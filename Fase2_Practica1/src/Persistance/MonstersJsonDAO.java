@@ -15,7 +15,7 @@ public class MonstersJsonDAO {
     public ArrayList<Monster> readMonstersFile() throws FileNotFoundException {
         Gson g = new Gson();
         JsonReader reader = new JsonReader(new FileReader(path));
-        Monster monster[] = g.fromJson(reader, Character[].class);
+        Monster monster[] = g.fromJson(reader, Monster[].class);
 
         ArrayList<Monster> monsters = new ArrayList<>();
         for(Monster m: monster){
