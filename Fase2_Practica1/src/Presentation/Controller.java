@@ -1,5 +1,7 @@
 package Presentation;
 
+import Business.Character;
+import Business.CharacterManager;
 import Business.MonsterManager;
 
 import java.io.FileNotFoundException;
@@ -8,8 +10,10 @@ public class Controller {
 
     private Menu menu = new Menu();
     private MonsterManager monsterManager;
+    private CharacterManager characterManager;
     public void run() {
         monsterManager = new MonsterManager();
+        int selection;
         try {
             monsterManager.setMonsters(monsterManager.getMonsterDAO().readMonstersFile());
         } catch (FileNotFoundException ignored) {
@@ -19,8 +23,14 @@ public class Controller {
         if (monsterManager.getMonsters().size() < 0) {
             menu.printMessage("Error: The monsters.json file can’t be accessed.");
         } else {
-            menu.globalMenuSelection();
+            selection = menu.globalMenuSelection();
+            switch (selection) {
+                case 1:
+                    Character newCharacter = menu.askForCharacterInfo(characterManager.getCharacters());
+                    break;
+            }
         }
+
 
 
 

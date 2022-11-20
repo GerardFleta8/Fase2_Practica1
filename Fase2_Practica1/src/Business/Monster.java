@@ -10,6 +10,9 @@ public class Monster {
     private String damageDice;
     private String damageType;
 
+    public Monster(String name, String challenge, String xp, String hitPoints, String initiative, String damageDice, String damageType) {
+    }
+
     public String getName() {
         return name;
     }

@@ -1,5 +1,8 @@
 package Presentation;
 
+import Business.Character;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
@@ -56,4 +59,40 @@ public class Menu {
             return selection;
         }
 
+        public String askForInput (String message) {
+            Scanner scan = new Scanner(System.in);
+
+            System.out.println(message);
+
+            return scan.nextLine();
+        }
+        public Character askForCharacterInfo(ArrayList<Character> characters) {
+            String name;
+            boolean correctName = false;
+            boolean nameAlreadyTaken = false;
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Tavern keeper: “Oh, so you are new to this land.”");
+            System.out.println("“What’s your name?”");
+            name = this.askForInput("-> Enter your name: ");
+            while(!correctName) {
+                if (name.isEmpty()) {
+                    name = this.askForInput("Name can't be empty, try again: ");
+                } else {
+                    nameAlreadyTaken = false;
+                    for (Character character: characters) {
+                        if (character.getName().equals(name)) {
+                            nameAlreadyTaken = true;
+                            break;
+                        }
+                    }
+                    if (nameAlreadyTaken) {
+                        name = this.askForInput("Name is already taken, try a different one: ");
+                    } else {
+                        correctName = true;
+                    }
+                }
+            }
+
+            return(new Character());
+        }
 }
