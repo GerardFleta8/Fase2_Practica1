@@ -22,10 +22,6 @@ public class CharactersJsonDAO {
             characters.add(c);
         }
 
-        for (Character c: character) {
-            System.out.println(c.getSpirit());
-
-        }
         return characters;
     }
 }

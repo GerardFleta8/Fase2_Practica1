@@ -66,7 +66,7 @@ public class Menu {
 
             return scan.nextLine();
         }
-        public Character askForCharacterInfo(ArrayList<Character> characters) {
+        public void askForCharacterInfo(ArrayList<Character> characters) {
             String name;
             boolean correctName = false;
             boolean nameAlreadyTaken = false;
@@ -91,8 +91,10 @@ public class Menu {
                         correctName = true;
                     }
                 }
+                //FALTA COMPROBAR NOMBRE
             }
+            System.out.println("Tavern keeper: “Hello, " +name + ", be welcome.”");
 
-            return(new Character());
+            //return(new Character());
         }
 }

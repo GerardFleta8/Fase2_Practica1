@@ -13,9 +13,11 @@ public class Controller {
     private CharacterManager characterManager;
     public void run() {
         monsterManager = new MonsterManager();
+        characterManager = new CharacterManager();
         int selection;
         try {
             monsterManager.setMonsters(monsterManager.getMonsterDAO().readMonstersFile());
+            characterManager.setCharacters(characterManager.getCharactersDAO().readCharactersFile());
         } catch (FileNotFoundException ignored) {
 
         }
@@ -26,7 +28,7 @@ public class Controller {
             selection = menu.globalMenuSelection();
             switch (selection) {
                 case 1:
-                    Character newCharacter = menu.askForCharacterInfo(characterManager.getCharacters());
+                    /*Character newCharacter*/ menu.askForCharacterInfo(characterManager.getCharacters());
                     break;
             }
         }
