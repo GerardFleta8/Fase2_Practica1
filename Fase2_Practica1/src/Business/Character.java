@@ -14,8 +14,8 @@ public class Character {
     }
     public String getOwner() {return owner; }
     public Integer getBody() {return body; }
-    public Integer getMind() {return mind; }
-    public Integer getSpirit() {return spirit; }
+    public int getMind() {return mind; }
+    public int getSpirit() {return spirit; }
     public String getClassType() {return classType; }
 
 }
