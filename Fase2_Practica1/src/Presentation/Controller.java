@@ -2,6 +2,7 @@ package Presentation;
 
 import Business.Character;
 import Business.CharacterManager;
+
 import Business.MonsterManager;
 
 import java.io.FileNotFoundException;
@@ -28,7 +29,10 @@ public class Controller {
             selection = menu.globalMenuSelection();
             switch (selection) {
                 case 1:
-                    /*Character newCharacter*/ menu.askForCharacterInfo(characterManager.getCharacters());
+                    /*Character newCharacter*/
+
+                        menu.askForCharacterInfo(characterManager.getCharacters());
+
                     break;
             }
         }

@@ -2,6 +2,7 @@ package Presentation;
 
 import Business.Character;
 
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -66,6 +67,15 @@ public class Menu {
 
             return scan.nextLine();
         }
+        public boolean checkIfNameHasNumber(String name) {
+            if (name.matches(".*[0-9].*")) {
+                return true;
+            } else{
+                return false;
+            }
+
+
+        }
         public void askForCharacterInfo(ArrayList<Character> characters) {
             String name;
             boolean correctName = false;
@@ -93,8 +103,14 @@ public class Menu {
                 }
                 //FALTA COMPROBAR NOMBRE
             }
+            if (checkIfNameHasNumber(name)) {
+                System.out.println("The name entered contains number/s!\n");
+                globalMenuSelection();
+            }
             System.out.println("Tavern keeper: “Hello, " +name + ", be welcome.”");
 
             //return(new Character());
         }
+
+
 }
