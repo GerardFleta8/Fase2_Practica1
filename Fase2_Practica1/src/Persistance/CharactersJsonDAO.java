@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class CharactersJsonDAO {
 
-    private String path = "Files/characters.json";
+    private String path = "characters.json";
 
     public ArrayList<Character> readCharactersFile() throws FileNotFoundException {
         Gson g = new Gson();
@@ -21,6 +21,8 @@ public class CharactersJsonDAO {
         for(Character c: character){
             characters.add(c);
         }
+
+
 
         return characters;
     }

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class MonstersJsonDAO {
 
-    private String filename = "Files/monsters.json";
+    private String filename = "monsters.json";
     public ArrayList<Monster> readMonstersFile() throws FileNotFoundException {
         Gson g = new Gson();
         JsonReader reader = new JsonReader(new FileReader(filename));

@@ -16,13 +16,16 @@ public class Controller {
         monsterManager = new MonsterManager();
         characterManager = new CharacterManager();
         int selection;
+
+        menu.welcomeMenu();
+
         try {
             monsterManager.setMonsters(monsterManager.getMonsterDAO().readMonstersFile());
             characterManager.setCharacters(characterManager.getCharactersDAO().readCharactersFile());
-        } catch (FileNotFoundException ignored) {
-
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
-        menu.welcomeMenu();
+
         if (monsterManager.getMonsters().size() < 0) {
             menu.printMessage("Error: The monsters.json file can’t be accessed.");
         } else {
@@ -30,8 +33,9 @@ public class Controller {
             switch (selection) {
                 case 1:
                     /*Character newCharacter*/
-
                         menu.askForCharacterInfo(characterManager.getCharacters());
+
+
 
                     break;
             }
