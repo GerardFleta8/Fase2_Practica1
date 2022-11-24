@@ -104,6 +104,16 @@ public class Menu {
             return hasCapital;
 
         }
+
+        public boolean hasCapitalLetters(String name) {
+            for (int i = 0; i < name.length(); i++) {
+                if(java.lang.Character.isUpperCase(name.charAt(i + 1))) {
+                    return true;
+                }
+            }
+            return false;
+
+        }
         private String correctionOfFormat(String name) {
             String nameCorrected;
             nameCorrected= name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
@@ -111,8 +121,12 @@ public class Menu {
             return nameCorrected;
 
         }
+
         public void askForCharacterInfo(ArrayList<Character> characters) {
             String name = null;
+            String owner;
+            int xp;
+            boolean xpCorrect = false;
             boolean correctName = false;
             boolean nameAlreadyTaken;
 
@@ -120,6 +134,7 @@ public class Menu {
                 System.out.println("Tavern keeper: “Oh, so you are new to this land.”");
                 System.out.println("“What’s your name?”");
                 name = this.askForInput("-> Enter your name: ");
+                System.out.println("");
                 if (name.isEmpty()) {
                     System.out.println("You haven't entered any name!\n");
                     globalMenuSelection();
@@ -142,19 +157,38 @@ public class Menu {
                                 System.out.println("The name entered contains special characters!\n");
                                 globalMenuSelection();
                             } else {
-                                if (!checkFirstCapital(name)) {
+                                if (!checkFirstCapital(name) || hasCapitalLetters(name)) {
                                     name = correctionOfFormat(name);
+                                    correctName = true;
+                                } else {
+                                    correctName = true;
                                 }
 
-                                correctName = true;
+
                             }
                         }
                     }
                 }
-                //FALTA COMPROBAR NOMBRE
+
             }
 
             System.out.println("Tavern keeper: “Hello, " +name + ", be welcome.”");
+            System.out.println("“And now, if I may break the fourth wall, who is your Player?”\n");
+            owner = this.askForInput("-> Enter the player’s name: ");
+            System.out.println("");
+            System.out.println("Tavern keeper: “I see, I see...”");
+            System.out.println("“Now, are you an experienced adventurer?”");
+            xp = Integer.parseInt(this.askForInput("Enter the character's level [1..10]: "));
+            while(!xpCorrect) {
+
+                if (xp > 10 || xp < 1) {
+                    xp = Integer.parseInt(this.askForInput("Invalid level, try one between [1..10]: "));
+                    xpCorrect = false;
+                } else{
+                    xpCorrect = true;
+                }
+            }
+
 
             //return(new Character());
         }
