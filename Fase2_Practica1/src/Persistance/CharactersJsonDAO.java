@@ -26,4 +26,8 @@ public class CharactersJsonDAO {
 
         return characters;
     }
+
+    public void updateCharactersFile(ArrayList<Character> characters) {
+
+    }
 }

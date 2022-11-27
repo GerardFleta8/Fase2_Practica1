@@ -9,6 +9,9 @@ public class Character {
     private int spirit;
     private String classType;
 
+    public Character(String name, String owner, int xp, int body, int mind, int spirit) {
+    }
+
     public String getName(){
         return name;
     }

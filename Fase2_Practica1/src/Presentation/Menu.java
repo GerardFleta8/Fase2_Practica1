@@ -122,13 +122,24 @@ public class Menu {
 
         }
 
-        public void askForCharacterInfo(ArrayList<Character> characters) {
+        public int rollDice(int numFaces) {
+            int dice;
+            dice = (int) (Math.random()*numFaces + 1);
+
+            return dice;
+        }
+
+
+        public Character askForCharacterInfo(ArrayList<Character> characters) {
             String name = null;
             String owner;
             int xp;
             boolean xpCorrect = false;
             boolean correctName = false;
             boolean nameAlreadyTaken;
+            int body, mind, spirit, diceTotal;
+            ArrayList<String> xpType = new ArrayList<>();
+            ArrayList<ArrayList> aList = new ArrayList<>();
 
             while(!correctName) {
                 System.out.println("Tavern keeper: “Oh, so you are new to this land.”");
@@ -163,15 +174,11 @@ public class Menu {
                                 } else {
                                     correctName = true;
                                 }
-
-
                             }
                         }
                     }
                 }
-
             }
-
             System.out.println("Tavern keeper: “Hello, " +name + ", be welcome.”");
             System.out.println("“And now, if I may break the fourth wall, who is your Player?”\n");
             owner = this.askForInput("-> Enter the player’s name: ");
@@ -180,7 +187,6 @@ public class Menu {
             System.out.println("“Now, are you an experienced adventurer?”");
             xp = Integer.parseInt(this.askForInput("Enter the character's level [1..10]: "));
             while(!xpCorrect) {
-
                 if (xp > 10 || xp < 1) {
                     xp = Integer.parseInt(this.askForInput("Invalid level, try one between [1..10]: "));
                     xpCorrect = false;
@@ -188,9 +194,54 @@ public class Menu {
                     xpCorrect = true;
                 }
             }
+            System.out.println("Tavern keeper: “Oh, so you are level " + xp+"!”");
+            System.out.println("“Great, let me get a closer look at you...”\n");
+            System.out.println("Generating your stats...\n");
+            for (int i = 0; i < 3; i++) {
+                ArrayList<Integer> dices = new ArrayList<>();
+                dices.add(rollDice(6));
+                dices.add(rollDice(6));
+                dices.add(dices.get(0) + dices.get(1));
+                aList.add(dices);
+            }
+            xpType.add("Body");
+            xpType.add("Mind");
+            xpType.add("Spirit");
+            for (int i = 0; i < aList.size(); i++) {
+                System.out.println(xpType.get(i) + ":  You rolled " + aList.get(i).get(2)+ " ("+aList.get(i).get(0)+
+                        " and " + aList.get(i).get(1)+ ").");
 
+            }
+            System.out.println("\nYour stats are:");
+            ArrayList<Integer> totalresult = new ArrayList<>();
+            for (int i = 0; i < aList.size(); i++) {
 
-            //return(new Character());
+                if ((int) aList.get(i).get(2) == 2) {
+                    System.out.println("- "+ xpType.get(i)+": -1");
+                    totalresult.add(-1);
+                }
+                if ((int) aList.get(i).get(2) <= 5 && (int) aList.get(i).get(2) >= 3) {
+                    System.out.println("- "+ xpType.get(i)+ ": +0");
+                    totalresult.add(0);
+                }
+                if ((int) aList.get(i).get(2) <= 9 && (int) aList.get(i).get(2) >= 6) {
+                    System.out.println("- "+ xpType.get(i)+ ": +1");
+                    totalresult.add(1);
+                }
+                if ((int) aList.get(i).get(2) <= 11 && (int) aList.get(i).get(2) >= 10) {
+                    System.out.println("- "+ xpType.get(i)+ ": +2");
+                    totalresult.add(2);
+                }
+                if ((int) aList.get(i).get(2) == 12) {
+                    System.out.println("- "+ xpType.get(i)+ ": +3");
+                    totalresult.add(3);
+                }
+            }
+            body = totalresult.get(0);
+            mind = totalresult.get(1);
+            spirit = totalresult.get(2);
+
+            return(new Character(name, owner, xp, body, mind, spirit));
         }
 
 

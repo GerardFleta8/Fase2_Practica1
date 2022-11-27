@@ -33,7 +33,8 @@ public class Controller {
             switch (selection) {
                 case 1:
                     /*Character newCharacter*/
-                        menu.askForCharacterInfo(characterManager.getCharacters());
+                        Character character = menu.askForCharacterInfo(characterManager.getCharacters());
+                        characterManager.createCharacter(character);
 
 
 

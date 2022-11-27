@@ -21,4 +21,8 @@ public class CharacterManager {
     public CharactersJsonDAO getCharactersDAO() {
         return charactersJsonDAO;
     }
+
+    public void createCharacter(Character character) {
+        characters.add(character);
+    }
 }
