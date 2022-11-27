@@ -11,18 +11,18 @@ public class CharacterManager {
     public CharacterManager() {
         charactersJsonDAO = new CharactersJsonDAO();
     }
+    public void createCharacter(Character character) {
+        characters.add(character);
+    }
     public ArrayList<Character> getCharacters(){
         return characters;
-    }
-
-    public void setCharacters(ArrayList<Character> characters) {
-        this.characters = characters;
     }
     public CharactersJsonDAO getCharactersDAO() {
         return charactersJsonDAO;
     }
-
-    public void createCharacter(Character character) {
-        characters.add(character);
+    public void setCharacters(ArrayList<Character> characters) {
+        this.characters = characters;
     }
+
+
 }

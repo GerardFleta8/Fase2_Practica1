@@ -2,10 +2,13 @@ package Persistance;
 
 import Business.Character;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class CharactersJsonDAO {
@@ -28,6 +31,13 @@ public class CharactersJsonDAO {
     }
 
     public void updateCharactersFile(ArrayList<Character> characters) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+        try(FileWriter fileWriter = new FileWriter(path)) {
+            gson.toJson(characters, fileWriter);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 }

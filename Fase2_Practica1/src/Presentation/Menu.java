@@ -106,8 +106,8 @@ public class Menu {
         }
 
         public boolean hasCapitalLetters(String name) {
-            for (int i = 0; i < name.length(); i++) {
-                if(java.lang.Character.isUpperCase(name.charAt(i + 1))) {
+            for (int i = 1; i < name.length(); i++) {
+                if(java.lang.Character.isUpperCase(name.charAt(i))) {
                     return true;
                 }
             }

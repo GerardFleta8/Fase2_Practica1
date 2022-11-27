@@ -10,6 +10,13 @@ public class Character {
     private String classType;
 
     public Character(String name, String owner, int xp, int body, int mind, int spirit) {
+        this.name = name;
+        this.owner = owner;
+        this.xp = xp;
+        this.body = body;
+        this.mind = mind;
+        this.spirit = spirit;
+
     }
 
     public String getName(){
