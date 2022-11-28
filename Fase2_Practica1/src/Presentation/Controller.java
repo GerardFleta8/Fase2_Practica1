@@ -38,7 +38,7 @@ public class Controller {
                         Character newCharacter = menu.askForCharacterInfo(characterManager.getCharacters());
 
                         characterManager.createCharacter(newCharacter);
-                    System.out.println(newCharacter.getName());
+
 
 
 
