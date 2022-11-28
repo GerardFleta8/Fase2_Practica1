@@ -132,119 +132,212 @@ public class Menu {
 
         public Character askForCharacterInfo(ArrayList<Character> characters) {
             String name = null;
-            String owner;
+            String player;
             int xp;
+            String classType;
             boolean xpCorrect = false;
             boolean correctName = false;
             boolean nameAlreadyTaken;
             int body, mind, spirit, diceTotal;
             ArrayList<String> xpType = new ArrayList<>();
             ArrayList<ArrayList> aList = new ArrayList<>();
+            System.out.println("Tavern keeper: “Oh, so you are new to this land.”");
+            System.out.println("“What’s your name?”");
+            name = this.askForInput("-> Enter your name: ");
 
-            while(!correctName) {
-                System.out.println("Tavern keeper: “Oh, so you are new to this land.”");
-                System.out.println("“What’s your name?”");
-                name = this.askForInput("-> Enter your name: ");
-                System.out.println("");
-                if (name.isEmpty()) {
-                    System.out.println("You haven't entered any name!\n");
-                    globalMenuSelection();
-                } else {
-                    nameAlreadyTaken = false;
-                    for (Character character: characters) {
-                        if (character.getName().equalsIgnoreCase(name)) {
-                            nameAlreadyTaken = true;
-                        }
+            System.out.println("");
+            if (name.isEmpty()) {
+                System.out.println("You haven't entered any name!\n");
+            } else {
+                nameAlreadyTaken = false;
+                for (Character character: characters) {
+                    if (character.getName().equalsIgnoreCase(name)) {
+                        nameAlreadyTaken = true;
                     }
-                    if (nameAlreadyTaken) {
-                        System.out.println("Name already taken!\n");
-                        globalMenuSelection();
+                }
+                if (nameAlreadyTaken) {
+                    System.out.println("Name already taken!\n");
+                } else {
+                    if (checkIfNameHasNumber(name)) {
+                        System.out.println("The name entered contains number/s!\n");
                     } else {
-                        if (checkIfNameHasNumber(name)) {
-                            System.out.println("The name entered contains number/s!\n");
-                            globalMenuSelection();
+                        if (checkSpecialCharacter(name)) {
+                            System.out.println("The name entered contains special characters!\n");
                         } else {
-                            if (checkSpecialCharacter(name)) {
-                                System.out.println("The name entered contains special characters!\n");
-                                globalMenuSelection();
+                            if (!checkFirstCapital(name) || hasCapitalLetters(name)) {
+                                name = correctionOfFormat(name);
+                                correctName = true;
                             } else {
-                                if (!checkFirstCapital(name) || hasCapitalLetters(name)) {
-                                    name = correctionOfFormat(name);
-                                    correctName = true;
-                                } else {
-                                    correctName = true;
-                                }
+                                correctName = true;
                             }
                         }
                     }
                 }
             }
-            System.out.println("Tavern keeper: “Hello, " +name + ", be welcome.”");
-            System.out.println("“And now, if I may break the fourth wall, who is your Player?”\n");
-            owner = this.askForInput("-> Enter the player’s name: ");
-            System.out.println("");
-            System.out.println("Tavern keeper: “I see, I see...”");
-            System.out.println("“Now, are you an experienced adventurer?”");
-            xp = Integer.parseInt(this.askForInput("Enter the character's level [1..10]: "));
-            while(!xpCorrect) {
-                if (xp > 10 || xp < 1) {
-                    xp = Integer.parseInt(this.askForInput("Invalid level, try one between [1..10]: "));
-                    xpCorrect = false;
-                } else{
-                    xpCorrect = true;
+            if (correctName) {
+                System.out.println("Tavern keeper: “Hello, " +name + ", be welcome.”");
+                System.out.println("“And now, if I may break the fourth wall, who is your Player?”\n");
+                player = this.askForInput("-> Enter the player’s name: ");
+                System.out.println("");
+                System.out.println("Tavern keeper: “I see, I see...”");
+                System.out.println("“Now, are you an experienced adventurer?”");
+                xp = Integer.parseInt(this.askForInput("Enter the character's level [1..10]: "));
+                while(!xpCorrect) {
+                    if (xp > 10 || xp < 1) {
+                        xp = Integer.parseInt(this.askForInput("Invalid level, try one between [1..10]: "));
+                        xpCorrect = false;
+                    } else{
+                        xpCorrect = true;
+                    }
                 }
+                System.out.println("Tavern keeper: “Oh, so you are level " + xp+"!”");
+                System.out.println("“Great, let me get a closer look at you...”\n");
+                System.out.println("Generating your stats...\n");
+                for (int i = 0; i < 3; i++) {
+                    ArrayList<Integer> dices = new ArrayList<>();
+                    dices.add(rollDice(6));
+                    dices.add(rollDice(6));
+                    dices.add(dices.get(0) + dices.get(1));
+                    aList.add(dices);
+                }
+                xpType.add("Body");
+                xpType.add("Mind");
+                xpType.add("Spirit");
+                for (int i = 0; i < aList.size(); i++) {
+                    System.out.println(xpType.get(i) + ":  You rolled " + aList.get(i).get(2)+ " ("+aList.get(i).get(0)+
+                            " and " + aList.get(i).get(1)+ ").");
+
+                }
+                System.out.println("\nYour stats are:");
+                ArrayList<Integer> totalresult = new ArrayList<>();
+                for (int i = 0; i < aList.size(); i++) {
+
+                    if ((int) aList.get(i).get(2) == 2) {
+                        System.out.println("- "+ xpType.get(i)+": -1");
+                        totalresult.add(-1);
+                    }
+                    if ((int) aList.get(i).get(2) <= 5 && (int) aList.get(i).get(2) >= 3) {
+                        System.out.println("- "+ xpType.get(i)+ ": +0");
+                        totalresult.add(0);
+                    }
+                    if ((int) aList.get(i).get(2) <= 9 && (int) aList.get(i).get(2) >= 6) {
+                        System.out.println("- "+ xpType.get(i)+ ": +1");
+                        totalresult.add(1);
+                    }
+                    if ((int) aList.get(i).get(2) <= 11 && (int) aList.get(i).get(2) >= 10) {
+                        System.out.println("- "+ xpType.get(i)+ ": +2");
+                        totalresult.add(2);
+                    }
+                    if ((int) aList.get(i).get(2) == 12) {
+                        System.out.println("- "+ xpType.get(i)+ ": +3");
+                        totalresult.add(3);
+                    }
+                }
+                body = totalresult.get(0);
+                mind = totalresult.get(1);
+                spirit = totalresult.get(2);
+                classType = "Adventurer";
+                return(new Character(name, player, xp, body, mind, spirit, classType));
+            } else {
+                return null;
             }
-            System.out.println("Tavern keeper: “Oh, so you are level " + xp+"!”");
-            System.out.println("“Great, let me get a closer look at you...”\n");
-            System.out.println("Generating your stats...\n");
-            for (int i = 0; i < 3; i++) {
-                ArrayList<Integer> dices = new ArrayList<>();
-                dices.add(rollDice(6));
-                dices.add(rollDice(6));
-                dices.add(dices.get(0) + dices.get(1));
-                aList.add(dices);
-            }
-            xpType.add("Body");
-            xpType.add("Mind");
-            xpType.add("Spirit");
-            for (int i = 0; i < aList.size(); i++) {
-                System.out.println(xpType.get(i) + ":  You rolled " + aList.get(i).get(2)+ " ("+aList.get(i).get(0)+
-                        " and " + aList.get(i).get(1)+ ").");
+
+        }
+
+        public ArrayList<Integer> listCharacters(ArrayList<Character> characters) {
+            int option, i = 0;
+            ArrayList<String> charactersNames = new ArrayList<>();
+            boolean userFoundFlag = false;
+            boolean userFound = false;
+            ArrayList<Integer> positions = new ArrayList<>();
+            String playerToFind;
+            System.out.println("Tavern keeper: “Lads! They want to see you!”");
+            System.out.println("“Who piques your interest?”\n");
+            while(!userFoundFlag) {
+                playerToFind = this.askForInput("-> Enter the name of the Player to filter: ");
+                for (int j = 0; j < characters.size() ; j++) {
+                    if (characters.get(j).getPlayer().equalsIgnoreCase(playerToFind)) {
+                        userFound = true;
+                    }
+                }
+
+                if (!userFound && playerToFind.equals("")) {
+                    positions = new ArrayList<>();
+
+                    System.out.println("You watch as all adventurers get up from their chairs and approach you.\n");
+                    for (i = 1; i <= characters.size() ; i++) {
+                        System.out.println("\t" + i + ". "+ characters.get(i-1).getName());
+                        positions.add(i);
+                    }
+                    System.out.println("");
+                    userFoundFlag = true;
+                }
+                if (!userFound && !playerToFind.equals("")) {
+                    System.out.println("Player not found! try again.\n");
+                    userFoundFlag = false;
+                }
+                if (userFound) {
+                    positions = new ArrayList<>();
+                    userFoundFlag = true;
+                    System.out.println("You watch as some adventurers get up from their chairs and approach you.\n");
+                    for (int j = 0; j < characters.size() ; j++) {
+                        if (characters.get(j).getPlayer().equalsIgnoreCase(playerToFind)) {
+                            charactersNames.add(characters.get(j).getName());
+                            positions.add(j);
+                        }
+                    }
+                    for (int j = 1; j <= charactersNames.size(); j++) {
+                        System.out.println("\t" + j + ". "+ charactersNames.get(j-1));
+                    }
+                    System.out.println("");
+                    System.out.println("\t0. Back\n");
+
+
+                }
+
 
             }
-            System.out.println("\nYour stats are:");
-            ArrayList<Integer> totalresult = new ArrayList<>();
-            for (int i = 0; i < aList.size(); i++) {
+            return positions;
 
-                if ((int) aList.get(i).get(2) == 2) {
-                    System.out.println("- "+ xpType.get(i)+": -1");
-                    totalresult.add(-1);
-                }
-                if ((int) aList.get(i).get(2) <= 5 && (int) aList.get(i).get(2) >= 3) {
-                    System.out.println("- "+ xpType.get(i)+ ": +0");
-                    totalresult.add(0);
-                }
-                if ((int) aList.get(i).get(2) <= 9 && (int) aList.get(i).get(2) >= 6) {
-                    System.out.println("- "+ xpType.get(i)+ ": +1");
-                    totalresult.add(1);
-                }
-                if ((int) aList.get(i).get(2) <= 11 && (int) aList.get(i).get(2) >= 10) {
-                    System.out.println("- "+ xpType.get(i)+ ": +2");
-                    totalresult.add(2);
-                }
-                if ((int) aList.get(i).get(2) == 12) {
-                    System.out.println("- "+ xpType.get(i)+ ": +3");
-                    totalresult.add(3);
-                }
-            }
-            body = totalresult.get(0);
-            mind = totalresult.get(1);
-            spirit = totalresult.get(2);
 
-            return(new Character(name, owner, xp, body, mind, spirit));
         }
 
 
+    public void showCharacterDetails(ArrayList<Integer> positions, ArrayList<Character> characters, int option) {
+        System.out.println("Tavern keeper: “Hey " + characters.get(positions.get(option-1)).getName()+ " get here; the" +
+                    " boss wants to see you!”");
+        System.out.println("* Name:   "+ characters.get(positions.get(option-1)).getName());
+        System.out.println("* Player: "+ characters.get(positions.get(option-1)).getPlayer());
+        System.out.println("* Class:  "+ characters.get(positions.get(option-1)).getClassType());
+        System.out.println("* XP:     "+ characters.get(positions.get(option-1)).getXp());
+        if (characters.get(positions.get(option-1)).getBody() >= 0) {
+            System.out.println("* Body:   +"+ characters.get(positions.get(option-1)).getBody());
+        }
+        if(characters.get(positions.get(option-1)).getBody() < 0) {
+            System.out.println("* Body:   -"+ characters.get(positions.get(option-1)).getBody());
+        }
+        if (characters.get(positions.get(option-1)).getMind() >= 0) {
+            System.out.println("* Mind:   +"+ characters.get(positions.get(option-1)).getMind());
+        }
+        if(characters.get(positions.get(option-1)).getMind() < 0) {
+            System.out.println("* Mind:   -"+ characters.get(positions.get(option-1)).getMind());
+        }
+        if (characters.get(positions.get(option-1)).getSpirit() >= 0) {
+            System.out.println("* Spirit: +"+ characters.get(positions.get(option-1)).getSpirit());
+        }
+        if(characters.get(positions.get(option-1)).getSpirit() < 0) {
+            System.out.println("* Spirit: -"+ characters.get(positions.get(option-1)).getSpirit());
+        }
+        System.out.println("");
+
+    }
 
 
+
+
+    public int optionListCharacters(ArrayList<Integer> positions) {
+        int option = 0;
+        option = Integer.parseInt(this.askForInput("Who would you like to meet [0.."+positions.size() + "]: "));
+        return option;
+    }
 }
