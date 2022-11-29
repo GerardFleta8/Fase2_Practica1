@@ -52,7 +52,19 @@ public class Controller {
                             if (optionListCharacter == 0) {
                                 break;
                             } else {
-                                menu.showCharacterDetails(positions, characterManager.getCharacters(), optionListCharacter);
+                                String charToDelete = menu.showCharacterDetails(positions, characterManager.getCharacters(), optionListCharacter);
+                                if(charToDelete == ""){
+                                    break;
+                                }
+                                else{
+                                    //delete charToDelete from list
+                                    //hay que crear el metodo
+                                    //characterManager.removeCharacter() se le puede pasar el int optionListCharacter, o el charToDelete
+                                    menu.printMessage("Tavern keeper: \"I'm sorry Kiddo, but you have to leave.\"");
+                                    menu.printMessage("");
+                                    menu.printMessage("Character "+charToDelete+" left the Guild.");
+                                    menu.printMessage("");
+                                }
                             }
                         } else {
                             System.out.println("No characters created yet.\n");

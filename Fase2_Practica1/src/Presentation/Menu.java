@@ -269,7 +269,8 @@ public class Menu {
                         System.out.println("\t" + i + ". "+ characters.get(i-1).getName());
                         positions.add(i);
                     }
-                    System.out.println("");
+                    System.out.println();
+                    System.out.println("\t0. Back\n");
                     userFoundFlag = true;
                 }
                 if (!userFound && !playerToFind.equals("")) {
@@ -286,12 +287,12 @@ public class Menu {
                             positions.add(j);
                         }
                     }
+
                     for (int j = 1; j <= charactersNames.size(); j++) {
                         System.out.println("\t" + j + ". "+ charactersNames.get(j-1));
                     }
-                    System.out.println("");
+                    System.out.println();
                     System.out.println("\t0. Back\n");
-
 
                 }
 
@@ -303,7 +304,7 @@ public class Menu {
         }
 
 
-    public void showCharacterDetails(ArrayList<Integer> positions, ArrayList<Character> characters, int option) {
+    public String showCharacterDetails(ArrayList<Integer> positions, ArrayList<Character> characters, int option) {
         System.out.println("Tavern keeper: “Hey " + characters.get(positions.get(option-1)).getName()+ " get here; the" +
                     " boss wants to see you!”");
         System.out.println("* Name:   "+ characters.get(positions.get(option-1)).getName());
@@ -328,7 +329,11 @@ public class Menu {
         if(characters.get(positions.get(option-1)).getSpirit() < 0) {
             System.out.println("* Spirit: -"+ characters.get(positions.get(option-1)).getSpirit());
         }
-        System.out.println("");
+        System.out.println();
+
+        System.out.println("[Enter name to delete, or press enter to cancel]");
+
+        return this.askForInput("Do you want to delete "+characters.get(positions.get(option-1)).getName()+"?");
 
     }
 
