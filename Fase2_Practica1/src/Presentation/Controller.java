@@ -76,6 +76,7 @@ public class Controller {
                         }
                         break;
                     case 3:
+                        //ir haciendo
                         menu.askForAdventureInfo(adventureManager.getAdventures(), monsterManager.getMonsters());
                         break;
                 }
