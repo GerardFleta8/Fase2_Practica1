@@ -1,6 +1,8 @@
 package Presentation;
 
+import Business.Adventure;
 import Business.Character;
+import Business.Monster;
 
 
 import java.util.ArrayList;
@@ -304,47 +306,58 @@ public class Menu {
         }
 
 
-    public String showCharacterDetails(ArrayList<Integer> positions, ArrayList<Character> characters, int option) {
-        System.out.println("Tavern keeper: “Hey " + characters.get(positions.get(option-1)).getName()+ " get here; the" +
-                    " boss wants to see you!”");
-        System.out.println("* Name:   "+ characters.get(positions.get(option-1)).getName());
-        System.out.println("* Player: "+ characters.get(positions.get(option-1)).getPlayer());
-        System.out.println("* Class:  "+ characters.get(positions.get(option-1)).getClassType());
-        System.out.println("* XP:     "+ characters.get(positions.get(option-1)).getXp());
-        if (characters.get(positions.get(option-1)).getBody() >= 0) {
-            System.out.println("* Body:   +"+ characters.get(positions.get(option-1)).getBody());
+        public String showCharacterDetails(ArrayList<Integer> positions, ArrayList<Character> characters, int option) {
+            System.out.println("Tavern keeper: “Hey " + characters.get(positions.get(option-1)).getName()+ " get here; the" +
+                        " boss wants to see you!”");
+            System.out.println("* Name:   "+ characters.get(positions.get(option-1)).getName());
+            System.out.println("* Player: "+ characters.get(positions.get(option-1)).getPlayer());
+            System.out.println("* Class:  "+ characters.get(positions.get(option-1)).getClassType());
+            System.out.println("* XP:     "+ characters.get(positions.get(option-1)).getXp());
+            if (characters.get(positions.get(option-1)).getBody() >= 0) {
+                System.out.println("* Body:   +"+ characters.get(positions.get(option-1)).getBody());
+            }
+            if(characters.get(positions.get(option-1)).getBody() < 0) {
+                System.out.println("* Body:   -"+ characters.get(positions.get(option-1)).getBody());
+            }
+            if (characters.get(positions.get(option-1)).getMind() >= 0) {
+                System.out.println("* Mind:   +"+ characters.get(positions.get(option-1)).getMind());
+            }
+            if(characters.get(positions.get(option-1)).getMind() < 0) {
+                System.out.println("* Mind:   -"+ characters.get(positions.get(option-1)).getMind());
+            }
+            if (characters.get(positions.get(option-1)).getSpirit() >= 0) {
+                System.out.println("* Spirit: +"+ characters.get(positions.get(option-1)).getSpirit());
+            }
+            if(characters.get(positions.get(option-1)).getSpirit() < 0) {
+                System.out.println("* Spirit: "+ characters.get(positions.get(option-1)).getSpirit());
+            }
+            System.out.println();
+
+            System.out.println("[Enter name to delete, or press enter to cancel]");
+
+            return this.askForInput("Do you want to delete "+characters.get(positions.get(option-1)).getName()+"?");
         }
-        if(characters.get(positions.get(option-1)).getBody() < 0) {
-            System.out.println("* Body:   -"+ characters.get(positions.get(option-1)).getBody());
+
+
+        public int optionListCharacters(ArrayList<Integer> positions) {
+            int option = 0;
+            option = Integer.parseInt(this.askForInput("Who would you like to meet [0.."+positions.size() + "]: "));
+            return option;
         }
-        if (characters.get(positions.get(option-1)).getMind() >= 0) {
-            System.out.println("* Mind:   +"+ characters.get(positions.get(option-1)).getMind());
+
+        public void askForAdventureInfo(ArrayList<Adventure> adventures, ArrayList<Monster> monsters) {
+            String name;
+            int numCombats;
+            System.out.println("Tavern keeper: “Planning an adventure? Good luck with that!”\n");
+            name = this.askForInput("-> Name your adventure: ");
+            System.out.println("Tavern keeper: “You plan to undertake"+ name + ", really?”");
+            System.out.println("“How long will that take?”\n");
+            numCombats = Integer.parseInt(this.askForInput("-> How many encounters do you want [1..4]: "));
+            System.out.println("Tavern keeper: “"+ numCombats+" encounters? That is too much for me...”\n");
+            int numCombatsAux = numCombats - (numCombats-1);
+            System.out.println("* Encounter "+ numCombatsAux+" / " + numCombats );
+
+
+
         }
-        if(characters.get(positions.get(option-1)).getMind() < 0) {
-            System.out.println("* Mind:   -"+ characters.get(positions.get(option-1)).getMind());
-        }
-        if (characters.get(positions.get(option-1)).getSpirit() >= 0) {
-            System.out.println("* Spirit: +"+ characters.get(positions.get(option-1)).getSpirit());
-        }
-        if(characters.get(positions.get(option-1)).getSpirit() < 0) {
-            System.out.println("* Spirit: -"+ characters.get(positions.get(option-1)).getSpirit());
-        }
-        System.out.println();
-
-        System.out.println("[Enter name to delete, or press enter to cancel]");
-
-        return this.askForInput("Do you want to delete "+characters.get(positions.get(option-1)).getName()+"?");
-
-    }
-
-
-
-
-
-
-    public int optionListCharacters(ArrayList<Integer> positions) {
-        int option = 0;
-        option = Integer.parseInt(this.askForInput("Who would you like to meet [0.."+positions.size() + "]: "));
-        return option;
-    }
 }

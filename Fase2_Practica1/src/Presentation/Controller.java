@@ -1,21 +1,22 @@
 package Presentation;
 
+import Business.*;
 import Business.Character;
-import Business.CharacterManager;
-
-import Business.MonsterManager;
 
 import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Controller {
 
     private Menu menu = new Menu();
     private MonsterManager monsterManager;
+    private AdventureManager adventureManager;
     private CharacterManager characterManager;
     public void run() {
         monsterManager = new MonsterManager();
         characterManager = new CharacterManager();
+        adventureManager = new AdventureManager();
         int optionListCharacter = 0;
         ArrayList<Integer> positions = new ArrayList<>();
         int selection = 0;
@@ -32,7 +33,6 @@ public class Controller {
         if (monsterManager.getMonsters().size() < 0) {
             menu.printMessage("Error: The monsters.json file can’t be accessed.");
         } else {
-            
             while(selection != 5) {
                 selection = menu.globalMenuSelection();
                 switch (selection) {
@@ -44,7 +44,6 @@ public class Controller {
                             characterManager.createCharacter(newCharacter);
                             System.out.println("\nThe character " + newCharacter.getName()+" has been created.\n");
                             characterManager.getCharactersDAO().updateCharactersFile(characterManager.getCharacters());
-
                             break;
                         }
                     case 2:
@@ -57,12 +56,10 @@ public class Controller {
                             } else {
                                 String charToDelete = menu.showCharacterDetails(positions, characterManager.getCharacters(), optionListCharacter);
                                 if(charToDelete == ""){
-
                                     break;
                                 }
                                 else{
                                     boolean deleted = characterManager.deleteCharacter(positions, optionListCharacter - 1, charToDelete);
-
                                     if (!deleted) {
                                         System.out.println("Incorrect character name, the character won't be deleted.\n");
                                     } else {
@@ -78,12 +75,12 @@ public class Controller {
                             System.out.println("No characters created yet.\n");
                         }
                         break;
+                    case 3:
+                        menu.askForAdventureInfo(adventureManager.getAdventures(), monsterManager.getMonsters());
+                        break;
                 }
             }
-
         }
-
-
         characterManager.getCharactersDAO().updateCharactersFile(characterManager.getCharacters());
 
 
