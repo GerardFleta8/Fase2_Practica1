@@ -42,7 +42,11 @@ public class Controller {
                             break;
                         } else {
                             characterManager.createCharacter(newCharacter);
+
+
                             System.out.println("\nThe character " + newCharacter.getName()+" has been created.\n");
+                            characterManager.getCharactersDAO().updateCharactersFile(characterManager.getCharacters());
+
                             break;
                         }
                     case 2:
@@ -57,18 +61,27 @@ public class Controller {
                                     break;
                                 }
                                 else{
-                                    //delete charToDelete from list
-                                    //hay que crear el metodo
-                                    //characterManager.removeCharacter() se le puede pasar el int optionListCharacter, o el charToDelete
-                                    menu.printMessage("Tavern keeper: \"I'm sorry Kiddo, but you have to leave.\"");
-                                    menu.printMessage("");
-                                    menu.printMessage("Character "+charToDelete+" left the Guild.");
-                                    menu.printMessage("");
+                                    boolean deleted = characterManager.deleteCharacter(positions, optionListCharacter - 1, charToDelete);
+
+                                    if (!deleted) {
+                                        System.out.println("Incorrect character name, the character won't be deleted.\n");
+                                    } else {
+                                        for (int i = 0; i < characterManager.getCharacters().size(); i++) {
+                                            System.out.println(characterManager.getCharacters().get(i).getName());
+
+                                        }
+                                        characterManager.getCharactersDAO().updateCharactersFile(characterManager.getCharacters());
+                                        menu.printMessage("Tavern keeper: \"I'm sorry Kiddo, but you have to leave.\"");
+                                        menu.printMessage("");
+                                        menu.printMessage("Character "+charToDelete+" left the Guild.");
+                                        menu.printMessage("");
+                                    }
                                 }
                             }
                         } else {
                             System.out.println("No characters created yet.\n");
                         }
+                        break;
                 }
             }
 

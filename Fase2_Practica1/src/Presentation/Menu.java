@@ -340,6 +340,8 @@ public class Menu {
 
 
 
+
+
     public int optionListCharacters(ArrayList<Integer> positions) {
         int option = 0;
         option = Integer.parseInt(this.askForInput("Who would you like to meet [0.."+positions.size() + "]: "));
