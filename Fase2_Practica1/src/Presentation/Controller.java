@@ -42,8 +42,6 @@ public class Controller {
                             break;
                         } else {
                             characterManager.createCharacter(newCharacter);
-
-
                             System.out.println("\nThe character " + newCharacter.getName()+" has been created.\n");
                             characterManager.getCharactersDAO().updateCharactersFile(characterManager.getCharacters());
 
@@ -54,10 +52,12 @@ public class Controller {
                             positions = menu.listCharacters(characterManager.getCharacters());
                             optionListCharacter = menu.optionListCharacters(positions);
                             if (optionListCharacter == 0) {
+                                System.out.println("");
                                 break;
                             } else {
                                 String charToDelete = menu.showCharacterDetails(positions, characterManager.getCharacters(), optionListCharacter);
                                 if(charToDelete == ""){
+
                                     break;
                                 }
                                 else{
@@ -66,10 +66,6 @@ public class Controller {
                                     if (!deleted) {
                                         System.out.println("Incorrect character name, the character won't be deleted.\n");
                                     } else {
-                                        for (int i = 0; i < characterManager.getCharacters().size(); i++) {
-                                            System.out.println(characterManager.getCharacters().get(i).getName());
-
-                                        }
                                         characterManager.getCharactersDAO().updateCharactersFile(characterManager.getCharacters());
                                         menu.printMessage("Tavern keeper: \"I'm sorry Kiddo, but you have to leave.\"");
                                         menu.printMessage("");

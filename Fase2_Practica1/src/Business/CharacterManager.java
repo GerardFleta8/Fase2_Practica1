@@ -25,11 +25,10 @@ public class CharacterManager {
     }
 
     public boolean deleteCharacter(ArrayList<Integer> positions, int characterIndex, String charToDelete) {
+        System.out.println(characters.get(positions.get(characterIndex)).getMind());
+
         if (charToDelete.equals(characters.get(positions.get(characterIndex)).getName())) {
-
-            characters.remove(positions.get(characterIndex));
-            System.out.println(positions.get(characterIndex));
-
+            characters.remove(characters.get(positions.get(characterIndex)));
             return true;
         } else {
             return false;

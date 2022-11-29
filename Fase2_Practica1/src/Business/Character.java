@@ -1,5 +1,7 @@
 package Business;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Character {
     private String name;
     private String player;
@@ -7,6 +9,7 @@ public class Character {
     private int body;
     private int mind;
     private int spirit;
+    @SerializedName("class")
     private String classType;
 
     public Character(String name, String player, int xp, int body, int mind, int spirit, String classType) {
