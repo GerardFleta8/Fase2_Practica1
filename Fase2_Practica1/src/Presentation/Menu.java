@@ -360,4 +360,25 @@ public class Menu {
 
 
         }
+
+    public int MonsterOptions() {
+        System.out.println();
+        System.out.println("1. Add monster");
+        System.out.println("2. Remove monster");
+        System.out.println("3. Continue");
+        System.out.println();
+        int option = Integer.parseInt(this.askForInput("-> Enter an option [1..3]: "));
+        return option;
+    }
+
+    public int askForMonsterToAdd(ArrayList<Monster> Monsters) {
+        int i = 1;
+        for(Monster c : Monsters){
+            System.out.println(i+". "+c.getName()+"("+c.getChallenge()+")");
+            i++;
+        }
+        System.out.println();
+        int option = Integer.parseInt(this.askForInput("-> Choose a monster to add [1..7]: "));
+        return option;
+    }
 }

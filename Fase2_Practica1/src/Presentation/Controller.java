@@ -77,7 +77,34 @@ public class Controller {
                         break;
                     case 3:
                         //ir haciendo
-                        menu.askForAdventureInfo(adventureManager.getAdventures(), monsterManager.getMonsters());
+                        //menu.askForAdventureInfo(adventureManager.getAdventures(), monsterManager.getMonsters());
+                        //pido la info desde el controler para poder guardar la aventura, si la pido desde el menu
+                        //tengo que devolver una adventure para poder guardarlo pero el menu no deberia saber nada
+                        String name;
+                        int numCombats;
+                        menu.printMessage("Tavern keeper: “Planning an adventure? Good luck with that!”\n");
+                        name = menu.askForInput("-> Name your adventure: ");
+                        menu.printMessage("Tavern keeper: “You plan to undertake"+ name + ", really?”");
+                        menu.printMessage("“How long will that take?”\n");
+                        numCombats = Integer.parseInt(menu.askForInput("-> How many encounters do you want [1..4]: "));
+                        menu.printMessage("Tavern keeper: “"+ numCombats+" encounters? That is too much for me...”\n");
+                        //int numCombatsAux = numCombats - (numCombats-1);
+                        int numCombatsAux = 1;
+                        while(numCombatsAux < numCombats) {
+                            menu.printMessage("* Encounter " + numCombatsAux + " / " + numCombats);
+                            menu.printMessage("* Monsters in the Encounter");
+                            menu.printMessage("\t# Empty");
+                            int monsterOption = menu.MonsterOptions(); //devuelve 1..3
+                            if(monsterOption == 1){
+                                ArrayList<Monster> availableMonsters = new ArrayList<>();
+                                availableMonsters = this.monsterManager.getMonsters();
+                                int monsterAdd = 0;
+                                monsterAdd = menu.askForMonsterToAdd(availableMonsters);
+                            }
+                            else if(monsterOption == 3){
+                                numCombatsAux++;
+                            }
+                        }
                         break;
                 }
             }
