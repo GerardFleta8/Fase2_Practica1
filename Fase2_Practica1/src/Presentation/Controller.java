@@ -125,7 +125,6 @@ public class Controller {
                             if (monsterAdd != 0) {
 
                                 monstersAlreadyIn.add(monsterManager.getMonsters().get(monsterAdd - 1));
-
                                 for (int i = 1; i <= monstersAlreadyIn.size(); i++) {
                                     if (monstersAlreadyIn.get(i-1).getChallenge().equals("Boss")) {
                                         countBoss++;
@@ -137,20 +136,23 @@ public class Controller {
                                     if (monstersAlreadyIn.get(i-1).getName().equals(monsterManager.getMonsters().get(monsterAdd - 1).getName())) {
                                         j++;
                                         numMonters.add(i-1 ,j);
-                                        System.out.println(monstersAlreadyIn.get(i - 1).getName());
-                                        System.out.println(numMonters.get(i-1));
                                         if (numMonters.get(i-1)<=1) {
                                             System.out.printf("\t" +i + ". " + monstersAlreadyIn.get(i - 1).getName()+"\n");
                                         }
                                         if (numMonters.get(i-1) > 1) {
-                                            System.out.printf("\t" +i + ". " + monstersAlreadyIn.get(i - 1).getName()+" (x"+numMonters.get(i-1)+"\n");
+                                            System.out.printf("\t" +i + ". " + monstersAlreadyIn.get(i - 1).getName()+" (x"+numMonters.get(i-1)+")\n");
                                         }
                                     } else {
-                                        System.out.printf("\t" +i + ". " + monstersAlreadyIn.get(i - 1).getName()+"\n");
+                                        if (numMonters.get(i-1) >1 ) {
+                                            System.out.printf("\t" +i + ". " + monstersAlreadyIn.get(i - 1).getName()+" (x"+numMonters.get(i-1)+")\n");
+                                        } else{
+                                            System.out.printf("\t" +i + ". " + monstersAlreadyIn.get(i - 1).getName()+"\n");
+                                        }
+
                                     }
 
 
-                                    }
+                                }
                             }
                             System.out.println("");
                             int monsterOption = menu.MonsterOptions();
