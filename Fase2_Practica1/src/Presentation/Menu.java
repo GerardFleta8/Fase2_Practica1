@@ -350,7 +350,7 @@ public class Menu {
             int numCombats;
             System.out.println("Tavern keeper: “Planning an adventure? Good luck with that!”\n");
             name = this.askForInput("-> Name your adventure: ");
-            System.out.println("Tavern keeper: “You plan to undertake"+ name + ", really?”");
+            System.out.println("Tavern keeper: “You plan to undertake "+ name + ", really?”");
             System.out.println("“How long will that take?”\n");
             numCombats = Integer.parseInt(this.askForInput("-> How many encounters do you want [1..4]: "));
             System.out.println("Tavern keeper: “"+ numCombats+" encounters? That is too much for me...”\n");
@@ -367,18 +367,39 @@ public class Menu {
         System.out.println("2. Remove monster");
         System.out.println("3. Continue");
         System.out.println();
-        int option = Integer.parseInt(this.askForInput("-> Enter an option [1..3]: "));
+        int option = 0;
+        boolean isCorrect = false;
+        while (!isCorrect) {
+            option = Integer.parseInt(this.askForInput("-> Enter an option [1..3]: "));
+            if(option < 1 || option > 3) {
+                System.out.println("Incorrect option!\n");
+                isCorrect = false;
+            } else {
+                isCorrect = true;
+            }
+        }
+        System.out.println("");
         return option;
     }
 
-    public int askForMonsterToAdd(ArrayList<Monster> Monsters) {
+    public int askForMonsterToAdd(ArrayList<Monster> monsters) {
         int i = 1;
-        for(Monster c : Monsters){
+        for(Monster c : monsters){
             System.out.println(i+". "+c.getName()+"("+c.getChallenge()+")");
             i++;
         }
         System.out.println();
-        int option = Integer.parseInt(this.askForInput("-> Choose a monster to add [1..7]: "));
+        int option = 0;
+        boolean isCorrect = false;
+        while (!isCorrect) {
+            option = Integer.parseInt(this.askForInput("-> Choose a monster to add [1.." +monsters.size() +"]: "));
+            if(option < 1 || option > monsters.size()) {
+                System.out.println("Monster not in list!\n");
+                isCorrect = false;
+            } else {
+                isCorrect = true;
+            }
+        }
         return option;
     }
 }

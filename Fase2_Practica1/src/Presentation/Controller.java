@@ -42,7 +42,7 @@ public class Controller {
                             break;
                         } else {
                             characterManager.createCharacter(newCharacter);
-                            System.out.println("\nThe character " + newCharacter.getName()+" has been created.\n");
+                            System.out.println("\nThe character " + newCharacter.getName() + " has been created.\n");
                             characterManager.getCharactersDAO().updateCharactersFile(characterManager.getCharacters());
                             break;
                         }
@@ -55,10 +55,9 @@ public class Controller {
                                 break;
                             } else {
                                 String charToDelete = menu.showCharacterDetails(positions, characterManager.getCharacters(), optionListCharacter);
-                                if(charToDelete == ""){
+                                if (charToDelete == "") {
                                     break;
-                                }
-                                else{
+                                } else {
                                     boolean deleted = characterManager.deleteCharacter(positions, optionListCharacter - 1, charToDelete);
                                     if (!deleted) {
                                         System.out.println("Incorrect character name, the character won't be deleted.\n");
@@ -66,7 +65,7 @@ public class Controller {
                                         characterManager.getCharactersDAO().updateCharactersFile(characterManager.getCharacters());
                                         menu.printMessage("Tavern keeper: \"I'm sorry Kiddo, but you have to leave.\"");
                                         menu.printMessage("");
-                                        menu.printMessage("Character "+charToDelete+" left the Guild.");
+                                        menu.printMessage("Character " + charToDelete + " left the Guild.");
                                         menu.printMessage("");
                                     }
                                 }
@@ -84,34 +83,62 @@ public class Controller {
                         int numCombats;
                         menu.printMessage("Tavern keeper: “Planning an adventure? Good luck with that!”\n");
                         name = menu.askForInput("-> Name your adventure: ");
-                        menu.printMessage("Tavern keeper: “You plan to undertake"+ name + ", really?”");
+                        boolean nameAlreadyTaken = false;
+                        for (Adventure adventure : adventureManager.getAdventures()) {
+                            if (adventure.getName().equalsIgnoreCase(name)) {
+                                nameAlreadyTaken = true;
+                            }
+                        }
+                        if (nameAlreadyTaken) {
+                            System.out.println("Adventure name already taken! Try again.\n");
+                            break;
+                        }
+                        menu.printMessage("Tavern keeper: “You plan to undertake " + name + ", really?”");
                         menu.printMessage("“How long will that take?”\n");
                         numCombats = Integer.parseInt(menu.askForInput("-> How many encounters do you want [1..4]: "));
-                        menu.printMessage("Tavern keeper: “"+ numCombats+" encounters? That is too much for me...”\n");
+                        menu.printMessage("Tavern keeper: “" + numCombats + " encounters? That is too much for me...”\n");
                         //int numCombatsAux = numCombats - (numCombats-1);
+                        ArrayList<Monster> monstersAlreadyIn = new ArrayList<>();
+                        ArrayList<Integer> countMonster = new ArrayList<>();
                         int numCombatsAux = 1;
-                        while(numCombatsAux < numCombats) {
+                        int monsterAdd = 0;
+                        int j = 0;
+                        while (numCombatsAux < numCombats) {
+                            int countBoss = 0;
                             menu.printMessage("* Encounter " + numCombatsAux + " / " + numCombats);
                             menu.printMessage("* Monsters in the Encounter");
-                            menu.printMessage("\t# Empty");
+                            if (monsterAdd == 0) {
+                                menu.printMessage("\t# Empty");
+                            }
+                            if (monsterAdd != 0) {
+
+                                monstersAlreadyIn.add(monsterManager.getMonsters().get(monsterAdd - 1));
+                                for (int i = 1; i <= monstersAlreadyIn.size(); i++) {
+                                    if (monstersAlreadyIn.get(i-1).getChallenge().equals("Boss")) {
+                                        countBoss++;
+                                    }
+                                    if (countBoss > 1) {
+                                        System.out.println("\nToo much bosses in the adventure!");
+                                        break;
+                                    }
+                                    System.out.printf("\t" +i + ". " + monstersAlreadyIn.get(i - 1).getName()+"\n");
+                                }
+                            }
+                            System.out.println("");
                             int monsterOption = menu.MonsterOptions(); //devuelve 1..3
-                            if(monsterOption == 1){
+                            if (monsterOption == 1) {
                                 ArrayList<Monster> availableMonsters = new ArrayList<>();
                                 availableMonsters = this.monsterManager.getMonsters();
-                                int monsterAdd = 0;
                                 monsterAdd = menu.askForMonsterToAdd(availableMonsters);
-                            }
-                            else if(monsterOption == 3){
+                            } else if (monsterOption == 3) {
                                 numCombatsAux++;
                             }
                         }
-                        break;
                 }
+                        break;
             }
         }
+
         characterManager.getCharactersDAO().updateCharactersFile(characterManager.getCharacters());
-
-
-
     }
 }
