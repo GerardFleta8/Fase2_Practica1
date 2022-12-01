@@ -75,12 +75,9 @@ public class Controller {
                         }
                         break;
                     case 3:
-                        //ir haciendo
-                        //menu.askForAdventureInfo(adventureManager.getAdventures(), monsterManager.getMonsters());
-                        //pido la info desde el controler para poder guardar la aventura, si la pido desde el menu
-                        //tengo que devolver una adventure para poder guardarlo pero el menu no deberia saber nada
                         String name;
-                        int numCombats;
+                        int numCombats = 0;
+                        boolean nameCorrect = false;
                         menu.printMessage("Tavern keeper: “Planning an adventure? Good luck with that!”\n");
                         name = menu.askForInput("-> Name your adventure: ");
                         boolean nameAlreadyTaken = false;
@@ -93,16 +90,30 @@ public class Controller {
                             System.out.println("Adventure name already taken! Try again.\n");
                             break;
                         }
+                        while (!nameCorrect) {
+                            if (name.equals("")) {
+                                nameCorrect = false;
+                            } else {
+                                nameCorrect = true;
+                            }
+                        }
                         menu.printMessage("Tavern keeper: “You plan to undertake " + name + ", really?”");
                         menu.printMessage("“How long will that take?”\n");
-                        numCombats = Integer.parseInt(menu.askForInput("-> How many encounters do you want [1..4]: "));
+                        boolean isCorrect = false;
+                        while (!isCorrect) {
+                            numCombats = Integer.parseInt(menu.askForInput("-> How many encounters do you want [1..4]: "));
+                            if(numCombats < 1 || numCombats > 4) {
+                                System.out.println("Incorrect option!\n");
+                                isCorrect = false;
+                            } else {
+                                isCorrect = true;
+                            }
+                        }
                         menu.printMessage("Tavern keeper: “" + numCombats + " encounters? That is too much for me...”\n");
-                        //int numCombatsAux = numCombats - (numCombats-1);
                         ArrayList<Monster> monstersAlreadyIn = new ArrayList<>();
-                        ArrayList<Integer> countMonster = new ArrayList<>();
+                        ArrayList<Integer> numMonters = new ArrayList<>();
                         int numCombatsAux = 1;
                         int monsterAdd = 0;
-                        int j = 0;
                         while (numCombatsAux < numCombats) {
                             int countBoss = 0;
                             menu.printMessage("* Encounter " + numCombatsAux + " / " + numCombats);
@@ -113,7 +124,9 @@ public class Controller {
                             if (monsterAdd != 0) {
 
                                 monstersAlreadyIn.add(monsterManager.getMonsters().get(monsterAdd - 1));
+
                                 for (int i = 1; i <= monstersAlreadyIn.size(); i++) {
+
                                     if (monstersAlreadyIn.get(i-1).getChallenge().equals("Boss")) {
                                         countBoss++;
                                     }
@@ -122,10 +135,10 @@ public class Controller {
                                         break;
                                     }
                                     System.out.printf("\t" +i + ". " + monstersAlreadyIn.get(i - 1).getName()+"\n");
-                                }
+                                    }
                             }
                             System.out.println("");
-                            int monsterOption = menu.MonsterOptions(); //devuelve 1..3
+                            int monsterOption = menu.MonsterOptions();
                             if (monsterOption == 1) {
                                 ArrayList<Monster> availableMonsters = new ArrayList<>();
                                 availableMonsters = this.monsterManager.getMonsters();
@@ -135,10 +148,9 @@ public class Controller {
                             }
                         }
                 }
-                        break;
+                break;
             }
         }
-
         characterManager.getCharactersDAO().updateCharactersFile(characterManager.getCharacters());
     }
 }
