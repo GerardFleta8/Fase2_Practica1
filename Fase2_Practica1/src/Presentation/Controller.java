@@ -141,15 +141,12 @@ public class Controller {
                                         seentwice.add(s.getName());
                                     }
                                 }
-                                System.out.println(seentwice);
-                                System.out.println("monsters list");
-                                for(Monster s: monstersList){
-                                    System.out.println(s.getName());
-                                }
+
+
                                 int flag = 0;
                                 int i = 0;
                                 for(String s: seentwice){
-                                    System.out.println("hola");
+
                                     int auxNum = 0;
                                     int k = 0;
                                     for(Monster n: monstersList){
@@ -159,35 +156,19 @@ public class Controller {
                                         }
                                         k++;
                                     }
-                                    System.out.println("...."+monstersList.get(flag).getName());
+
                                     monstersIn.add(monstersList.get(flag));
                                     monstersIn.get(i).setNumMonsters(auxNum);
-                                    System.out.println("x");
-                                    System.out.println(monstersIn.get(i).getName());
-                                    System.out.println(monstersIn.get(i).getNumMonsters());
-                                    System.out.println(i);
+                                    if (monstersIn.get(i).getNumMonsters() >1) {
+                                        System.out.printf("\t" +(i+1) + ". " +monstersIn.get(i).getName() +" (x"+monstersIn.get(i).getNumMonsters()+")\n");
+                                    } else {
+                                        System.out.printf("\t" +(i+1) + ". " +monstersIn.get(i).getName() +"\n");
+                                    }
+
+
                                     i++;
                                 }
 
-                                    //System.out.println(s.getName()+s.getNumMonsters());
-
-                                //System.out.println(seentwice);
-                                    /*
-                                monstersAlreadyIn.add(monsterManager.getMonsters().get(monsterAdd - 1));
-                                for (int i = 1; i <= monstersAlreadyIn.size(); i++) {
-                                    if (monstersAlreadyIn.get(i-1).getChallenge().equals("Boss")) {
-                                        countBoss++;
-                                    }
-                                    if (countBoss > 1) {
-                                        System.out.println("\nToo much bosses in the adventure!");
-                                        break;
-                                    }
-                                           // System.out.printf("\t" +i + ". " + monstersAlreadyIn.get(i - 1).getName()+"\n");
-
-                                        if (numMonters.get(i-1) > 1) {
-                                           // System.out.printf("\t" +i + ". " + monstersAlreadyIn.get(i - 1).getName()+" (x"+numMonters.get(i-1)+")\n");
-                                        }
-                                    }*/
 
                             }
                             System.out.println("");
@@ -196,6 +177,7 @@ public class Controller {
                                 ArrayList<Monster> availableMonsters = new ArrayList<>();
                                 availableMonsters = this.monsterManager.getMonsters();
                                 monsterAdd = menu.askForMonsterToAdd(availableMonsters);
+                                monstersIn = new ArrayList<>();
                             } else if (monsterOption == 3) {
                                 numCombatsAux++;
                             }
