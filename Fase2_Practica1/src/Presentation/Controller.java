@@ -4,8 +4,10 @@ import Business.*;
 import Business.Character;
 
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Controller {
 
@@ -112,8 +114,14 @@ public class Controller {
                         menu.printMessage("Tavern keeper: “" + numCombats + " encounters? That is too much for me...”\n");
                         ArrayList<Monster> monstersAlreadyIn = new ArrayList<>();
                         ArrayList<Integer> numMonters = new ArrayList<>();
+                        ArrayList<Monster> monstersList = new ArrayList<>();
+                        Set<String> seen = new HashSet<String>();
+                        Set<String> seentwice = new HashSet<String>();
                         int numCombatsAux = 1;
                         int monsterAdd = 0;
+                        String aux;
+                        int x = 0;
+                        int oc = 0;
                         while (numCombatsAux < numCombats) {
                             int countBoss = 0;
                             int j = 0;
@@ -124,6 +132,21 @@ public class Controller {
                             }
                             if (monsterAdd != 0) {
 
+                                monstersList.add(j,monsterManager.getMonsters().get(monsterAdd - 1));
+
+                                for (Monster s: monstersList) {
+                                    if (!seen.add(s.getName())) {
+                                        seentwice.add(s.getName());
+
+
+                                    } else {
+
+                                        seentwice.add(s.getName());
+                                    }
+                                }
+
+                                System.out.println(seentwice);
+                                    /*
                                 monstersAlreadyIn.add(monsterManager.getMonsters().get(monsterAdd - 1));
                                 for (int i = 1; i <= monstersAlreadyIn.size(); i++) {
                                     if (monstersAlreadyIn.get(i-1).getChallenge().equals("Boss")) {
@@ -133,26 +156,13 @@ public class Controller {
                                         System.out.println("\nToo much bosses in the adventure!");
                                         break;
                                     }
-                                    if (monstersAlreadyIn.get(i-1).getName().equals(monsterManager.getMonsters().get(monsterAdd - 1).getName())) {
-                                        j++;
-                                        numMonters.add(i-1 ,j);
-                                        if (numMonters.get(i-1)<=1) {
-                                            System.out.printf("\t" +i + ". " + monstersAlreadyIn.get(i - 1).getName()+"\n");
-                                        }
+                                           // System.out.printf("\t" +i + ". " + monstersAlreadyIn.get(i - 1).getName()+"\n");
+
                                         if (numMonters.get(i-1) > 1) {
-                                            System.out.printf("\t" +i + ". " + monstersAlreadyIn.get(i - 1).getName()+" (x"+numMonters.get(i-1)+")\n");
+                                           // System.out.printf("\t" +i + ". " + monstersAlreadyIn.get(i - 1).getName()+" (x"+numMonters.get(i-1)+")\n");
                                         }
-                                    } else {
-                                        if (numMonters.get(i-1) >1 ) {
-                                            System.out.printf("\t" +i + ". " + monstersAlreadyIn.get(i - 1).getName()+" (x"+numMonters.get(i-1)+")\n");
-                                        } else{
-                                            System.out.printf("\t" +i + ". " + monstersAlreadyIn.get(i - 1).getName()+"\n");
-                                        }
+                                    }*/
 
-                                    }
-
-
-                                }
                             }
                             System.out.println("");
                             int monsterOption = menu.MonsterOptions();
