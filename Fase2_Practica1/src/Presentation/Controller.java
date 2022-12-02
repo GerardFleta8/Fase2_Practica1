@@ -122,64 +122,73 @@ public class Controller {
                         String aux;
                         int x = 0;
                         int oc = 0;
-                        while (numCombatsAux < numCombats) {
-                            int countBoss = 0;
-                            int j = 0;
-                            menu.printMessage("* Encounter " + numCombatsAux + " / " + numCombats);
-                            menu.printMessage("* Monsters in the Encounter");
-                            if (monsterAdd == 0) {
-                                menu.printMessage("\t# Empty");
-                            }
-                            if (monsterAdd != 0) {
-
-                                monstersList.add(monsterManager.getMonsters().get(monsterAdd - 1));
-                                for (Monster s: monstersList) {
-                                    if (!seen.add(s.getName())) {
-                                        seentwice.add(s.getName());
-                                    } else {
-                                    //hola
-                                        seentwice.add(s.getName());
-                                    }
+                        while (numCombatsAux <= numCombats) {
+                            monstersIn = new ArrayList<>();
+                            int continuar = 0;
+                            while(continuar == 0) {
+                                int countBoss = 0;
+                                int j = 0;
+                                menu.printMessage("* Encounter " + numCombatsAux + " / " + numCombats);
+                                menu.printMessage("* Monsters in the Encounter");
+                                if (monsterAdd == 0) {
+                                    menu.printMessage("\t# Empty");
                                 }
+                                if (monsterAdd != 0) {
 
-
-                                int flag = 0;
-                                int i = 0;
-                                for(String s: seentwice){
-
-                                    int auxNum = 0;
-                                    int k = 0;
-                                    for(Monster n: monstersList){
-                                        if(s.equalsIgnoreCase(n.getName())){
-                                            flag = k;
-                                            auxNum++;
+                                    monstersList.add(monsterManager.getMonsters().get(monsterAdd - 1));
+                                    for (Monster s : monstersList) {
+                                        if (!seen.add(s.getName())) {
+                                            seentwice.add(s.getName());
+                                        } else {
+                                            //hola
+                                            seentwice.add(s.getName());
                                         }
-                                        k++;
-                                    }
-
-                                    monstersIn.add(monstersList.get(flag));
-                                    monstersIn.get(i).setNumMonsters(auxNum);
-                                    if (monstersIn.get(i).getNumMonsters() >1) {
-                                        System.out.printf("\t" +(i+1) + ". " +monstersIn.get(i).getName() +" (x"+monstersIn.get(i).getNumMonsters()+")\n");
-                                    } else {
-                                        System.out.printf("\t" +(i+1) + ". " +monstersIn.get(i).getName() +"\n");
                                     }
 
 
-                                    i++;
+                                    int flag = 0;
+                                    int i = 0;
+                                    for (String s : seentwice) {
+
+                                        int auxNum = 0;
+                                        int k = 0;
+                                        for (Monster n : monstersList) {
+                                            if (s.equalsIgnoreCase(n.getName())) {
+                                                flag = k;
+                                                auxNum++;
+                                            }
+                                            k++;
+                                        }
+
+                                        monstersIn.add(monstersList.get(flag));
+                                        monstersIn.get(i).setNumMonsters(auxNum);
+                                        if (monstersIn.get(i).getNumMonsters() > 1) {
+                                            System.out.printf("\t" + (i + 1) + ". " + monstersIn.get(i).getName() + " (x" + monstersIn.get(i).getNumMonsters() + ")\n");
+                                        } else {
+                                            System.out.printf("\t" + (i + 1) + ". " + monstersIn.get(i).getName() + "\n");
+                                        }
+
+
+                                        i++;
+                                    }
+
+
                                 }
-
-
-                            }
-                            System.out.println("");
-                            int monsterOption = menu.MonsterOptions();
-                            if (monsterOption == 1) {
-                                ArrayList<Monster> availableMonsters = new ArrayList<>();
-                                availableMonsters = this.monsterManager.getMonsters();
-                                monsterAdd = menu.askForMonsterToAdd(availableMonsters);
-                                monstersIn = new ArrayList<>();
-                            } else if (monsterOption == 3) {
-                                numCombatsAux++;
+                                System.out.println("");
+                                int monsterOption = menu.MonsterOptions();
+                                if (monsterOption == 1) {
+                                    ArrayList<Monster> availableMonsters = new ArrayList<>();
+                                    availableMonsters = this.monsterManager.getMonsters();
+                                    monsterAdd = menu.askForMonsterToAdd(availableMonsters);
+                                    monstersIn = new ArrayList<>();
+                                } else if (monsterOption == 3) {
+                                    //guardar la current arraylist monstersIn
+                                    //hace falta volver a reiniciar la arrayList monsters in depues de guardarla
+                                    //y antes de pasar al siguiente encuentro
+                                    continuar = 1;
+                                    monsterAdd = 0;
+                                    numCombatsAux++;
+                                }
                             }
                         }
                 }
