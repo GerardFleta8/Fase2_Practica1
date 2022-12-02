@@ -140,7 +140,7 @@ public class Controller {
 
 
                                     } else {
-
+                                    //hola
                                         seentwice.add(s.getName());
                                     }
                                 }
