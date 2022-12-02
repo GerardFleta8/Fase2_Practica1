@@ -9,10 +9,17 @@ public class Monster {
     private int initiative;
     private String damageDice;
     private String damageType;
+    private int numMonsters;
 
     public Monster(String name, String challenge, String xp, String hitPoints, String initiative, String damageDice, String damageType) {
     }
 
+    public void setNumMonsters(int x){
+        this.numMonsters = x;
+    }
+    public int getNumMonsters(){
+        return numMonsters;
+    }
     public String getName() {
         return name;
     }

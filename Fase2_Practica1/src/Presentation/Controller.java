@@ -112,7 +112,7 @@ public class Controller {
                             }
                         }
                         menu.printMessage("Tavern keeper: “" + numCombats + " encounters? That is too much for me...”\n");
-                        ArrayList<Monster> monstersAlreadyIn = new ArrayList<>();
+                        ArrayList<Monster> monstersIn = new ArrayList<>();
                         ArrayList<Integer> numMonters = new ArrayList<>();
                         ArrayList<Monster> monstersList = new ArrayList<>();
                         Set<String> seen = new HashSet<String>();
@@ -132,20 +132,46 @@ public class Controller {
                             }
                             if (monsterAdd != 0) {
 
-                                monstersList.add(j,monsterManager.getMonsters().get(monsterAdd - 1));
-
+                                monstersList.add(monsterManager.getMonsters().get(monsterAdd - 1));
                                 for (Monster s: monstersList) {
                                     if (!seen.add(s.getName())) {
                                         seentwice.add(s.getName());
-
-
                                     } else {
                                     //hola
                                         seentwice.add(s.getName());
                                     }
                                 }
-
                                 System.out.println(seentwice);
+                                System.out.println("monsters list");
+                                for(Monster s: monstersList){
+                                    System.out.println(s.getName());
+                                }
+                                int flag = 0;
+                                int i = 0;
+                                for(String s: seentwice){
+                                    System.out.println("hola");
+                                    int auxNum = 0;
+                                    int k = 0;
+                                    for(Monster n: monstersList){
+                                        if(s.equalsIgnoreCase(n.getName())){
+                                            flag = k;
+                                            auxNum++;
+                                        }
+                                        k++;
+                                    }
+                                    System.out.println("...."+monstersList.get(flag).getName());
+                                    monstersIn.add(monstersList.get(flag));
+                                    monstersIn.get(i).setNumMonsters(auxNum);
+                                    System.out.println("x");
+                                    System.out.println(monstersIn.get(i).getName());
+                                    System.out.println(monstersIn.get(i).getNumMonsters());
+                                    System.out.println(i);
+                                    i++;
+                                }
+
+                                    //System.out.println(s.getName()+s.getNumMonsters());
+
+                                //System.out.println(seentwice);
                                     /*
                                 monstersAlreadyIn.add(monsterManager.getMonsters().get(monsterAdd - 1));
                                 for (int i = 1; i <= monstersAlreadyIn.size(); i++) {
