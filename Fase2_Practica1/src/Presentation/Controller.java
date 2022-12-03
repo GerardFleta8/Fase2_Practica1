@@ -76,6 +76,7 @@ public class Controller {
                             System.out.println("No characters created yet.\n");
                         }
                         break;
+                    //new adventure
                     case 3:
                         String name;
                         int numCombats = 0;
@@ -122,6 +123,7 @@ public class Controller {
                             monstersList = new ArrayList<>();
                             int monsterAdd = 0;
                             int continuar = 0;
+                            int monsterRemove = 0;
                             while(continuar == 0) {
                                 int countBoss = 0;
                                 int j = 0;
@@ -131,9 +133,11 @@ public class Controller {
                                     menu.printMessage("\t# Empty");
                                 }
                                 if (monsterAdd != 0) {
-                                    monstersList.add(monsterManager.getMonsters().get(monsterAdd - 1));
-                                    for (Monster s : monstersList) {
-                                        seentwice.add(s.getName());
+                                    if(monsterRemove == 0) {
+                                        monstersList.add(monsterManager.getMonsters().get(monsterAdd - 1));
+                                        for (Monster s : monstersList) {
+                                            seentwice.add(s.getName());
+                                        }
                                     }
                                     int flag = 0;
                                     int i = 0;
@@ -159,11 +163,34 @@ public class Controller {
                                 }
                                 System.out.println("");
                                 int monsterOption = menu.MonsterOptions();
+                                monsterRemove = 0;
                                 if (monsterOption == 1) {
                                     ArrayList<Monster> availableMonsters = new ArrayList<>();
                                     availableMonsters = this.monsterManager.getMonsters();
                                     monsterAdd = menu.askForMonsterToAdd(availableMonsters);
                                     monstersIn = new ArrayList<>();
+                                } else if (monsterOption == 2) {
+                                    monsterRemove = menu.askForInt("-> Which monster do you want to delete:",1, seentwice.size());
+                                    int i = 0;
+                                    monsterRemove = monsterRemove - 1;
+                                    String aux = "";
+                                    for(String s: seentwice){
+                                        if(i == monsterRemove){
+                                            aux = s;
+                                        }
+                                        i++;
+                                    }
+                                    seentwice.remove(aux); //hay que pasarle el nombre aux (para borrar en un set)
+                                    monsterRemove++; //para que no entre al if si han borrado el 1, y monster Remove es 0 otra vez
+                                    monstersIn = new ArrayList<>();
+                                    i = 0;
+                                    //los hemos borrado del set seentwice, falta borrarlos del monstersList
+                                    for(Monster s : monstersList){
+                                        if(aux.equalsIgnoreCase(s.getName())){
+                                            monstersList.remove(i);
+                                        }
+                                        i++;
+                                    }
                                 } else if (monsterOption == 3) {
                                     //guardar la current arraylist monstersIn
                                     continuar = 1;

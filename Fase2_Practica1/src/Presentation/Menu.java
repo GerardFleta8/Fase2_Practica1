@@ -6,6 +6,7 @@ import Business.Monster;
 
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
@@ -68,6 +69,27 @@ public class Menu {
             System.out.println(message);
 
             return scan.nextLine();
+        }
+        public static int askForInt(String message, int min, int max){
+            Scanner s = new Scanner(System.in);
+            int option = 0;
+            int incorrectInput = 1;
+            do{
+                System.out.println(message);
+                try{
+                    option = s.nextInt();
+                    if(option >= min && option <= max){
+                        incorrectInput = 0;
+                    }else{
+                        System.out.println("Please enter a number between "+min+" and "+max);
+                    }
+                }catch(InputMismatchException e){
+                    System.out.println("Please enter a number.");
+                }finally{
+                    s.nextLine();
+                }
+            }while(incorrectInput == 1);
+            return option;
         }
         public boolean checkIfNameHasNumber(String name) {
             if (name.matches(".*[0-9].*")) {
