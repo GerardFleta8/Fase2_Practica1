@@ -133,6 +133,8 @@ public class Controller {
                                     menu.printMessage("\t# Empty");
                                 }
                                 if (monsterAdd != 0) {
+                                    //si monster remove != significa que queremos borrar
+                                    // y hemos actualizado seentwice y no la queremos sobre escribir
                                     if(monsterRemove == 0) {
                                         monstersList.add(monsterManager.getMonsters().get(monsterAdd - 1));
                                         for (Monster s : monstersList) {
