@@ -114,10 +114,10 @@ public class Controller {
                         menu.printMessage("Tavern keeper: “" + numCombats + " encounters? That is too much for me...”\n");
                         ArrayList<Monster> monstersIn = new ArrayList<>();
                         ArrayList<Monster> monstersList = new ArrayList<>();
-                        Set<String> seen = new HashSet<String>();
-                        Set<String> seentwice = new HashSet<String>();
                         int numCombatsAux = 1;
                         while (numCombatsAux <= numCombats) {
+                            Set<String> seen = new HashSet<String>();
+                            Set<String> seentwice = new HashSet<String>();
                             monstersIn = new ArrayList<>();
                             monstersList = new ArrayList<>();
                             int monsterAdd = 0;
@@ -131,22 +131,13 @@ public class Controller {
                                     menu.printMessage("\t# Empty");
                                 }
                                 if (monsterAdd != 0) {
-
                                     monstersList.add(monsterManager.getMonsters().get(monsterAdd - 1));
                                     for (Monster s : monstersList) {
-                                        if (!seen.add(s.getName())) {
-                                            seentwice.add(s.getName());
-                                        } else {
-                                            //hola
-                                            seentwice.add(s.getName());
-                                        }
+                                        seentwice.add(s.getName());
                                     }
-
-
                                     int flag = 0;
                                     int i = 0;
                                     for (String s : seentwice) {
-
                                         int auxNum = 0;
                                         int k = 0;
                                         for (Monster n : monstersList) {
@@ -156,7 +147,6 @@ public class Controller {
                                             }
                                             k++;
                                         }
-
                                         monstersIn.add(monstersList.get(flag));
                                         monstersIn.get(i).setNumMonsters(auxNum);
                                         if (monstersIn.get(i).getNumMonsters() > 1) {
@@ -164,12 +154,8 @@ public class Controller {
                                         } else {
                                             System.out.printf("\t" + (i + 1) + ". " + monstersIn.get(i).getName() + "\n");
                                         }
-
-
                                         i++;
                                     }
-
-
                                 }
                                 System.out.println("");
                                 int monsterOption = menu.MonsterOptions();
