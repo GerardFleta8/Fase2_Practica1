@@ -113,17 +113,14 @@ public class Controller {
                         }
                         menu.printMessage("Tavern keeper: “" + numCombats + " encounters? That is too much for me...”\n");
                         ArrayList<Monster> monstersIn = new ArrayList<>();
-                        ArrayList<Integer> numMonters = new ArrayList<>();
                         ArrayList<Monster> monstersList = new ArrayList<>();
                         Set<String> seen = new HashSet<String>();
                         Set<String> seentwice = new HashSet<String>();
                         int numCombatsAux = 1;
-                        int monsterAdd = 0;
-                        String aux;
-                        int x = 0;
-                        int oc = 0;
                         while (numCombatsAux <= numCombats) {
                             monstersIn = new ArrayList<>();
+                            monstersList = new ArrayList<>();
+                            int monsterAdd = 0;
                             int continuar = 0;
                             while(continuar == 0) {
                                 int countBoss = 0;
@@ -183,10 +180,7 @@ public class Controller {
                                     monstersIn = new ArrayList<>();
                                 } else if (monsterOption == 3) {
                                     //guardar la current arraylist monstersIn
-                                    //hace falta volver a reiniciar la arrayList monsters in depues de guardarla
-                                    //y antes de pasar al siguiente encuentro
                                     continuar = 1;
-                                    monsterAdd = 0;
                                     numCombatsAux++;
                                 }
                             }
