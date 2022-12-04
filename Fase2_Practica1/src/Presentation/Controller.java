@@ -100,6 +100,7 @@ public class Controller {
                                 nameCorrect = true;
                             }
                         }
+
                         menu.printMessage("Tavern keeper: “You plan to undertake " + name + ", really?”");
                         menu.printMessage("“How long will that take?”\n");
                         boolean isCorrect = false;
@@ -112,6 +113,7 @@ public class Controller {
                                 isCorrect = true;
                             }
                         }
+                        ArrayList<Encounter> encounters = new ArrayList<>();
                         menu.printMessage("Tavern keeper: “" + numCombats + " encounters? That is too much for me...”\n");
                         ArrayList<Monster> monstersIn = new ArrayList<>();
                         ArrayList<Monster> monstersList = new ArrayList<>();
@@ -183,7 +185,7 @@ public class Controller {
                                         i++;
                                     }
                                     seentwice.remove(aux); //hay que pasarle el nombre aux (para borrar en un set)
-                                    monsterRemove++; //para que no entre al if si han borrado el 1, y monster Remove es 0 otra vez
+                                    monsterRemove++; //para que no entre al if si han borrado el 1 y monsterRemove es 0 otra vez
                                     monstersIn = new ArrayList<>();
                                     i = 0;
                                     //los hemos borrado del set seentwice, falta borrarlos del monstersList
@@ -194,12 +196,16 @@ public class Controller {
                                         i++;
                                     }
                                 } else if (monsterOption == 3) {
-                                    //guardar la current arraylist monstersIn
+                                    //guardar la current arraylist monstersIn al encuentro y añadir el encuentro
+                                    Encounter currentEncounter = new Encounter(monstersIn);
+                                    encounters.add(currentEncounter);
                                     continuar = 1;
                                     numCombatsAux++;
                                 }
                             }
                         }
+                        adventureManager.createAdventure(new Adventure(name, numCombats, encounters));
+                        //falta guardar la adventure en JSON con json manager
                 }
                 break;
             }
