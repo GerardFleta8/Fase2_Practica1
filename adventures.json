@@ -62,5 +62,83 @@
         ]
       }
     ]
+  },
+  {
+    "name": "ff",
+    "numEncounters": 2,
+    "encounters": [
+      {
+        "monstersInEncounter": [
+          {
+            "name": "Goblin",
+            "challenge": "Minion",
+            "experience": 2,
+            "hitPoints": 5,
+            "initiative": 0,
+            "damageDice": "d4",
+            "damageType": "Physical",
+            "numMonsters": 2
+          }
+        ]
+      },
+      {
+        "monstersInEncounter": [
+          {
+            "name": "Warg Rider",
+            "challenge": "Minion",
+            "experience": 6,
+            "hitPoints": 6,
+            "initiative": 2,
+            "damageDice": "d6",
+            "damageType": "Physical",
+            "numMonsters": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Hola",
+    "numEncounters": 2,
+    "encounters": [
+      {
+        "monstersInEncounter": [
+          {
+            "name": "Warg Rider",
+            "challenge": "Minion",
+            "experience": 6,
+            "hitPoints": 6,
+            "initiative": 2,
+            "damageDice": "d6",
+            "damageType": "Physical",
+            "numMonsters": 1
+          },
+          {
+            "name": "Snuffler",
+            "challenge": "Minion",
+            "experience": 2,
+            "hitPoints": 6,
+            "initiative": 0,
+            "damageDice": "d4",
+            "damageType": "Physical",
+            "numMonsters": 2
+          }
+        ]
+      },
+      {
+        "monstersInEncounter": [
+          {
+            "name": "Werewolf",
+            "challenge": "Lieutenant",
+            "experience": 24,
+            "hitPoints": 25,
+            "initiative": 2,
+            "damageDice": "d10",
+            "damageType": "Physical",
+            "numMonsters": 1
+          }
+        ]
+      }
+    ]
   }
 ]

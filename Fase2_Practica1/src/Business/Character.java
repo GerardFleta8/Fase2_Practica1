@@ -33,4 +33,5 @@ public class Character {
     public int getSpirit() {return spirit; }
     public String getClassType() {return classType; }
 
+
 }

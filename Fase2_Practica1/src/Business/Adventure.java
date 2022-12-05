@@ -23,7 +23,5 @@ public class Adventure {
         return numEncounters;
     }
 
-    /*public ArrayList<Monster> getMonsters() {
-        return monsters;
-    }*/
+    public ArrayList<Encounter> getEncounters() {return encounters;}
 }
