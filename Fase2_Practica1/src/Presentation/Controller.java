@@ -28,6 +28,7 @@ public class Controller {
         try {
             monsterManager.setMonsters(monsterManager.getMonsterDAO().readMonstersFile());
             characterManager.setCharacters(characterManager.getCharactersDAO().readCharactersFile());
+            adventureManager.setAdventures(adventureManager.getAdventuresDAO().readAdventuresFile());
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -85,11 +86,14 @@ public class Controller {
                         menu.printMessage("Tavern keeper: “Planning an adventure? Good luck with that!”\n");
                         name = menu.askForInput("-> Name your adventure: ");
                         boolean nameAlreadyTaken = false;
-                        for (Adventure adventure : adventureManager.getAdventures()) {
-                            if (adventure.getName().equalsIgnoreCase(name)) {
-                                nameAlreadyTaken = true;
+                        if(!(adventureManager.getAdventures().isEmpty())) {
+                            for (Adventure adventure : adventureManager.getAdventures()) {
+                                if (adventure.getName().equalsIgnoreCase(name)) {
+                                    nameAlreadyTaken = true;
+                                }
                             }
                         }
+
                         if (nameAlreadyTaken) {
                             System.out.println("Adventure name already taken! Try again.\n");
                             break;
@@ -107,7 +111,7 @@ public class Controller {
                         boolean isCorrect = false;
                         while (!isCorrect) {
                             numCombats = Integer.parseInt(menu.askForInput("-> How many encounters do you want [1..4]: "));
-                            if(numCombats < 1 || numCombats > 4) {
+                            if (numCombats < 1 || numCombats > 4) {
                                 System.out.println("Incorrect option!\n");
                                 isCorrect = false;
                             } else {
@@ -129,7 +133,7 @@ public class Controller {
                             int continuar = 0;
                             bossCounter = 0;
                             int monsterRemove = 0;
-                            while(continuar == 0) {
+                            while (continuar == 0) {
 
                                 int j = 0;
                                 menu.printMessage("* Encounter " + numCombatsAux + " / " + numCombats);
@@ -140,8 +144,8 @@ public class Controller {
                                 if (monsterAdd != 0) {
                                     //si monster remove != significa que queremos borrar
                                     // y hemos actualizado seentwice y no la queremos sobre escribir
-                                    if(monsterRemove == 0) {
-                                        if (monsterManager.getMonsters().get(monsterAdd-1).getChallenge().equals("Boss")) {
+                                    if (monsterRemove == 0) {
+                                        if (monsterManager.getMonsters().get(monsterAdd - 1).getChallenge().equals("Boss")) {
                                             bossCounter++;
                                         }
                                         if (bossCounter > 1) {
@@ -188,12 +192,12 @@ public class Controller {
 
                                     monstersIn = new ArrayList<>();
                                 } else if (monsterOption == 2) {
-                                    monsterRemove = menu.askForInt("-> Which monster do you want to delete:",1, seentwice.size());
+                                    monsterRemove = menu.askForInt("-> Which monster do you want to delete:", 1, seentwice.size());
                                     int i = 0;
                                     monsterRemove = monsterRemove - 1;
                                     String aux = "";
-                                    for(String s: seentwice){
-                                        if(i == monsterRemove){
+                                    for (String s : seentwice) {
+                                        if (i == monsterRemove) {
                                             aux = s;
                                         }
                                         i++;
@@ -205,7 +209,7 @@ public class Controller {
 
                                     //los hemos borrado del set seentwice, falta borrarlos del monstersList
                                     boolean monsterFound = true;
-                                    while(monsterFound == true) {
+                                    while (monsterFound == true) {
                                         int found = 0;
                                         i = 0;
                                         monsterFound = false;
@@ -216,11 +220,11 @@ public class Controller {
                                             }
                                             i++;
                                         }
-                                        if(monsterFound){
+                                        if (monsterFound) {
                                             monstersList.remove(found);
                                         }
                                     }
-                                    if(monstersList.size() == 0){
+                                    if (monstersList.size() == 0) {
                                         monsterAdd = 0;
                                     }
                                 } else if (monsterOption == 3) {
@@ -245,11 +249,17 @@ public class Controller {
                         int i = 0;
                         //igual aqui hay que cogerlas del json y no directamente las que tenga el manager
                         //las que hay en el manager son las que ha creado nuevas, asi que tendriamos que leer todas del json
-                        for(Adventure a: adventureManager.getAdventures()){
-                            menu.printMessage(i+". "+a.getName());
+                        if (adventureManager.getAdventures().isEmpty()) {
+                            System.out.println("null");
+                        } else {
+
+                            for (Adventure a : adventureManager.getAdventures()) {
+                                menu.printMessage(i + ". " + a.getName());
+                            }
+                            menu.printMessage("");
+                            menu.askForInt("-> Choose an adventure:", 1, adventureManager.getAdventures().size());
                         }
-                        menu.printMessage("");
-                        menu.askForInt("-> Choose an adventure:", 1, adventureManager.getAdventures().size());
+
                         break;
                 }
                 break;
