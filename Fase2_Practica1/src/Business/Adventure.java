@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 public class Adventure {
     private String name;
-    private int numCombats;
+    private int numEncounters;
     //private ArrayList<Monster> monsters;
     private ArrayList<Encounter> encounters;
 
-    public Adventure(String name, int numCombats, ArrayList<Encounter> encounters) {
+    public Adventure(String name, int numEncounters, ArrayList<Encounter> encounters) {
         this.name = name;
-        this.numCombats = numCombats;
+        this.numEncounters = numEncounters;
         //this.monsters = monsters;
         this.encounters = encounters;
     }
@@ -20,7 +20,7 @@ public class Adventure {
     }
 
     public int getNumCombats() {
-        return numCombats;
+        return numEncounters;
     }
 
     /*public ArrayList<Monster> getMonsters() {

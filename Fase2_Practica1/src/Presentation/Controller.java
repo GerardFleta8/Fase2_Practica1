@@ -119,6 +119,7 @@ public class Controller {
                         ArrayList<Monster> monstersIn = new ArrayList<>();
                         ArrayList<Monster> monstersList = new ArrayList<>();
                         int numCombatsAux = 1;
+                        int bossCounter = 0;
                         while (numCombatsAux <= numCombats) {
                             Set<String> seen = new HashSet<String>();
                             Set<String> seentwice = new HashSet<String>();
@@ -126,9 +127,10 @@ public class Controller {
                             monstersList = new ArrayList<>();
                             int monsterAdd = 0;
                             int continuar = 0;
+                            bossCounter = 0;
                             int monsterRemove = 0;
                             while(continuar == 0) {
-                                int countBoss = 0;
+
                                 int j = 0;
                                 menu.printMessage("* Encounter " + numCombatsAux + " / " + numCombats);
                                 menu.printMessage("* Monsters in the Encounter");
@@ -139,7 +141,17 @@ public class Controller {
                                     //si monster remove != significa que queremos borrar
                                     // y hemos actualizado seentwice y no la queremos sobre escribir
                                     if(monsterRemove == 0) {
-                                        monstersList.add(monsterManager.getMonsters().get(monsterAdd - 1));
+                                        if (monsterManager.getMonsters().get(monsterAdd-1).getChallenge().equals("Boss")) {
+                                            bossCounter++;
+                                        }
+                                        if (bossCounter > 1) {
+                                            System.out.println("\nToo many bosses!\n");
+
+                                        } else {
+                                            monstersList.add(monsterManager.getMonsters().get(monsterAdd - 1));
+                                        }
+
+
                                         for (Monster s : monstersList) {
                                             seentwice.add(s.getName());
                                         }
@@ -173,6 +185,7 @@ public class Controller {
                                     ArrayList<Monster> availableMonsters = new ArrayList<>();
                                     availableMonsters = this.monsterManager.getMonsters();
                                     monsterAdd = menu.askForMonsterToAdd(availableMonsters);
+
                                     monstersIn = new ArrayList<>();
                                 } else if (monsterOption == 2) {
                                     monsterRemove = menu.askForInt("-> Which monster do you want to delete:",1, seentwice.size());
@@ -189,6 +202,7 @@ public class Controller {
                                     monsterRemove++; //para que no entre al if si han borrado el 1 y monsterRemove es 0 otra vez
                                     monstersIn = new ArrayList<>();
                                     i = 0;
+
                                     //los hemos borrado del set seentwice, falta borrarlos del monstersList
                                     for(Monster s : monstersList){
                                         if(aux.equalsIgnoreCase(s.getName())){
@@ -196,6 +210,7 @@ public class Controller {
                                         }
                                         i++;
                                     }
+
                                 } else if (monsterOption == 3) {
                                     //guardar la current arraylist monstersIn al encuentro y añadir el encuentro
                                     Encounter currentEncounter = new Encounter(monstersIn);
@@ -206,6 +221,7 @@ public class Controller {
                             }
                         }
                         adventureManager.createAdventure(new Adventure(name, numCombats, encounters));
+                        adventureManager.getAdventuresDAO().updateAdventuresFile(adventureManager.getAdventures());
                         //falta guardar la adventure en JSON con json manager
                         break;
 

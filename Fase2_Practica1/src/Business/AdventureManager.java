@@ -1,6 +1,7 @@
 package Business;
 
 import Persistance.AdventuresJsonDAO;
+import Persistance.CharactersJsonDAO;
 
 import java.util.ArrayList;
 
@@ -22,5 +23,8 @@ public class AdventureManager {
     }
     public void setAdventures(ArrayList<Adventure> adventures) {
         this.adventures = adventures;
+    }
+    public AdventuresJsonDAO getAdventuresDAO() {
+        return adventuresJsonDAO;
     }
 }
