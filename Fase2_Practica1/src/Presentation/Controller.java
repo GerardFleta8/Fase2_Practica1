@@ -201,16 +201,28 @@ public class Controller {
                                     seentwice.remove(aux); //hay que pasarle el nombre aux (para borrar en un set)
                                     monsterRemove++; //para que no entre al if si han borrado el 1 y monsterRemove es 0 otra vez
                                     monstersIn = new ArrayList<>();
-                                    i = 0;
+
 
                                     //los hemos borrado del set seentwice, falta borrarlos del monstersList
-                                    for(Monster s : monstersList){
-                                        if(aux.equalsIgnoreCase(s.getName())){
-                                            monstersList.remove(i);
+                                    boolean monsterFound = true;
+                                    while(monsterFound == true) {
+                                        int found = 0;
+                                        i = 0;
+                                        monsterFound = false;
+                                        for (Monster s : monstersList) {
+                                            if (aux.equalsIgnoreCase(s.getName())) {
+                                                found = i;
+                                                monsterFound = true;
+                                            }
+                                            i++;
                                         }
-                                        i++;
+                                        if(monsterFound){
+                                            monstersList.remove(found);
+                                        }
                                     }
-
+                                    if(monstersList.size() == 0){
+                                        monsterAdd = 0;
+                                    }
                                 } else if (monsterOption == 3) {
                                     //guardar la current arraylist monstersIn al encuentro y añadir el encuentro
                                     Encounter currentEncounter = new Encounter(monstersIn);
