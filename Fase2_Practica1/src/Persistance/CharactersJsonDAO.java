@@ -21,6 +21,9 @@ public class CharactersJsonDAO {
         Character character[] = g.fromJson(reader, Character[].class);
 
         ArrayList<Character> characters = new ArrayList<>();
+        if (character == null) {
+            return new ArrayList<>();
+        }
         for(Character c: character){
             characters.add(c);
         }

@@ -133,5 +133,32 @@
     "mind": 2,
     "spirit": -1,
     "class": "Adventurer"
+  },
+  {
+    "name": "Staxx",
+    "player": "Gerard",
+    "xp": 2,
+    "body": 0,
+    "mind": 2,
+    "spirit": 1,
+    "class": "Adventurer"
+  },
+  {
+    "name": "Lol",
+    "player": "Gerard",
+    "xp": 2,
+    "body": 1,
+    "mind": 2,
+    "spirit": 1,
+    "class": "Adventurer"
+  },
+  {
+    "name": "W",
+    "player": "w",
+    "xp": 2,
+    "body": 1,
+    "mind": 1,
+    "spirit": 1,
+    "class": "Adventurer"
   }
 ]

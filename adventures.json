@@ -1,0 +1,66 @@
+[
+  {
+    "name": "Gerard",
+    "numEncounters": 2,
+    "encounters": [
+      {
+        "monstersInEncounter": [
+          {
+            "name": "Warg Rider",
+            "challenge": "Minion",
+            "experience": 6,
+            "hitPoints": 6,
+            "initiative": 2,
+            "damageDice": "d6",
+            "damageType": "Physical",
+            "numMonsters": 1
+          },
+          {
+            "name": "Goblin",
+            "challenge": "Minion",
+            "experience": 2,
+            "hitPoints": 5,
+            "initiative": 0,
+            "damageDice": "d4",
+            "damageType": "Physical",
+            "numMonsters": 2
+          },
+          {
+            "name": "Werewolf",
+            "challenge": "Lieutenant",
+            "experience": 24,
+            "hitPoints": 25,
+            "initiative": 2,
+            "damageDice": "d10",
+            "damageType": "Physical",
+            "numMonsters": 1
+          }
+        ]
+      },
+      {
+        "monstersInEncounter": [
+          {
+            "name": "Goblin",
+            "challenge": "Minion",
+            "experience": 2,
+            "hitPoints": 5,
+            "initiative": 0,
+            "damageDice": "d4",
+            "damageType": "Physical",
+            "numMonsters": 2
+          },
+          {
+            "name": "Gothmog",
+            "challenge": "Boss",
+            "experience": 148,
+            "hitPoints": 87,
+            "initiative": 3,
+            "damageDice": "d20",
+            "damageType": "Magical",
+            "numMonsters": 1
+          }
+        ]
+      }
+    ]
+  }
+]

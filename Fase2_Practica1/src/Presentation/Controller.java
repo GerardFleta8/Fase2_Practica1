@@ -48,8 +48,9 @@ public class Controller {
                             characterManager.createCharacter(newCharacter);
                             System.out.println("\nThe character " + newCharacter.getName() + " has been created.\n");
                             characterManager.getCharactersDAO().updateCharactersFile(characterManager.getCharacters());
-                            break;
+
                         }
+                        break;
                     case 2:
                         if (characterManager.getCharacters().size() > 0) {
                             positions = menu.listCharacters(characterManager.getCharacters());
@@ -109,14 +110,21 @@ public class Controller {
                         menu.printMessage("Tavern keeper: “You plan to undertake " + name + ", really?”");
                         menu.printMessage("“How long will that take?”\n");
                         boolean isCorrect = false;
-                        while (!isCorrect) {
+                        int countIncorrect = 0;
+                        while (!isCorrect && countIncorrect < 3) {
                             numCombats = Integer.parseInt(menu.askForInput("-> How many encounters do you want [1..4]: "));
                             if (numCombats < 1 || numCombats > 4) {
-                                System.out.println("Incorrect option!\n");
+                                System.out.println("Incorrect number of encounters!\n");
+                                countIncorrect++;
+
                                 isCorrect = false;
                             } else {
                                 isCorrect = true;
                             }
+                        }
+
+                        if (countIncorrect >2) {
+                            break;
                         }
                         ArrayList<Encounter> encounters = new ArrayList<>();
                         menu.printMessage("Tavern keeper: “" + numCombats + " encounters? That is too much for me...”\n");
@@ -149,7 +157,8 @@ public class Controller {
                                             bossCounter++;
                                         }
                                         if (bossCounter > 1) {
-                                            System.out.println("\nToo many bosses!\n");
+                                            System.out.println("\nToo many bosses!");
+                                            bossCounter = 1;
 
                                         } else {
                                             monstersList.add(monsterManager.getMonsters().get(monsterAdd - 1));
@@ -250,19 +259,55 @@ public class Controller {
                         //igual aqui hay que cogerlas del json y no directamente las que tenga el manager
                         //las que hay en el manager son las que ha creado nuevas, asi que tendriamos que leer todas del json
                         if (adventureManager.getAdventures().isEmpty()) {
-                            System.out.println("null");
+                            System.out.println("No adventures created yet!\n");
+                            break;
                         } else {
-
                             for (Adventure a : adventureManager.getAdventures()) {
-                                menu.printMessage(i + ". " + a.getName());
+                                menu.printMessage("\t"+(i+1) + ". " + a.getName());
                             }
                             menu.printMessage("");
-                            menu.askForInt("-> Choose an adventure:", 1, adventureManager.getAdventures().size());
-                        }
+                            int option = menu.askForInt("-> Choose an adventure: ", 1, adventureManager.getAdventures().size());
+                            System.out.println("Tavern keeper: “"+ adventureManager.getAdventures().get(option-1).getName()+" – " +
+                                    "The Battle under the Stars it is!” “And how many people shall join you?”\n");
+                            int numChar = menu.askForInt("-> Choose a number of characters [3..5]: ", 3, 5);
+                            System.out.println("Tavern keeper: “Great, "+numChar+" it is.”");
+                            System.out.println("“Who among these lads shall join you?”\n\n");
+                            System.out.println("------------------------------");
+                            int numChamps = 0;
+                            ArrayList<Character> party = new ArrayList<>();
+                            for (int j = 0; j < numChar; j++) {
+                                Character aux = new Character("", "", 0,0,0,0,"");
+                                party.add(aux);
 
+                            }
+                            int k = 0;
+                            while (numChamps <= numChar) {
+                                System.out.println("Your party ("+(numChamps +" / "+ numChar+"):"));
+
+                                for (int j = 1; j <= numChar ; j++) {
+                                    if (!party.get(j-1).getName().isEmpty()) {
+                                        System.out.println("\t"+j+". "+ party.get(j-1).getName());
+                                    } else {
+                                        System.out.println("\t"+j+". Empty");
+                                    }
+                                }
+
+                                System.out.println("------------------------------");
+                                System.out.println("Available characters:");
+                                for (int j = 1; j <= characterManager.getCharacters().size(); j++) {
+                                    System.out.println("\t"+j+". " + characterManager.getCharacters().get(j-1).getName());
+                                }
+                                int characterChosen = menu.askForInt("-> Choose character "+(numChamps+1)+" in your party: ", 1, characterManager.getCharacters().size());
+                                System.out.println("------------------------------\n");
+                                party.add(k,characterManager.getCharacters().get(characterChosen-1));
+                                k++;
+                                numChamps++;
+
+                            }
+                        }
                         break;
                 }
-                break;
+
             }
         }
         characterManager.getCharactersDAO().updateCharactersFile(characterManager.getCharacters());

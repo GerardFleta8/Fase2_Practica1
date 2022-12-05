@@ -5,6 +5,7 @@ import Business.Character;
 import Business.Monster;
 
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -13,7 +14,12 @@ public class Menu {
 
 
         public void welcomeMenu() {
-            System.out.println("Welcome to Simple LSRPG.\n");
+            System.out.println("    ____ _               __        __      ____ ____   ___   _____"  );
+            System.out.println("   / __/(_)__ _   ____  / /___    / /     / __// _  \\ / _ \\ / ___/");
+            System.out.println(" __\\ \\ / //  | \\ / _ \\ / // -_)  / /___ __\\ \\ / ,  _// ___// (_ /");
+            System.out.println("/____//_//_/_/_// ___//_/ \\__/  /_____//____//_/\\ _\\/_/    \\___/");
+            System.out.println("               /_/ ");
+            System.out.println("\nWelcome to Simple LSRPG.\n");
             System.out.println("Loading data...\n");
         }
 
@@ -192,9 +198,11 @@ public class Menu {
                 System.out.println("You haven't entered any name!\n");
             } else {
                 nameAlreadyTaken = false;
-                for (Character character: characters) {
-                    if (character.getName().equalsIgnoreCase(name)) {
-                        nameAlreadyTaken = true;
+                if (!characters.isEmpty()) {
+                    for (Character character: characters) {
+                        if (character.getName().equalsIgnoreCase(name)) {
+                            nameAlreadyTaken = true;
+                        }
                     }
                 }
                 if (nameAlreadyTaken) {
