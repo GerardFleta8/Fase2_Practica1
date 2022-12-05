@@ -268,7 +268,7 @@ public class Controller {
                             menu.printMessage("");
                             int option = menu.askForInt("-> Choose an adventure: ", 1, adventureManager.getAdventures().size());
                             System.out.println("Tavern keeper: “"+ adventureManager.getAdventures().get(option-1).getName()+" – " +
-                                    "The Battle under the Stars it is!” “And how many people shall join you?”\n");
+                                    "The Battle under the Stars it is!”\n“And how many people shall join you?”\n");
                             int numChar = menu.askForInt("-> Choose a number of characters [3..5]: ", 3, 5);
                             System.out.println("Tavern keeper: “Great, "+numChar+" it is.”");
                             System.out.println("“Who among these lads shall join you?”\n\n");
@@ -278,12 +278,10 @@ public class Controller {
                             for (int j = 0; j < numChar; j++) {
                                 Character aux = new Character("", "", 0,0,0,0,"");
                                 party.add(aux);
-
                             }
                             int k = 0;
-                            while (numChamps <= numChar) {
+                            while (numChamps < numChar) {
                                 System.out.println("Your party ("+(numChamps +" / "+ numChar+"):"));
-
                                 for (int j = 1; j <= numChar ; j++) {
                                     if (!party.get(j-1).getName().isEmpty()) {
                                         System.out.println("\t"+j+". "+ party.get(j-1).getName());
@@ -291,19 +289,36 @@ public class Controller {
                                         System.out.println("\t"+j+". Empty");
                                     }
                                 }
-
                                 System.out.println("------------------------------");
                                 System.out.println("Available characters:");
                                 for (int j = 1; j <= characterManager.getCharacters().size(); j++) {
                                     System.out.println("\t"+j+". " + characterManager.getCharacters().get(j-1).getName());
                                 }
                                 int characterChosen = menu.askForInt("-> Choose character "+(numChamps+1)+" in your party: ", 1, characterManager.getCharacters().size());
-                                System.out.println("------------------------------\n");
-                                party.add(k,characterManager.getCharacters().get(characterChosen-1));
-                                k++;
-                                numChamps++;
+                                boolean alreadyInParty = false;
+                                for (int j = 0; j < party.size(); j++) {
+                                    if (characterManager.getCharacters().get(characterChosen-1).getName().equals(party.get(j).getName())) {
+                                        alreadyInParty = true;
+                                    }
+                                }
+                                if (alreadyInParty) {
+                                    System.out.println("Character already in party!\n");
+                                    System.out.println("\n------------------------------");
+                                } else {
+                                    System.out.println("\n------------------------------");
+                                    party.add(k,characterManager.getCharacters().get(characterChosen-1));
+                                    k++;
+                                    numChamps++;
+                                }
 
                             }
+                            for (int j = 1; j <= party.size() ; j++) {
+                                System.out.println("\t"+j+". "+ party.get(j-1).getName());
+                            }
+                            System.out.println("------------------------------\n");
+                            System.out.println("Tavern keeper: “Great, good luck on your adventure lads!”\n\n");
+                            System.out.println("The “"+adventureManager.getAdventures().get(option-1).getName()+"” will start soon...\n");
+
                         }
                         break;
                 }
