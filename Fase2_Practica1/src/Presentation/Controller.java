@@ -211,7 +211,17 @@ public class Controller {
 
                     //play adventure
                     case 4:
-
+                        menu.printMessage("Tavern keeper: \"So, you are looking to go on an adventure?\"\n\"Where do you fancy going?\"");
+                        menu.printMessage("");
+                        menu.printMessage("Available adventures:");
+                        int i = 0;
+                        //igual aqui hay que cogerlas del json y no directamente las que tenga el manager
+                        //las que hay en el manager son las que ha creado nuevas, asi que tendriamos que leer todas del json
+                        for(Adventure a: adventureManager.getAdventures()){
+                            menu.printMessage(i+". "+a.getName());
+                        }
+                        menu.printMessage("");
+                        menu.askForInt("-> Choose an adventure:", 1, adventureManager.getAdventures().size());
                         break;
                 }
                 break;

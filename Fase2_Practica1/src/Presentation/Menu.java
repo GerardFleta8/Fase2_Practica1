@@ -88,7 +88,7 @@ public class Menu {
 
             return scan.nextLine();
         }
-        public static int askForInt(String message, int min, int max){
+        public int askForInt(String message, int min, int max){
             Scanner s = new Scanner(System.in);
             int option = 0;
             int incorrectInput = 1;
