@@ -36,7 +36,8 @@ public class Controller {
             menu.printMessage("Error: The monsters.json file can’t be accessed.");
         } else {
             while(selection != 5) {
-                selection = menu.globalMenuSelection();
+                //le pasamos si hay mas de 3 jugadores o no
+                selection = menu.globalMenuSelection(characterManager.moreThan3Characters());
                 switch (selection) {
                     case 1:
                         Character newCharacter = menu.askForCharacterInfo(characterManager.getCharacters());
@@ -206,6 +207,12 @@ public class Controller {
                         }
                         adventureManager.createAdventure(new Adventure(name, numCombats, encounters));
                         //falta guardar la adventure en JSON con json manager
+                        break;
+
+                    //play adventure
+                    case 4:
+
+                        break;
                 }
                 break;
             }

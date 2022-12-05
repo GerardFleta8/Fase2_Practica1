@@ -35,5 +35,10 @@ public class CharacterManager {
         }
     }
 
-
+    public boolean moreThan3Characters(){
+        if(this.characters.size() >= 3){
+            return true;
+        }
+        return false;
+    }
 }

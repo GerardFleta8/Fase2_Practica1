@@ -21,19 +21,29 @@ public class Menu {
             System.out.println(message);
         }
 
-        public int globalMenuSelection() {
+        public int globalMenuSelection(boolean moreThan3Char) {
             Scanner scanner = new Scanner(System.in);
             String input;
             int selection = 0;
             boolean optionIsCorrect = false;
-            System.out.println("The tavern keeper looks at you and says:");
-            System.out.println("“Welcome adventurer! How can I help you?”");
-            System.out.println("\n\t1) Character creation\n\t2) List characters\n\t3) Create an adventure\n\t" +
-                    "4) Start an adventure\n\t5) Exit\n");
-            System.out.println("Your answer: ");
+            if(moreThan3Char) {
+                System.out.println("The tavern keeper looks at you and says:");
+                System.out.println("“Welcome adventurer! How can I help you?”");
+                System.out.println("\n\t1) Character creation\n\t2) List characters\n\t3) Create an adventure\n\t" +
+                        "4) Start an adventure\n\t5) Exit\n");
+                System.out.println("Your answer: ");
+            }
+            else{
+                System.out.println("The tavern keeper looks at you and says:");
+                System.out.println("“Welcome adventurer! How can I help you?”");
+                System.out.println("\n\t1) Character creation\n\t2) List characters\n\t3) Create an adventure\n\t" +
+                        "4) Start an adventure (disabled: create 3 characters first)\n\t5) Exit\n");
+                System.out.println("Your answer: ");
+
+            }
             while(!optionIsCorrect) {
                 input = scanner.nextLine();
-                if (input.equals("1") || input.equals("2") || input.equals("3") || input.equals("4") ||
+                if (input.equals("1") || input.equals("2") || input.equals("3")|| input.equals("4")&&moreThan3Char  ||
                         input.equals("5")) {
                     optionIsCorrect = true;
                     switch(input) {
@@ -54,10 +64,18 @@ public class Menu {
                             break;
                     }
                 } else {
-                    System.out.println("Incorrect option, please choose between one of the following:\n");
-                    System.out.println("\n\t1) Character creation\n\t2) List characters\n\t3) Create an adventure\n\t" +
-                            "4) Start an adventure\n\t5) Exit\n");
-                    System.out.println("Your answer: ");
+                    if(moreThan3Char) {
+                        System.out.println("Incorrect option, please choose between one of the following:\n");
+                        System.out.println("\n\t1) Character creation\n\t2) List characters\n\t3) Create an adventure\n\t" +
+                                "4) Start an adventure\n\t5) Exit\n");
+                        System.out.println("Your answer: ");
+                    }
+                    else{
+                        System.out.println("Incorrect option, please choose between one of the following:\n");
+                        System.out.println("\n\t1) Character creation\n\t2) List characters\n\t3) Create an adventure\n\t" +
+                                "4) Start an adventure (disabled: create 3 characters first)\n\t5) Exit\n");
+                        System.out.println("Your answer: ");
+                    }
                 }
             }
             return selection;
