@@ -4,10 +4,7 @@ import Business.*;
 import Business.Character;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Controller {
 
@@ -311,7 +308,6 @@ public class Controller {
                                     k++;
                                     numChamps++;
                                 }
-
                             }
                             menu.printMessage("Your party ("+(numChar +" / "+ numChar+"):"));
                             for (int j = 1; j <= numChar ; j++) {
@@ -323,22 +319,62 @@ public class Controller {
 
                             for (int j = 0; j < adventureManager.getAdventures().get(option-1).getNumCombats(); j++) {
                                 menu.printMessage("---------------------");
-                                menu.printMessage("Starting encounter " + (j+1)+":");
+                                menu.printMessage("Starting encounter " + (j + 1) + ":");
 
-                                for (int m = 0; m < adventureManager.getAdventures().get(option-1).getEncounters().get(j).getEncounterMonsters().size(); m++) {
-                                    menu.printMessage("- "+ adventureManager.getAdventures().get(option-1).getEncounters().get(j).getEncounterMonsters().get(m).getNumMonsters()+"x "+
-                                            adventureManager.getAdventures().get(option-1).getEncounters().get(j).getEncounterMonsters().get(m).getName());
+                                for (int m = 0; m < adventureManager.getAdventures().get(option - 1).getEncounters().get(j).getEncounterMonsters().size(); m++) {
+                                    menu.printMessage("- " + adventureManager.getAdventures().get(option - 1).getEncounters().get(j).getEncounterMonsters().get(m).getNumMonsters() + "x " +
+                                            adventureManager.getAdventures().get(option - 1).getEncounters().get(j).getEncounterMonsters().get(m).getName());
                                 }
                                 menu.printMessage("---------------------\n\n");
                                 menu.printMessage("---------------------");
                                 menu.printMessage("*** Preparation stage ***");
                                 menu.printMessage("---------------------");
-                                for (int l = 0; l < party.size(); l++) {
+                                int l;
+                                for (l = 0; l < party.size(); l++) {
                                     if (party.get(l).getClassType().equals("Adventurer")) {
-                                        System.out.println(party.get(l).getName()+ " uses Self-Motivated. Their Spirit increases in +1");
+                                        menu.printMessage(party.get(l).getName() + " uses Self-Motivated. Their Spirit increases in +1");
+                                        party.get(l).warmUpAction();
+                                        party.get(l).calcAndSetInitiative(menu.rollDice(12));
                                     }
                                 }
-                                System.out.println("");
+                                menu.printMessage("");
+                                menu.printMessage("Rolling initiative...");
+                                ArrayList<Monster> monstersInEncounter = new ArrayList<>();
+                                monstersInEncounter = adventureManager.getAdventures().get(option - 1).getEncounters().get(j).getEncounterMonsters();
+
+                                /*ArrayList<Character> auxParty = new ArrayList<>();
+                                boolean highestInitiative = false;
+                                for (l = 0; l < party.size(); l++) {
+                                    for(int x = 0; x < party.size(); x++){
+                                        //!(party.get(l).getName().equalsIgnoreCase(party.get(x).getName())) es lo mismo que l != x
+                                        if((l != x) && party.get(l).getInitiative() >= party.get(x).getInitiative()){
+                                            highestInitiative = true;
+                                        }
+                                        else if((l != x) && party.get(l).getInitiative() < party.get(x).getInitiative()){
+                                            highestInitiative = false;
+                                            break;
+                                        }
+                                    }
+                                    if(highestInitiative){
+                                        auxParty.add(party.get(l));
+                                        party.remove(l);
+                                    }
+                                }
+                                for(Character c: auxParty){
+                                    System.out.println(c.getName());
+                                }*/
+
+                                Collections.sort(party, new Comparator<Character>() {
+                                    @Override
+                                    public int compare(Character o1, Character o2) {
+                                        return Integer.valueOf(o2.getInitiative()).compareTo(o1.getInitiative());
+                                    }
+                                });
+
+                                for(Character c : party){
+                                    menu.printMessage("\t- "+c.getInitiative()+"\t"+c.getName());
+                                }
+
                             }
 
 

@@ -140,5 +140,49 @@
         ]
       }
     ]
+  },
+  {
+    "name": "a",
+    "numEncounters": 2,
+    "encounters": [
+      {
+        "monstersInEncounter": [
+          {
+            "name": "Goblin",
+            "challenge": "Minion",
+            "experience": 2,
+            "hitPoints": 5,
+            "initiative": 0,
+            "damageDice": "d4",
+            "damageType": "Physical",
+            "numMonsters": 2
+          },
+          {
+            "name": "Snaga",
+            "challenge": "Minion",
+            "experience": 2,
+            "hitPoints": 4,
+            "initiative": 0,
+            "damageDice": "d4",
+            "damageType": "Physical",
+            "numMonsters": 1
+          }
+        ]
+      },
+      {
+        "monstersInEncounter": [
+          {
+            "name": "Snaga",
+            "challenge": "Minion",
+            "experience": 2,
+            "hitPoints": 4,
+            "initiative": 0,
+            "damageDice": "d4",
+            "damageType": "Physical",
+            "numMonsters": 1
+          }
+        ]
+      }
+    ]
   }
 ]

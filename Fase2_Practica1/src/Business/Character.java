@@ -11,6 +11,8 @@ public class Character {
     private int spirit;
     @SerializedName("class")
     private String classType;
+    private int initiative;
+    private int hp;
 
     public Character(String name, String player, int xp, int body, int mind, int spirit, String classType) {
         this.name = name;
@@ -20,6 +22,8 @@ public class Character {
         this.mind = mind;
         this.spirit = spirit;
         this.classType = classType;
+        initiative = 0;
+        hp = 0;
 
     }
 
@@ -33,5 +37,18 @@ public class Character {
     public int getSpirit() {return spirit; }
     public String getClassType() {return classType; }
 
+    public void calcAndSetInitiative(int d12){
+        //para un adventurer: d12 + spirit;
+        this.initiative = d12 + spirit;
+    }
 
+    public void warmUpAction(){
+        //como ahora solo tenemos adventurers, solo incrementa el spirit
+        this.spirit++;
+    }
+
+
+    public int getInitiative() {
+        return this.initiative;
+    }
 }
