@@ -358,37 +358,24 @@ public class Controller {
                                 ArrayList<Monster> monstersInEncounter = new ArrayList<>();
                                 monstersInEncounter = adventureManager.getAdventures().get(option - 1).getEncounters().get(j).getEncounterMonsters();
 
-                                /*ArrayList<Character> auxParty = new ArrayList<>();
-                                boolean highestInitiative = false;
-                                for (l = 0; l < party.size(); l++) {
-                                    for(int x = 0; x < party.size(); x++){
-                                        //!(party.get(l).getName().equalsIgnoreCase(party.get(x).getName())) es lo mismo que l != x
-                                        if((l != x) && party.get(l).getInitiative() >= party.get(x).getInitiative()){
-                                            highestInitiative = true;
-                                        }
-                                        else if((l != x) && party.get(l).getInitiative() < party.get(x).getInitiative()){
-                                            highestInitiative = false;
-                                            break;
-                                        }
-                                    }
-                                    if(highestInitiative){
-                                        auxParty.add(party.get(l));
-                                        party.remove(l);
-                                    }
-                                }
-                                for(Character c: auxParty){
-                                    System.out.println(c.getName());
-                                }*/
-
                                 Collections.sort(party, new Comparator<Character>() {
                                     @Override
                                     public int compare(Character o1, Character o2) {
                                         return Integer.valueOf(o2.getInitiative()).compareTo(o1.getInitiative());
                                     }
                                 });
-
                                 for(Character c : party){
                                     menu.printMessage("\t- "+c.getInitiative()+"\t"+c.getName());
+                                }
+
+                                Collections.sort(monstersInEncounter, new Comparator<Monster>() {
+                                    @Override
+                                    public int compare(Monster o1, Monster o2) {
+                                        return Integer.valueOf(o2.getInitiative()).compareTo(o1.getInitiative());
+                                    }
+                                });
+                                for(Monster m: monstersInEncounter){
+                                    menu.printMessage("\t- "+m.getInitiative()+"\t"+m.getName());
                                 }
 
                             }
