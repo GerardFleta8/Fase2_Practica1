@@ -13,6 +13,7 @@ public class Character {
     private String classType;
     private int initiative;
     private int hp;
+    private int actionPerformed;
 
     public Character(String name, String player, int xp, int body, int mind, int spirit, String classType) {
         this.name = name;
@@ -46,9 +47,13 @@ public class Character {
         //como ahora solo tenemos adventurers, solo incrementa el spirit
         this.spirit++;
     }
-
-
     public int getInitiative() {
         return this.initiative;
+    }
+    public int getActionPerformed(){
+        return this.actionPerformed;
+    }
+    public void setActionPerformed(int actionPerformed){
+        this.actionPerformed = actionPerformed;
     }
 }

@@ -358,6 +358,13 @@ public class Controller {
                                 ArrayList<Monster> monstersInEncounter = new ArrayList<>();
                                 monstersInEncounter = adventureManager.getAdventures().get(option - 1).getEncounters().get(j).getEncounterMonsters();
 
+                                ArrayList<Monster> totalMonstersEncounter = new ArrayList<>();
+                                for(Monster c: monstersInEncounter){
+                                    for(int y = 0; y < c.getNumMonsters(); y++){
+                                        totalMonstersEncounter.add(c);
+                                    }
+                                }
+
                                 Collections.sort(party, new Comparator<Character>() {
                                     @Override
                                     public int compare(Character o1, Character o2) {
@@ -368,7 +375,8 @@ public class Controller {
                                     menu.printMessage("\t- "+c.getInitiative()+"\t"+c.getName());
                                 }
 
-                                Collections.sort(monstersInEncounter, new Comparator<Monster>() {
+
+                                Collections.sort(totalMonstersEncounter, new Comparator<Monster>() {
                                     @Override
                                     public int compare(Monster o1, Monster o2) {
                                         return Integer.valueOf(o2.getInitiative()).compareTo(o1.getInitiative());
