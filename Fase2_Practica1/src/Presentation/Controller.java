@@ -273,16 +273,23 @@ public class Controller {
                             menu.printMessage("------------------------------");
                             int numChamps = 0;
                             ArrayList<Character> party = new ArrayList<>();
-                            for (int j = 0; j < numChar; j++) {
+                            /*for (int j = 0; j < numChar; j++) {
                                 Character aux = new Character("", "", 0,0,0,0,"");
                                 party.add(aux);
-                            }
+                            }*/
                             int k = 0;
                             while (numChamps < numChar) {
                                 menu.printMessage("Your party ("+(numChamps +" / "+ numChar+"):"));
                                 for (int j = 1; j <= numChar ; j++) {
-                                    if (!party.get(j-1).getName().isEmpty()) {
-                                        menu.printMessage("\t"+j+". "+ party.get(j-1).getName());
+                                    //!party.get(j-1).getName().isEmpty()
+                                    if (!party.isEmpty()) {
+                                        System.out.println(party.size());
+                                        if(party.size() > (j-1)) {
+                                            menu.printMessage("\t" + j + ". " + party.get(j - 1).getName());
+                                        }
+                                        else {
+                                            menu.printMessage("\t"+j+". Empty");
+                                        }
                                     } else {
                                         menu.printMessage("\t"+j+". Empty");
                                     }
@@ -295,8 +302,17 @@ public class Controller {
                                 int characterChosen = menu.askForInt("-> Choose character "+(numChamps+1)+" in your party: ", 1, characterManager.getCharacters().size());
                                 boolean alreadyInParty = false;
                                 for (int j = 0; j < numChar; j++) {
-                                    if (characterManager.getCharacters().get(characterChosen-1).getName().equals(party.get(j).getName())) {
-                                        alreadyInParty = true;
+                                    if(party.isEmpty()){
+                                        alreadyInParty = false;
+                                        break;
+                                    }
+                                    else if(party.size() >= j+1 ) {
+                                        if (characterManager.getCharacters().get(characterChosen - 1).getName().equals(party.get(j).getName())) {
+                                            alreadyInParty = true;
+                                        }
+                                    }
+                                    else{
+                                        break;
                                     }
                                 }
                                 if (alreadyInParty) {
