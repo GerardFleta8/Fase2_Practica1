@@ -371,9 +371,10 @@ public class Controller {
                                         return Integer.valueOf(o2.getInitiative()).compareTo(o1.getInitiative());
                                     }
                                 });
+                                /*
                                 for(Character c : party){
                                     menu.printMessage("\t- "+c.getInitiative()+"\t"+c.getName());
-                                }
+                                }*/
 
 
                                 Collections.sort(totalMonstersEncounter, new Comparator<Monster>() {
@@ -382,11 +383,29 @@ public class Controller {
                                         return Integer.valueOf(o2.getInitiative()).compareTo(o1.getInitiative());
                                     }
                                 });
+                                /*
                                 for(Monster m: totalMonstersEncounter){
                                     menu.printMessage("\t- "+m.getInitiative()+"\t"+m.getName());
+                                }*/
+                                int totalTurns = totalMonstersEncounter.size() + party.size();
+                                int counterParty = 0;
+                                int counterMonsters = 0;
+                                for(int x = 0; j < totalTurns; j++){
+                                    if(counterParty < party.size()){
+                                        if(party.get(counterParty).getInitiative() > totalMonstersEncounter.get(counterMonsters).getInitiative()){
+                                            menu.printMessage("\t- "+party.get(counterParty).getInitiative()+"\t"+party.get(counterParty).getName());
+                                            counterParty++;
+                                        }
+                                        else{
+                                            menu.printMessage("\t- "+totalMonstersEncounter.get(counterMonsters).getInitiative()+"\t"+totalMonstersEncounter.get(counterMonsters).getName());
+                                            counterMonsters++;
+                                        }
+                                    }
+                                    else{
+                                        menu.printMessage("\t- "+totalMonstersEncounter.get(counterMonsters).getInitiative()+"\t"+totalMonstersEncounter.get(counterMonsters).getName());
+                                        counterMonsters++;
+                                    }
                                 }
-
-
                             }
 
 
