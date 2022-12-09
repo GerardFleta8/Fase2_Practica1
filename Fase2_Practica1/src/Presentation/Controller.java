@@ -361,19 +361,14 @@ public class Controller {
                                 ArrayList<Monster> totalMonstersEncounter = new ArrayList<>();
                                 for(Monster c: monstersInEncounter){
                                     for(int y = 0; y < c.getNumMonsters(); y++){
-                                        totalMonstersEncounter.add(c);
+
+                                        totalMonstersEncounter.add(new Monster(c));
                                     }
                                 }
 
                                 for(int y = 0; y < totalMonstersEncounter.size(); y++){
-                                    int dice = menu.rollDice(12);
-                                    System.out.println("dice: "+dice);
-                                    System.out.println("initial initiative: "+totalMonstersEncounter.get(y).getInitiative());
-                                    totalMonstersEncounter.get(y).calcAndSetInitiative(dice);
-                                    System.out.println("final initiative: "+totalMonstersEncounter.get(y).getInitiative());
+                                    totalMonstersEncounter.get(y).calcAndSetInitiative(menu.rollDice(12));
                                 }
-                                totalMonstersEncounter.get(1).calcAndSetInitiative(-10);
-                                System.out.println(totalMonstersEncounter.get(0).getInitiative());
 
                                 Collections.sort(party, new Comparator<Character>() {
                                     @Override

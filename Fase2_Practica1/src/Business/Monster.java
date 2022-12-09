@@ -15,6 +15,18 @@ public class Monster {
     public Monster(String name, String challenge, String xp, String hitPoints, String initiative, String damageDice, String damageType) {
     }
 
+    public Monster(Monster other){
+        this.name = other.getName();
+        this.challenge = other.getChallenge();
+        this.experience = other.getExperience();
+        this.hitPoints = other.getHitPoints();
+        this.initiative = other.getInitiative();
+        this.damageDice = other.getDamageDice();
+        this.damageType = other.getDamageType();
+        this.numMonsters = 0;
+        this.actionPerformed = 0;
+    }
+
     public void setNumMonsters(int x){
         this.numMonsters = x;
     }
@@ -58,9 +70,9 @@ public class Monster {
 
     public void calcAndSetInitiative(int d12){
         //para un adventurer: d12 + spirit;
-        System.out.println("initial initiave func:" + this.initiative);
+
         int aux = d12 + this.initiative;
         this.initiative = aux;
-        System.out.println("final initiave func:" + this.initiative);
+
     }
 }
