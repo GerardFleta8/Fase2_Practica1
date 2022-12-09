@@ -382,8 +382,12 @@ public class Controller {
                                         return Integer.valueOf(o2.getInitiative()).compareTo(o1.getInitiative());
                                     }
                                 });
-                                for(Monster m: monstersInEncounter){
+                                for(Monster m: totalMonstersEncounter){
                                     menu.printMessage("\t- "+m.getInitiative()+"\t"+m.getName());
+                                }
+
+                                for(){
+
                                 }
 
                             }
