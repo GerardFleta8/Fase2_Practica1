@@ -351,6 +351,8 @@ public class Controller {
                                         menu.printMessage(party.get(l).getName() + " uses Self-Motivated. Their Spirit increases in +1");
                                         party.get(l).warmUpAction();
                                         party.get(l).calcAndSetInitiative(menu.rollDice(12));
+                                        party.get(l).calcAndSetLevel(0);
+                                        party.get(l).calcAndSetMaxHP();
                                     }
                                 }
                                 menu.printMessage("");
@@ -361,7 +363,6 @@ public class Controller {
                                 ArrayList<Monster> totalMonstersEncounter = new ArrayList<>();
                                 for(Monster c: monstersInEncounter){
                                     for(int y = 0; y < c.getNumMonsters(); y++){
-
                                         totalMonstersEncounter.add(new Monster(c));
                                     }
                                 }
@@ -395,7 +396,7 @@ public class Controller {
                                 int totalTurns = totalMonstersEncounter.size() + party.size();
                                 int counterParty = 0;
                                 int counterMonsters = 0;
-                                for(int x = 0; j < totalTurns; j++){
+                                for(int x = 0; x < totalTurns; x++){
                                     if(counterParty < party.size()){
                                         if(counterMonsters >= totalMonstersEncounter.size()){
                                             menu.printMessage("\t- "+party.get(counterParty).getInitiative()+"\t"+party.get(counterParty).getName());
@@ -419,10 +420,61 @@ public class Controller {
                                 menu.printMessage("---------------------");
                                 menu.printMessage("*** Combat stage ***");
                                 menu.printMessage("---------------------");
-                                int roundOver = 0;
-                                /*while(!roundOver){
+                                boolean roundOver = false;
+                                int round = 1;
+                                while(!roundOver){
+                                    menu.printMessage("Round "+round+":");
+                                    for(Character c: party){
+                                        menu.printMessage("\t- "+c.getName()+"\t"+c.getHp()+" / "+c.getMaxHP()+" hit points");
+                                    }
+                                    counterParty = 0;
+                                    counterMonsters = 0;
+                                    for(int x = 0; x < totalTurns; x++){
+                                        if(counterParty < party.size()){
+                                            if(counterMonsters >= totalMonstersEncounter.size()){
+                                                if(party.get(counterParty).getHp() > 0){
+                                                    Monster aux = totalMonstersEncounter.get(0);
+                                                    for(Monster c : totalMonstersEncounter){
+                                                        if(aux.getHitPoints() > c.getHitPoints()) {
+                                                            aux = c;
+                                                        }
+                                                    }
+                                                    menu.printMessage(party.get(counterParty).getName()+" attacks "+aux.getName());
+                                                    aux.setHp();
+                                                }
+                                                counterParty++;
+                                            }
+                                            else {
+                                                if (party.get(counterParty).getInitiative() > totalMonstersEncounter.get(counterMonsters).getInitiative()) {
+                                                    if(party.get(counterParty).getHp() > 0){
+                                                        Monster aux = totalMonstersEncounter.get(0);
+                                                        for(Monster c : totalMonstersEncounter){
+                                                            if(aux.getHitPoints() > c.getHitPoints()) {
+                                                                aux = c;
+                                                            }
+                                                        }
+                                                        aux.setHp();
+                                                        menu.printMessage(party.get(counterParty).getName()+" attacks "+aux.getName());
+                                                    }
+                                                    counterParty++;
+                                                } else {
+                                                    menu.printMessage(totalMonstersEncounter.get(counterMonsters).getName()+" attacks ");
+                                                    counterMonsters++;
+                                                }
+                                            }
+                                        }
+                                        else{
+                                            menu.printMessage(totalMonstersEncounter.get(counterMonsters).getName()+" attacks ");
+                                            counterMonsters++;
+                                        }
+                                    }
 
-                                }*/
+                                    for(Monster c: totalMonstersEncounter){
+                                        System.out.println(c.getHitPoints());
+                                    }
+                                    break;
+
+                                }
 
                             }
 

@@ -75,4 +75,7 @@ public class Monster {
         this.initiative = aux;
 
     }
+    public void setHp(){
+        hitPoints = 0;
+    }
 }
