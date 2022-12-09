@@ -386,9 +386,6 @@ public class Controller {
                                     menu.printMessage("\t- "+m.getInitiative()+"\t"+m.getName());
                                 }
 
-                                for(){
-
-                                }
 
                             }
 
