@@ -365,6 +365,16 @@ public class Controller {
                                     }
                                 }
 
+                                for(int y = 0; y < totalMonstersEncounter.size(); y++){
+                                    int dice = menu.rollDice(12);
+                                    System.out.println("dice: "+dice);
+                                    System.out.println("initial initiative: "+totalMonstersEncounter.get(y).getInitiative());
+                                    totalMonstersEncounter.get(y).calcAndSetInitiative(dice);
+                                    System.out.println("final initiative: "+totalMonstersEncounter.get(y).getInitiative());
+                                }
+                                totalMonstersEncounter.get(1).calcAndSetInitiative(-10);
+                                System.out.println(totalMonstersEncounter.get(0).getInitiative());
+
                                 Collections.sort(party, new Comparator<Character>() {
                                     @Override
                                     public int compare(Character o1, Character o2) {

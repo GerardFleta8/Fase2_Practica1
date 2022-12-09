@@ -55,4 +55,12 @@ public class Monster {
     public void setActionPerformed(int actionPerformed){
         this.actionPerformed = actionPerformed;
     }
+
+    public void calcAndSetInitiative(int d12){
+        //para un adventurer: d12 + spirit;
+        System.out.println("initial initiave func:" + this.initiative);
+        int aux = d12 + this.initiative;
+        this.initiative = aux;
+        System.out.println("final initiave func:" + this.initiative);
+    }
 }
