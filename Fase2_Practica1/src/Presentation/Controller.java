@@ -498,13 +498,10 @@ public class Controller {
                                     for(Monster c: totalMonstersEncounter){
                                         System.out.println(c.getHitPoints());
                                     }
-                                    break;
-
+                                    break; //el round se acaba cuando los monstruos estan los 2 muertos o la party.
                                 }
 
                             }
-
-
                         }
                         break;
                 }
