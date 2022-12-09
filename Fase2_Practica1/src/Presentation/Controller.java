@@ -435,26 +435,52 @@ public class Controller {
                                                 if(party.get(counterParty).getHp() > 0){
                                                     Monster aux = totalMonstersEncounter.get(0);
                                                     for(Monster c : totalMonstersEncounter){
-                                                        if(aux.getHitPoints() > c.getHitPoints()) {
+                                                        if(aux.getHitPoints() > c.getHitPoints() && c.getHitPoints() <= 0) {
                                                             aux = c;
                                                         }
                                                     }
-                                                    menu.printMessage(party.get(counterParty).getName()+" attacks "+aux.getName());
-                                                    aux.setHp();
+                                                    menu.printMessage("");
+                                                    menu.printMessage(party.get(counterParty).getName()+" attacks "+aux.getName()+" with Sword slash.");
+                                                    int d10 = menu.rollDice(10);
+                                                    int damage = party.get(counterParty).attackAction(d10, menu.rollDice(6));
+                                                    if(damage == 0){
+                                                        menu.printMessage("Fails and deals 0 damage");
+                                                    }else if(damage == 10){
+                                                        menu.printMessage("Critical hit and deals "+damage+" physical damage.");
+                                                    }else{
+                                                        menu.printMessage("Hits and deals "+damage+" physical damage.");
+                                                    }
+                                                    aux.takeDamage(damage);
+                                                    if(aux.getHitPoints() <= 0){
+                                                        menu.printMessage(aux.getName()+" dies.");
+                                                    }
                                                 }
                                                 counterParty++;
                                             }
                                             else {
-                                                if (party.get(counterParty).getInitiative() > totalMonstersEncounter.get(counterMonsters).getInitiative()) {
+                                                if (party.get(counterParty).getInitiative() > totalMonstersEncounter.get(counterMonsters).getInitiative()){
                                                     if(party.get(counterParty).getHp() > 0){
                                                         Monster aux = totalMonstersEncounter.get(0);
                                                         for(Monster c : totalMonstersEncounter){
-                                                            if(aux.getHitPoints() > c.getHitPoints()) {
+                                                            if(aux.getHitPoints() > c.getHitPoints() && c.getHitPoints() <= 0) {
                                                                 aux = c;
                                                             }
                                                         }
-                                                        aux.setHp();
-                                                        menu.printMessage(party.get(counterParty).getName()+" attacks "+aux.getName());
+                                                        menu.printMessage("");
+                                                        menu.printMessage(party.get(counterParty).getName()+" attacks "+aux.getName()+" with Sword slash.");
+                                                        int d10 = menu.rollDice(10);
+                                                        int damage = party.get(counterParty).attackAction(d10, menu.rollDice(6));
+                                                        if(damage == 0){
+                                                            menu.printMessage("Fails and deals 0 damage");
+                                                        }else if(damage == 10){
+                                                            menu.printMessage("Critical hit and deals "+damage+" physical damage.");
+                                                        }else{
+                                                            menu.printMessage("Hits and deals "+damage+" physical damage.");
+                                                        }
+                                                        aux.takeDamage(damage);
+                                                        if(aux.getHitPoints() <= 0){
+                                                            menu.printMessage(aux.getName()+" dies.");
+                                                        }
                                                     }
                                                     counterParty++;
                                                 } else {

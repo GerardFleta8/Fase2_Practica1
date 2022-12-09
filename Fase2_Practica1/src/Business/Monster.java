@@ -75,7 +75,7 @@ public class Monster {
         this.initiative = aux;
 
     }
-    public void setHp(){
-        hitPoints = 0;
+    public void takeDamage(int damage){
+        hitPoints = hitPoints - damage;
     }
 }

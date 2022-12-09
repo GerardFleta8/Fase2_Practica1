@@ -46,6 +46,19 @@ public class Character {
         this.initiative = d12 + spirit;
     }
 
+    public int attackAction(int d10, int d6){
+        int damage = 0;
+        if(d10 == 1){
+            damage = 0;
+        }else{
+            damage = d6 + body;
+            if (d10 == 10) {
+                damage = damage*2;
+            }
+        }
+        return damage;
+    }
+
     public void warmUpAction(){
         //como ahora solo tenemos adventurers, solo incrementa el spirit
         this.spirit++;
