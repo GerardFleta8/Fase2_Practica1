@@ -392,13 +392,18 @@ public class Controller {
                                 int counterMonsters = 0;
                                 for(int x = 0; j < totalTurns; j++){
                                     if(counterParty < party.size()){
-                                        if(party.get(counterParty).getInitiative() > totalMonstersEncounter.get(counterMonsters).getInitiative()){
+                                        if(counterMonsters >= totalMonstersEncounter.size()){
                                             menu.printMessage("\t- "+party.get(counterParty).getInitiative()+"\t"+party.get(counterParty).getName());
                                             counterParty++;
                                         }
-                                        else{
-                                            menu.printMessage("\t- "+totalMonstersEncounter.get(counterMonsters).getInitiative()+"\t"+totalMonstersEncounter.get(counterMonsters).getName());
-                                            counterMonsters++;
+                                        else {
+                                            if (party.get(counterParty).getInitiative() > totalMonstersEncounter.get(counterMonsters).getInitiative()) {
+                                                menu.printMessage("\t- " + party.get(counterParty).getInitiative() + "\t" + party.get(counterParty).getName());
+                                                counterParty++;
+                                            } else {
+                                                menu.printMessage("\t- " + totalMonstersEncounter.get(counterMonsters).getInitiative() + "\t" + totalMonstersEncounter.get(counterMonsters).getName());
+                                                counterMonsters++;
+                                            }
                                         }
                                     }
                                     else{
@@ -406,6 +411,14 @@ public class Controller {
                                         counterMonsters++;
                                     }
                                 }
+                                menu.printMessage("---------------------");
+                                menu.printMessage("*** Combat stage ***");
+                                menu.printMessage("---------------------");
+                                int roundOver = 0;
+                                /*while(!roundOver){
+
+                                }*/
+
                             }
 
 
