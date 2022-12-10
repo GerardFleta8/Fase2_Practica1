@@ -435,7 +435,7 @@ public class Controller {
                                                 if(party.get(counterParty).getHp() > 0){
                                                     Monster aux = totalMonstersEncounter.get(0);
                                                     for(Monster c : totalMonstersEncounter){
-                                                        if(aux.getHitPoints() > c.getHitPoints() && c.getHitPoints() <= 0) {
+                                                        if(aux.getHitPoints() > c.getHitPoints() && c.getHitPoints() >= 0) {
                                                             aux = c;
                                                         }
                                                     }
@@ -462,7 +462,7 @@ public class Controller {
                                                     if(party.get(counterParty).getHp() > 0){
                                                         Monster aux = totalMonstersEncounter.get(0);
                                                         for(Monster c : totalMonstersEncounter){
-                                                            if(aux.getHitPoints() > c.getHitPoints() && c.getHitPoints() <= 0) {
+                                                            if(aux.getHitPoints() > c.getHitPoints() && c.getHitPoints() >= 0) {
                                                                 aux = c;
                                                             }
                                                         }
@@ -470,9 +470,9 @@ public class Controller {
                                                         menu.printMessage(party.get(counterParty).getName()+" attacks "+aux.getName()+" with Sword slash.");
                                                         int d10 = menu.rollDice(10);
                                                         int damage = party.get(counterParty).attackAction(d10, menu.rollDice(6));
-                                                        if(damage == 0){
+                                                        if(d10 == 0){
                                                             menu.printMessage("Fails and deals 0 damage");
-                                                        }else if(damage == 10){
+                                                        }else if(d10 == 10){
                                                             menu.printMessage("Critical hit and deals "+damage+" physical damage.");
                                                         }else{
                                                             menu.printMessage("Hits and deals "+damage+" physical damage.");
@@ -484,13 +484,107 @@ public class Controller {
                                                     }
                                                     counterParty++;
                                                 } else {
-                                                    menu.printMessage(totalMonstersEncounter.get(counterMonsters).getName()+" attacks ");
+                                                    if(totalMonstersEncounter.get(counterMonsters).getHitPoints() > 0){
+                                                        Character auxChar = party.get(0);
+                                                        boolean targetFound = false;
+                                                        int monsterAttackTarget = menu.rollDice(party.size());
+                                                        i = 1;
+                                                        for(Character c: party){
+                                                            //correct target and target is alive:
+                                                            if((i == monsterAttackTarget) && (c.getHp() > 0)){
+                                                                auxChar = c;
+
+                                                            } else if((i == monsterAttackTarget) && (c.getHp() <= 0)) { //correct target but target is dead: need to find the next live target
+                                                                int z = i;
+                                                                while(!targetFound){
+                                                                    if(z == 5){
+                                                                        z++;
+                                                                    }
+                                                                    if(party.get(z).getHp() > 0){
+                                                                        auxChar = party.get(z);
+                                                                        targetFound = true;
+                                                                        break;
+                                                                    }
+                                                                    i++;
+                                                                }
+                                                                if(targetFound = true){
+                                                                    break;
+                                                                }
+                                                            }
+                                                            i++;
+                                                        }
+                                                        menu.printMessage("");
+                                                        menu.printMessage(totalMonstersEncounter.get(counterMonsters).getName()+" attacks "+auxChar.getName()+".");
+                                                        String diceMonster;
+                                                        diceMonster = totalMonstersEncounter.get(counterMonsters).getDamageDice();
+                                                        int diceMonsterInt = Integer.parseInt(String.valueOf(diceMonster.charAt(1))); //devuelve el int del damageDice del monstruo
+                                                        int d10M = menu.rollDice(10);
+                                                        int damageM = menu.rollDice(diceMonsterInt);
+                                                        if(d10M == 0){
+                                                            menu.printMessage("Fails and deals 0 damage");
+                                                        }else if(d10M == 10){
+                                                            menu.printMessage("Critical hit and deals "+damageM+" physical damage.");
+                                                        }else{
+                                                            menu.printMessage("Hits and deals "+damageM+" physical damage.");
+                                                        }
+                                                        auxChar.takeDamage(damageM);
+                                                        if(auxChar.getHp() <= 0){
+                                                            menu.printMessage(auxChar.getName()+" falls unconscious.");
+                                                        }
+                                                    }
                                                     counterMonsters++;
                                                 }
                                             }
                                         }
                                         else{
-                                            menu.printMessage(totalMonstersEncounter.get(counterMonsters).getName()+" attacks ");
+                                            if(totalMonstersEncounter.get(counterMonsters).getHitPoints() > 0){
+                                                Character auxChar = party.get(0);
+                                                boolean targetFound = false;
+                                                int monsterAttackTarget = menu.rollDice(party.size());
+                                                i = 1;
+                                                for(Character c: party){
+                                                    //correct target and target is alive:
+                                                    if((i == monsterAttackTarget) && (c.getHp() > 0)){
+                                                        auxChar = c;
+
+                                                    } else if((i == monsterAttackTarget) && (c.getHp() <= 0)) { //correct target but target is dead: need to find the next live target
+                                                        int z = i;
+                                                        while(!targetFound){
+                                                            if(z == 5){
+                                                                z++;
+                                                            }
+                                                            if(party.get(z).getHp() > 0){
+                                                                auxChar = party.get(z);
+                                                                targetFound = true;
+                                                                break;
+                                                            }
+                                                            i++;
+                                                        }
+                                                        if(targetFound = true){
+                                                            break;
+                                                        }
+                                                    }
+                                                    i++;
+                                                }
+                                                menu.printMessage("");
+                                                menu.printMessage(totalMonstersEncounter.get(counterMonsters).getName()+" attacks "+auxChar.getName()+".");
+                                                String diceMonster;
+                                                diceMonster = totalMonstersEncounter.get(counterMonsters).getDamageDice();
+                                                int diceMonsterInt = Integer.parseInt(String.valueOf(diceMonster.charAt(1))); //devuelve el int del damageDice del monstruo
+                                                int d10M = menu.rollDice(10);
+                                                int damageM = menu.rollDice(diceMonsterInt);
+                                                if(d10M == 0){
+                                                    menu.printMessage("Fails and deals 0 damage");
+                                                }else if(d10M == 10){
+                                                    menu.printMessage("Critical hit and deals "+damageM+" physical damage.");
+                                                }else{
+                                                    menu.printMessage("Hits and deals "+damageM+" physical damage.");
+                                                }
+                                                auxChar.takeDamage(damageM);
+                                                if(auxChar.getHp() <= 0){
+                                                    menu.printMessage(auxChar.getName()+" falls unconscious.");
+                                                }
+                                            }
                                             counterMonsters++;
                                         }
                                     }

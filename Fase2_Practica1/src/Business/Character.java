@@ -114,4 +114,7 @@ public class Character {
         int maxHp = (10 + body)*level;
         return maxHp;
     }
+    public void takeDamage(int dmg){
+        hp = hp - dmg;
+    }
 }
