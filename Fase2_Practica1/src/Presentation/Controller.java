@@ -634,6 +634,15 @@ public class Controller {
                                         roundOver = true;
                                     }
                                 }
+                                boolean gameOver = true;
+                                for(Character c: party){
+                                    if(c.getHp() >= 0){
+                                        gameOver = false;
+                                    }
+                                }
+                                if(gameOver){
+                                    break;
+                                }
                                 menu.printMessage("------------------------");
                                 menu.printMessage("*** Short rest stage ***");
                                 menu.printMessage("------------------------");
