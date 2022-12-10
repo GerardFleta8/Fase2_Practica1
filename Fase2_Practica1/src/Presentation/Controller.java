@@ -437,15 +437,17 @@ public class Controller {
                                                     for(Monster c : totalMonstersEncounter){
                                                         if(aux.getHitPoints() > c.getHitPoints() && c.getHitPoints() >= 0) {
                                                             aux = c;
+                                                        }else if(aux.getHitPoints() <= 0 && c.getHitPoints() >= 0){
+                                                            aux = c;
                                                         }
                                                     }
                                                     menu.printMessage("");
                                                     menu.printMessage(party.get(counterParty).getName()+" attacks "+aux.getName()+" with Sword slash.");
                                                     int d10 = menu.rollDice(10);
                                                     int damage = party.get(counterParty).attackAction(d10, menu.rollDice(6));
-                                                    if(damage == 0){
+                                                    if(d10 == 1){
                                                         menu.printMessage("Fails and deals 0 damage");
-                                                    }else if(damage == 10){
+                                                    }else if(d10 == 10){
                                                         menu.printMessage("Critical hit and deals "+damage+" physical damage.");
                                                     }else{
                                                         menu.printMessage("Hits and deals "+damage+" physical damage.");
@@ -464,13 +466,15 @@ public class Controller {
                                                         for(Monster c : totalMonstersEncounter){
                                                             if(aux.getHitPoints() > c.getHitPoints() && c.getHitPoints() >= 0) {
                                                                 aux = c;
+                                                            }else if(aux.getHitPoints() <= 0 && c.getHitPoints() >= 0){
+                                                                aux = c;
                                                             }
                                                         }
                                                         menu.printMessage("");
                                                         menu.printMessage(party.get(counterParty).getName()+" attacks "+aux.getName()+" with Sword slash.");
                                                         int d10 = menu.rollDice(10);
                                                         int damage = party.get(counterParty).attackAction(d10, menu.rollDice(6));
-                                                        if(d10 == 0){
+                                                        if(d10 == 1){
                                                             menu.printMessage("Fails and deals 0 damage");
                                                         }else if(d10 == 10){
                                                             menu.printMessage("Critical hit and deals "+damage+" physical damage.");
@@ -520,7 +524,7 @@ public class Controller {
                                                         int diceMonsterInt = Integer.parseInt(String.valueOf(diceMonster.charAt(1))); //devuelve el int del damageDice del monstruo
                                                         int d10M = menu.rollDice(10);
                                                         int damageM = menu.rollDice(diceMonsterInt);
-                                                        if(d10M == 0){
+                                                        if(d10M == 1){
                                                             menu.printMessage("Fails and deals 0 damage");
                                                         }else if(d10M == 10){
                                                             menu.printMessage("Critical hit and deals "+damageM+" physical damage.");
@@ -573,7 +577,7 @@ public class Controller {
                                                 int diceMonsterInt = Integer.parseInt(String.valueOf(diceMonster.charAt(1))); //devuelve el int del damageDice del monstruo
                                                 int d10M = menu.rollDice(10);
                                                 int damageM = menu.rollDice(diceMonsterInt);
-                                                if(d10M == 0){
+                                                if(d10M == 1){
                                                     menu.printMessage("Fails and deals 0 damage");
                                                 }else if(d10M == 10){
                                                     menu.printMessage("Critical hit and deals "+damageM+" physical damage.");
@@ -588,11 +592,31 @@ public class Controller {
                                             counterMonsters++;
                                         }
                                     }
-
+                                    boolean monstersDead = true;
                                     for(Monster c: totalMonstersEncounter){
+                                        if(c.getHitPoints() >= 0){
+                                            monstersDead = false;
+                                        }
                                         System.out.println(c.getHitPoints());
                                     }
-                                    break; //el round se acaba cuando los monstruos estan los 2 muertos o la party.
+                                    boolean partyDead = true;
+                                    for(Character c: party){
+                                        if(c.getHp() >= 0){
+                                            partyDead = false;
+                                        }
+                                    }
+                                    menu.printMessage("End of round "+round+".");
+                                    round++;
+                                    if(monstersDead){
+                                        menu.printMessage("All enemies are defeated");
+                                        roundOver = true;
+                                    }
+                                    if(partyDead){
+                                        menu.printMessage("Tavern Keeper: \"Lad, wake up. Yes your party fell unconscious.\"");
+                                        menu.printMessage("\"Don't worry, you are safe back at the Tavern.\"");
+                                        roundOver = true;
+                                    }
+                                    //break; //el round se acaba cuando los monstruos estan los 2 muertos o la party.
                                 }
 
                             }
