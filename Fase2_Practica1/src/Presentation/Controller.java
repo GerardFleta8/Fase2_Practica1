@@ -665,8 +665,16 @@ public class Controller {
                                 }
                                 menu.printMessage("");
                                 menu.printMessage("");
-
-
+                            }
+                            boolean partyAlive = true;
+                            for(Character c: party){
+                                if(c.getHp() <= 0){
+                                    partyAlive = false;
+                                }
+                            }
+                            if(partyAlive){
+                                menu.printMessage("Congratulations, your party completed \""+adventureManager.getAdventures().get(option-1).getName()+ "\"");
+                                menu.printMessage("");
                             }
                         }
                         break;
