@@ -423,13 +423,18 @@ public class Controller {
                                 boolean roundOver = false;
                                 int round = 1;
                                 while(!roundOver){
+
                                     menu.printMessage("Round "+round+":");
                                     for(Character c: party){
                                         menu.printMessage("\t- "+c.getName()+"\t"+c.getHp()+" / "+c.getMaxHP()+" hit points");
                                     }
                                     counterParty = 0;
                                     counterMonsters = 0;
+                                    boolean partyDead = true;
+                                    boolean monstersDead = true;
                                     for(int x = 0; x < totalTurns; x++){
+                                        partyDead = true;
+                                        monstersDead = true;
                                         if(counterParty < party.size()){
                                             if(counterMonsters >= totalMonstersEncounter.size()){
                                                 if(party.get(counterParty).getHp() > 0){
@@ -591,20 +596,32 @@ public class Controller {
                                             }
                                             counterMonsters++;
                                         }
-                                    }
-                                    boolean monstersDead = true;
-                                    for(Monster c: totalMonstersEncounter){
-                                        if(c.getHitPoints() >= 0){
-                                            monstersDead = false;
+
+                                        for(Monster c: totalMonstersEncounter){
+                                            if(c.getHitPoints() >= 0){
+                                                monstersDead = false;
+                                            }
+                                            System.out.println(c.getHitPoints());
                                         }
-                                        System.out.println(c.getHitPoints());
-                                    }
-                                    boolean partyDead = true;
-                                    for(Character c: party){
-                                        if(c.getHp() >= 0){
-                                            partyDead = false;
+                                        if(monstersDead){
+                                            for(Character c: party){
+                                                if(c.getHp() >= 0){
+                                                    partyDead = false;
+                                                }
+                                            }
+                                            break;
+                                        }
+
+                                        for(Character c: party){
+                                            if(c.getHp() >= 0){
+                                                partyDead = false;
+                                            }
+                                        }
+                                        if(partyDead){
+                                            break;
                                         }
                                     }
+
                                     menu.printMessage("End of round "+round+".");
                                     round++;
                                     if(monstersDead){
