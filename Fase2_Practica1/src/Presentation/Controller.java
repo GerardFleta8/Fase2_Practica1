@@ -611,7 +611,6 @@ public class Controller {
                                             }
                                             break;
                                         }
-
                                         for(Character c: party){
                                             if(c.getHp() >= 0){
                                                 partyDead = false;
@@ -626,6 +625,7 @@ public class Controller {
                                     round++;
                                     if(monstersDead){
                                         menu.printMessage("All enemies are defeated");
+                                        menu.printMessage("");
                                         roundOver = true;
                                     }
                                     if(partyDead){
@@ -633,14 +633,32 @@ public class Controller {
                                         menu.printMessage("\"Don't worry, you are safe back at the Tavern.\"");
                                         roundOver = true;
                                     }
-                                    //break; //el round se acaba cuando los monstruos estan los 2 muertos o la party.
                                 }
+                                menu.printMessage("------------------------");
+                                menu.printMessage("*** Short rest stage ***");
+                                menu.printMessage("------------------------");
+                                int xpToAdd = 0;
+                                for(Monster c: totalMonstersEncounter){
+                                    xpToAdd = xpToAdd + c.getExperience();
+                                }
+                                for(Character c: party){
+                                    int currentLevel = c.getLevel();
+                                    c.calcAndSetLevel(xpToAdd);
+                                    int newLevel = c.getLevel();
+                                    if(newLevel > currentLevel){
+                                        c.calcAndSetMaxHP();
+                                        menu.printMessage(c.getName()+" gains "+xpToAdd+" xp. "+c.getName()+" levels up. They are now lvl "+c.getLevel()+"!");
+                                    }
+                                    else{
+                                        menu.printMessage(c.getName()+" gains "+xpToAdd+" xp.");
+                                    }
+                                }
+
 
                             }
                         }
                         break;
                 }
-
             }
         }
         characterManager.getCharactersDAO().updateCharactersFile(characterManager.getCharacters());
