@@ -10,7 +10,6 @@ public class Monster {
     private String damageDice;
     private String damageType;
     private int numMonsters;
-    private int actionPerformed;
 
     public Monster(String name, String challenge, String xp, String hitPoints, String initiative, String damageDice, String damageType) {
     }
@@ -24,7 +23,6 @@ public class Monster {
         this.damageDice = other.getDamageDice();
         this.damageType = other.getDamageType();
         this.numMonsters = 0;
-        this.actionPerformed = 0;
     }
 
     public void setNumMonsters(int x){
@@ -59,13 +57,6 @@ public class Monster {
 
     public String getDamageType() {
         return damageType;
-    }
-
-    public int getActionPerformed(){
-        return this.actionPerformed;
-    }
-    public void setActionPerformed(int actionPerformed){
-        this.actionPerformed = actionPerformed;
     }
 
     public void calcAndSetInitiative(int d12){
