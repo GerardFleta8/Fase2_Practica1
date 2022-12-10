@@ -13,7 +13,6 @@ public class Character {
     private String classType;
     private int initiative;
     private int hp;
-    private int actionPerformed;
     private int level;
 
     public Character(String name, String player, int xp, int body, int mind, int spirit, String classType) {
@@ -46,6 +45,16 @@ public class Character {
         this.initiative = d12 + spirit;
     }
 
+    public int restStageAction(int d8){
+        if(hp <= 0){
+            return 0;
+        }else{
+            int heal = d8 + mind;
+            hp = hp + heal;
+            return heal;
+        }
+    }
+
     public int attackAction(int d10, int d6){
         int damage = 0;
         if(d10 == 1){
@@ -66,12 +75,7 @@ public class Character {
     public int getInitiative() {
         return this.initiative;
     }
-    public int getActionPerformed(){
-        return this.actionPerformed;
-    }
-    public void setActionPerformed(int actionPerformed){
-        this.actionPerformed = actionPerformed;
-    }
+
 
     public int calcAndSetLevel(int experience){
         this.xp = this.xp + experience;

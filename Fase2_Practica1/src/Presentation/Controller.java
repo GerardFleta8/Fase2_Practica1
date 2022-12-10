@@ -653,6 +653,18 @@ public class Controller {
                                         menu.printMessage(c.getName()+" gains "+xpToAdd+" xp.");
                                     }
                                 }
+                                menu.printMessage("");
+                                for(Character c: party){
+                                    int heal = c.restStageAction(menu.rollDice(8));
+                                    if(heal == 0){
+                                        menu.printMessage(c.getName()+" is unconscious.");
+                                    }
+                                    else{
+                                        menu.printMessage(c.getName()+" uses Bandage time. Heals "+heal+" hit points.");
+                                    }
+                                }
+                                menu.printMessage("");
+                                menu.printMessage("");
 
 
                             }
