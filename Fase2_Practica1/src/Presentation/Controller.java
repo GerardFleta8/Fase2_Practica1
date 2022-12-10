@@ -601,7 +601,7 @@ public class Controller {
                                             if(c.getHitPoints() >= 0){
                                                 monstersDead = false;
                                             }
-                                            System.out.println(c.getHitPoints());
+                                            //System.out.println(c.getHitPoints()); //to test monster hp is correct
                                         }
                                         if(monstersDead){
                                             for(Character c: party){
