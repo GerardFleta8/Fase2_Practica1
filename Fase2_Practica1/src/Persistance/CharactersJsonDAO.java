@@ -10,11 +10,17 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-
+/**
+ * DAO of characters
+ */
 public class CharactersJsonDAO {
 
     private String path = "characters.json";
-
+    /**
+     * Method that reads the characters file
+     * @return list of characters in the json file
+     * @throws FileNotFoundException
+     */
     public ArrayList<Character> readCharactersFile() throws FileNotFoundException {
         Gson g = new Gson();
         JsonReader reader = new JsonReader(new FileReader(path));
@@ -31,7 +37,10 @@ public class CharactersJsonDAO {
 
         return characters;
     }
-
+    /**
+     * Method that updates the characters file
+     * @param characters list of characters to write in the file
+     */
     public void updateCharactersFile(ArrayList<Character> characters) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 

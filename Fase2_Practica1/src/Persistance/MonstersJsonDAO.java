@@ -12,10 +12,17 @@ import com.google.gson.stream.JsonReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
-
+/**
+ * DAO for monsters
+ */
 public class MonstersJsonDAO {
 
     private String filename = "monsters.json";
+    /**
+     * Method that reads the monsters file
+     * @return list of monsters in the json file
+     * @throws FileNotFoundException
+     */
     public ArrayList<Monster> readMonstersFile() throws FileNotFoundException {
         Gson g = new Gson();
 
