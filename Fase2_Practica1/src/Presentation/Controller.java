@@ -289,7 +289,7 @@ public class Controller {
                                 for (int j = 1; j <= numChar ; j++) {
                                     //!party.get(j-1).getName().isEmpty()
                                     if (!party.isEmpty()) {
-                                        System.out.println(party.size());
+                                        menu.printMessage(String.valueOf(party.size()));
                                         if(party.size() > (j-1)) {
                                             menu.printMessage("\t" + j + ". " + party.get(j - 1).getName());
                                         }
