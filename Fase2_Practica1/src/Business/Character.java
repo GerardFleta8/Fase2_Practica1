@@ -211,7 +211,7 @@ public class Character {
 
     /**
      * The damage received is subtracted from a character's current hp
-     * @param dmg Integer with the damage a character should recieve
+     * @param dmg Integer with the damage a character should receive
      */
     public void takeDamage(int dmg){
         hp = hp - dmg;
