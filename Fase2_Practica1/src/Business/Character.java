@@ -15,6 +15,16 @@ public class Character {
     private int hp;
     private int level;
 
+    /**
+     * Constructor characters
+     * @param name String with the character's name
+     * @param player String with the character's player's name
+     * @param xp Integer with the character's experience points
+     * @param body Integer with the value for the parameter: body
+     * @param mind Integer with the value for the parameter: mind
+     * @param spirit Integer with the value for the parameter: spirit
+     * @param classType String which indicates the character's class type
+     */
     public Character(String name, String player, int xp, int body, int mind, int spirit, String classType) {
         this.name = name;
         this.player = player;
@@ -26,25 +36,76 @@ public class Character {
         initiative = 0;
     }
 
+    /**
+     * Gets a character's name
+     * @return String with characters name
+     */
     public String getName(){
         return name;
     }
+
+    /**
+     * Gets a character's player
+     * @return String with a character's player
+     */
     public String getPlayer() {return player; }
+
+    /**
+     * Gets a character's body value
+     * @return Integer with character's body value
+     */
     public Integer getBody() {return body; }
+
+    /**
+     * Gets a character's mind value
+     * @return Integer with character's mind value
+     */
     public int getMind() {return mind; }
+
+    /**
+     * Gets a character's experience points
+     * @return Integer with a character's experience points
+     */
     public int getXp() {return xp;}
+
+    /**
+     * Gets a character's spirit value
+     * @return Integer with character's spirit value
+     */
     public int getSpirit() {return spirit; }
 
+    /**
+     * Gets a character's current hp
+     * @return Integer with character's current hp
+     */
     public int getHp(){return hp;}
 
+    /**
+     * Gets character's level
+     * @return Integer with character's level
+     */
     public int getLevel(){return level;}
+
+    /**
+     * Gets a character's class type
+     * @return String with character's class type
+     */
     public String getClassType() {return classType; }
 
+    /**
+     * Calculates and sets a character's initiative
+     * @param d12 Integer which is the result of 12 faced die being rolled. It is used to calculate the initiative
+     */
     public void calcAndSetInitiative(int d12){
         //para un adventurer: d12 + spirit;
         this.initiative = d12 + spirit;
     }
 
+    /**
+     * Is the action to be performed during the rest stage (only if a character is alive)
+     * @param d8 Integer which is the result of an 8 faced die being rolled. Used to calculate heal value
+     * @return Int with the heal value, to be able to print it.
+     */
     public int restStageAction(int d8){
         if(hp <= 0){
             return 0;
@@ -55,6 +116,12 @@ public class Character {
         }
     }
 
+    /**
+     * Action to be performed during the attack stage of a battle
+     * @param d10 Integer with the result of a 10 face die being rolled
+     * @param d6 Integer with the result of a 6 face die being rolled
+     * @return Integer with the amount of damage done by the attack
+     */
     public int attackAction(int d10, int d6){
         int damage = 0;
         if(d10 == 1){
@@ -68,14 +135,27 @@ public class Character {
         return damage;
     }
 
+    /**
+     * Action to be performed during the warm-up stage of a battle
+     */
     public void warmUpAction(){
         //como ahora solo tenemos adventurers, solo incrementa el spirit
         this.spirit++;
     }
+
+    /**
+     * Gets a character's initiative
+     * @return Integer with a character's initiative
+     */
     public int getInitiative() {
         return this.initiative;
     }
 
+    /**
+     * Calculates and sets a characters level based on their experience
+     * @param experience is the experience the character just gained
+     * @return Integer with the character new level after being recalculated
+     */
 
     public int calcAndSetLevel(int experience){
         this.xp = this.xp + experience;
