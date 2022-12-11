@@ -11,11 +11,16 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-
+/**
+ * DAO of Adventures
+ */
 public class AdventuresJsonDAO {
 
     private String path = "adventures.json";
-
+    /**
+     * Method that updates the adventures file
+     * @param adventures list of adventures to write in the file
+     */
     public void updateAdventuresFile(ArrayList<Adventure> adventures) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try(FileWriter fileWriter = new FileWriter(path)) {
@@ -25,6 +30,12 @@ public class AdventuresJsonDAO {
         }
 
     }
+
+    /**
+     * Method that reads the adventures file
+     * @return list of adventures in the json file
+     * @throws FileNotFoundException
+     */
     public ArrayList<Adventure> readAdventuresFile() throws FileNotFoundException {
         Gson g = new Gson();
         JsonReader reader = new JsonReader(new FileReader(path));

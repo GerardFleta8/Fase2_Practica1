@@ -6,12 +6,18 @@ import Business.Character;
 import java.io.FileNotFoundException;
 import java.util.*;
 
+/**
+ * Contoller of the program
+ */
 public class Controller {
 
     private Menu menu = new Menu();
     private MonsterManager monsterManager;
     private AdventureManager adventureManager;
     private CharacterManager characterManager;
+    /**
+     * Runnable of the controller that manages the Menu and Managers
+     */
     public void run() {
         monsterManager = new MonsterManager();
         characterManager = new CharacterManager();
