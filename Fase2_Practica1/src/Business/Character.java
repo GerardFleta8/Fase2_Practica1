@@ -156,7 +156,6 @@ public class Character {
      * @param experience is the experience the character just gained
      * @return Integer with the character new level after being recalculated
      */
-
     public int calcAndSetLevel(int experience){
         this.xp = this.xp + experience;
         if(xp > 0 && xp <= 99){
@@ -191,13 +190,29 @@ public class Character {
         }
         return level;
     }
+
+    /**
+     * Calculates the max hp based on current level and body stats and sets the current hp to max hp
+     * (it is used when a character levels up and when initialy setting the hp)
+     */
     public void calcAndSetMaxHP(){
         this.hp = (10 + body)*level;
     }
+
+    /**
+     * Calculates the max hp based on current level and body stats without setting the current hp to it
+     * (its used when printing current hp / max hp during battle phase)
+     * @return
+     */
     public int getMaxHP(){
         int maxHp = (10 + body)*level;
         return maxHp;
     }
+
+    /**
+     * The damage received is subtracted from a character's current hp
+     * @param dmg Integer with the damage a character should recieve
+     */
     public void takeDamage(int dmg){
         hp = hp - dmg;
     }
