@@ -115,7 +115,7 @@ public class Controller {
                         boolean isCorrect = false;
                         int countIncorrect = 0;
                         while (!isCorrect && countIncorrect < 3) {
-                            numCombats = Integer.parseInt(menu.askForInput("-> How many encounters do you want [1..4]: "));
+                            numCombats = menu.askForInt("-> How many encounters do you want [1..4]: ", 1, 4);
                             if (numCombats < 1 || numCombats > 4) {
                                 menu.printMessage("Incorrect number of encounters!\n");
                                 countIncorrect++;
