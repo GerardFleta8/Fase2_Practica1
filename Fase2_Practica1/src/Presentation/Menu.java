@@ -1,11 +1,9 @@
 package Presentation;
 
-import Business.Adventure;
-import Business.Character;
+import Business.Characters.Character;
 import Business.Monster;
 
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;

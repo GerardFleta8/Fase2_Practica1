@@ -1,7 +1,7 @@
 package Presentation;
 
 import Business.*;
-import Business.Character;
+import Business.Characters.Character;
 
 import java.io.FileNotFoundException;
 import java.util.*;

@@ -1,5 +1,6 @@
 package Business;
 
+import Business.Characters.Character;
 import Persistance.CharactersJsonDAO;
 
 import java.util.ArrayList;

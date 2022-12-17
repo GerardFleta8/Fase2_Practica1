@@ -1,6 +1,6 @@
 package Persistance;
 
-import Business.Character;
+import Business.Characters.Character;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;

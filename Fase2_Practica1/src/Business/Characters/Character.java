@@ -1,4 +1,4 @@
-package Business;
+package Business.Characters;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -209,11 +209,26 @@ public class Character {
         return maxHp;
     }
 
+
+    //will be used in subClasses to reduce dmg taken
+    public void takeDamage(int dmg, String dmgType){
+        hp = hp - dmg;
+    }
     /**
      * The damage received is subtracted from a character's current hp
      * @param dmg Integer with the damage a character should receive
      */
     public void takeDamage(int dmg){
         hp = hp - dmg;
+    }
+
+    /*
+    //For subclasses to be able to set name
+    public void setName(String name) {
+        this.name = name;
+    }
+    */
+    public void setHp(int hp){
+        this.hp = hp;
     }
 }
