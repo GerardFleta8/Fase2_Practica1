@@ -142,6 +142,9 @@ public class Character {
         //como ahora solo tenemos adventurers, solo incrementa el spirit
         this.spirit++;
     }
+    public void warmUpAction(int d6){
+
+    }
 
     /**
      * Gets a character's initiative
