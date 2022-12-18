@@ -20,6 +20,7 @@ public class Warrior extends Character {
     }*/
 
     //crear un warrior desde una clase Adventurer (cuando evolucionan)
+    //Nose si hace falta ya que los adventurers se instanciaran como Characters c = new Adventurer()
     /*public Warrior(Adventurer adventurer){
 
     }*/
