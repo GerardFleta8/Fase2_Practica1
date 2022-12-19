@@ -9,7 +9,7 @@ import java.util.*;
 /**
  * Contoller of the program
  */
-public class Controller() {
+public class Controller {
 
     private Menu menu = new Menu();
     private MonsterManager monsterManager;
@@ -44,7 +44,115 @@ public class Controller() {
                 selection = menu.globalMenuSelection(characterManager.moreThan3Characters());
                 switch (selection) {
                     case 1:
-                        Character newCharacter = menu.askForCharacterInfo(characterManager.getCharacters());
+                        //Character newCharacter = menu.askForCharacterInfo(characterManager.getCharacters());
+                        Character newCharacter;
+                        String name = null;
+                        String player;
+                        int xp;
+                        int level;
+                        String classType;
+                        boolean xpCorrect = false;
+                        boolean correctName = false;
+                        boolean nameAlreadyTaken;
+                        int body, mind, spirit, diceTotal;
+                        ArrayList<String> xpType = new ArrayList<>();
+                        ArrayList<ArrayList> aList = new ArrayList<>();
+                        menu.printMessage("Tavern keeper: “Oh, so you are new to this land.”");
+                        menu.printMessage("“What’s your name?”");
+                        name = menu.askForInput("-> Enter your name: ");
+                        menu.printMessage("");
+                        if (name.isEmpty()) {
+                            System.out.println("You haven't entered any name!\n");
+                        } else {
+                            nameAlreadyTaken = characterManager.checkNameAlreadyTaken(name);
+                            if (nameAlreadyTaken) {
+                                menu.printMessage("Name already taken!\n");
+                            } else {
+                                if (characterManager.checkIfNameHasNumber(name)) {
+                                    menu.printMessage("The name entered contains number/s!\n");
+                                } else {
+                                    if (characterManager.checkSpecialCharacter(name)) {
+                                        System.out.println("The name entered contains special characters!\n");
+                                    } else {
+                                        if (!characterManager.checkFirstCapital(name) || characterManager.hasCapitalLetters(name)) {
+                                            name = characterManager.correctionOfFormat(name);
+                                            correctName = true;
+                                        } else {
+                                            correctName = true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (correctName) {
+                            menu.printMessage("Tavern keeper: “Hello, " +name + ", be welcome.”");
+                            menu.printMessage("“And now, if I may break the fourth wall, who is your Player?”\n");
+                            player = menu.askForInput("-> Enter the player’s name: ");
+                            menu.printMessage("");
+                            System.out.println("Tavern keeper: “I see, I see...”");
+                            System.out.println("“Now, are you an experienced adventurer?”");
+                            level = menu.askForInt("Enter the character's level [1..10]: ", 1, 10);
+                            xp = (level-1) * 100;
+                            /*while(!xpCorrect) {
+                                if (xp > 10 || xp < 1) {
+                                    xp = Integer.parseInt(this.askForInput("Invalid level, try one between [1..10]: "));
+                                    xpCorrect = false;
+                                } else{
+                                    xpCorrect = true;
+                                }
+                            }*/
+                            System.out.println("Tavern keeper: “Oh, so you are level " + level+"!”");
+                            System.out.println("“Great, let me get a closer look at you...”\n");
+                            System.out.println("Generating your stats...\n");
+                            for (int i = 0; i < 3; i++) {
+                                ArrayList<Integer> dices = new ArrayList<>();
+                                dices.add(menu.rollDice(6));
+                                dices.add(menu.rollDice(6));
+                                dices.add(dices.get(0) + dices.get(1));
+                                aList.add(dices);
+                            }
+                            xpType.add("Body");
+                            xpType.add("Mind");
+                            xpType.add("Spirit");
+                            for (int i = 0; i < aList.size(); i++) {
+                                menu.printMessage(xpType.get(i) + ":  You rolled " + aList.get(i).get(2)+ " ("+aList.get(i).get(0)+
+                                        " and " + aList.get(i).get(1)+ ").");
+
+                            }
+                            menu.printMessage("\nYour stats are:");
+                            ArrayList<Integer> totalresult = new ArrayList<>();
+                            for (int i = 0; i < aList.size(); i++) {
+
+                                if ((int) aList.get(i).get(2) == 2) {
+                                    menu.printMessage("- "+ xpType.get(i)+": -1");
+                                    totalresult.add(-1);
+                                }
+                                if ((int) aList.get(i).get(2) <= 5 && (int) aList.get(i).get(2) >= 3) {
+                                    menu.printMessage("- "+ xpType.get(i)+ ": +0");
+                                    totalresult.add(0);
+                                }
+                                if ((int) aList.get(i).get(2) <= 9 && (int) aList.get(i).get(2) >= 6) {
+                                    menu.printMessage("- "+ xpType.get(i)+ ": +1");
+                                    totalresult.add(1);
+                                }
+                                if ((int) aList.get(i).get(2) <= 11 && (int) aList.get(i).get(2) >= 10) {
+                                    menu.printMessage("- "+ xpType.get(i)+ ": +2");
+                                    totalresult.add(2);
+                                }
+                                if ((int) aList.get(i).get(2) == 12) {
+                                    menu.printMessage("- "+ xpType.get(i)+ ": +3");
+                                    totalresult.add(3);
+                                }
+                            }
+                            body = totalresult.get(0);
+                            mind = totalresult.get(1);
+                            spirit = totalresult.get(2);
+                            classType = "Adventurer";
+                            newCharacter = new Character(name, player, xp, body, mind, spirit, classType);
+                        } else {
+                            newCharacter = null;
+                        }
+
                         if (newCharacter == null) {
                             break;
                         } else {
@@ -55,14 +163,16 @@ public class Controller() {
                         }
                         break;
                     case 2:
-                        if (characterManager.getCharacters().size() > 0) {
+                        if (characterManager.isEmpty() == false) {
                             positions = menu.listCharacters(characterManager.getCharacters());
                             optionListCharacter = menu.optionListCharacters(positions);
                             if (optionListCharacter == 0) {
                                 menu.printMessage("");
                                 break;
                             } else {
-                                String charToDelete = menu.showCharacterDetails(positions, characterManager.getCharacters(), optionListCharacter);
+                                String charToDelete = null;
+                                menu.printMessage(characterManager.getCharacters().get(positions.get(optionListCharacter-1)).characterDetails());
+                                //charToDelete = menu.showCharacterDetails(positions, characterManager.getCharacters(), optionListCharacter);
                                 if (charToDelete == "") {
                                     break;
                                 } else {
@@ -84,33 +194,33 @@ public class Controller() {
                         break;
                     //new adventure
                     case 3:
-                        String name;
+                        String nameAdv;
                         int numCombats = 0;
                         boolean nameCorrect = false;
                         menu.printMessage("Tavern keeper: “Planning an adventure? Good luck with that!”\n");
-                        name = menu.askForInput("-> Name your adventure: ");
-                        boolean nameAlreadyTaken = false;
+                        nameAdv = menu.askForInput("-> Name your adventure: ");
+                        boolean adNameAlreadyTaken = false;
                         if(!(adventureManager.getAdventures().isEmpty())) {
                             for (Adventure adventure : adventureManager.getAdventures()) {
-                                if (adventure.getName().equalsIgnoreCase(name)) {
-                                    nameAlreadyTaken = true;
+                                if (adventure.getName().equalsIgnoreCase(nameAdv)) {
+                                    adNameAlreadyTaken = true;
                                 }
                             }
                         }
 
-                        if (nameAlreadyTaken) {
+                        if (adNameAlreadyTaken) {
                             menu.printMessage("Adventure name already taken! Try again.\n");
                             break;
                         }
                         while (!nameCorrect) {
-                            if (name.equals("")) {
+                            if (nameAdv.equals("")) {
                                 nameCorrect = false;
                             } else {
                                 nameCorrect = true;
                             }
                         }
 
-                        menu.printMessage("Tavern keeper: “You plan to undertake " + name + ", really?”");
+                        menu.printMessage("Tavern keeper: “You plan to undertake " + nameAdv + ", really?”");
                         menu.printMessage("“How long will that take?”\n");
                         boolean isCorrect = false;
                         int countIncorrect = 0;
@@ -248,7 +358,7 @@ public class Controller() {
                                 }
                             }
                         }
-                        adventureManager.createAdventure(new Adventure(name, numCombats, encounters));
+                        adventureManager.createAdventure(new Adventure(nameAdv, numCombats, encounters));
                         adventureManager.getAdventuresDAO().updateAdventuresFile(adventureManager.getAdventures());
                         //falta guardar la adventure en JSON con json manager
                         break;

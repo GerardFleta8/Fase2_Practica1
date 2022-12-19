@@ -126,6 +126,7 @@ public class Character {
      * @return Integer with the amount of damage done by the attack
      */
     public int attackAction(int d10, int d6){
+
         int damage = 0;
         if(d10 == 1){
             damage = 0;
@@ -243,5 +244,28 @@ public class Character {
 
     protected void setMind(int mind) {
         this.mind = mind;
+    }
+
+    public String characterDetails(){
+        String string = "Tavern keeper: \"Hey " + name + " get here; the boss wants to see you!\"\n\n"+"* Name:   "+name+"\n* Player: "+player+"\n* Class:  "+classType+"\n* Level:  "+level+"\n* XP:     "+xp+"\n";
+        String stringBody;
+        String stringMind;
+        String stringSpirit;
+        if(body >= 0){
+            stringBody = string + "* Body:   +"+body+"\n";
+        }else{
+            stringBody = string + "* Body:   -"+body+"\n";
+        }
+        if(mind >= 0){
+            stringMind = stringBody + "* Mind:   +"+mind+"\n";
+        }else{
+            stringMind = stringBody + "* Mind:   -"+mind+"\n";
+        }
+        if(spirit >= 0){
+            stringSpirit = stringMind + "* Spirit: +"+spirit+"\n";
+        }else{
+            stringSpirit = stringMind + "* Spirit: -"+spirit+"\n";
+        }
+        return stringSpirit;
     }
 }

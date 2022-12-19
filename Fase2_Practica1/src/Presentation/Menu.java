@@ -135,83 +135,7 @@ public class Menu {
         }while(incorrectInput == 1);
         return option;
     }
-    /**
-     * Method that checks if the name of the character contains number
-     * @return boolean if name has number
-     * @param name name of the character to be checked
-     */
-    public boolean checkIfNameHasNumber(String name) {
-        if (name.matches(".*[0-9].*")) {
-            return true;
-        } else{
-            return false;
-        }
 
-
-    }
-    /**
-     * Method that checks if the name of the character contains number
-     * @return boolean if name has special character
-     * @param name name of the character to be checked
-     */
-    public boolean checkSpecialCharacter(String name) {
-        String specialCharactersString = "!@#$%&*()'+,-./:;<=>?[]^_`{|}";
-        boolean hasSpecialCharacter = false;
-        for (int i=0; i < name.length() ; i++)
-        {
-            char ch = name.charAt(i);
-            if(specialCharactersString.contains(java.lang.Character.toString(ch))) {
-                hasSpecialCharacter = true;
-
-            }
-            else if(i == name.length()-1)
-               hasSpecialCharacter = false;
-        }
-        return hasSpecialCharacter;
-
-    }
-    /**
-     * Method that checks if the name has first capital letter
-     * @return boolean if name has first capital
-     * @param name name of the character to be checked
-     */
-    public boolean checkFirstCapital(String name) {
-        boolean hasCapital = false;
-
-        if (java.lang.Character.isUpperCase(name.charAt(0))) {
-            hasCapital = true;
-        } else {
-            hasCapital = false;
-        }
-        return hasCapital;
-
-    }
-    /**
-     * Method that checks if the name of the character contains capital letter
-     * @return boolean if name contains capital letters
-     * @param name name of the character to be checked
-     */
-    public boolean hasCapitalLetters(String name) {
-        for (int i = 1; i < name.length(); i++) {
-            if(java.lang.Character.isUpperCase(name.charAt(i))) {
-                return true;
-            }
-        }
-        return false;
-
-    }
-    /**
-     * Method that transforms the name to a correct standard
-     * @return String of the name already corrected
-     * @param name name of the character to be converted
-     */
-    private String correctionOfFormat(String name) {
-        String nameCorrected;
-        nameCorrected= name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
-
-        return nameCorrected;
-
-    }
     /**
      * Method that rolls dice
      * @return value of the dice
@@ -229,7 +153,7 @@ public class Menu {
      * @return new character
      * @param characters list of characters created
      */
-    public Character askForCharacterInfo(ArrayList<Character> characters) {
+    /*public Character askForCharacterInfo(ArrayList<Character> characters) {
         String name = null;
         String player;
         int xp;
@@ -344,6 +268,7 @@ public class Menu {
         }
 
     }
+    */
     /**
      * Method that lists all the characters created
      * @return list of positions to show

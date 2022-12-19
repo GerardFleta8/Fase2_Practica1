@@ -6,7 +6,10 @@
     "body": 2,
     "mind": 0,
     "spirit": 0,
-    "class": "Adventurer"
+    "class": "Adventurer",
+    "initiative": 0,
+    "hp": 0,
+    "level": 0
   },
   {
     "name": "Caranthir",
@@ -15,7 +18,10 @@
     "body": 2,
     "mind": 0,
     "spirit": 1,
-    "class": "Adventurer"
+    "class": "Adventurer",
+    "initiative": 0,
+    "hp": 0,
+    "level": 0
   },
   {
     "name": "Curufin",
@@ -24,7 +30,10 @@
     "body": 1,
     "mind": 1,
     "spirit": 1,
-    "class": "Adventurer"
+    "class": "Adventurer",
+    "initiative": 0,
+    "hp": 0,
+    "level": 0
   },
   {
     "name": "Elendil",
@@ -33,7 +42,10 @@
     "body": 1,
     "mind": 3,
     "spirit": 2,
-    "class": "Adventurer"
+    "class": "Adventurer",
+    "initiative": 0,
+    "hp": 0,
+    "level": 0
   },
   {
     "name": "Fëanor",
@@ -42,7 +54,10 @@
     "body": 1,
     "mind": 1,
     "spirit": 2,
-    "class": "Adventurer"
+    "class": "Adventurer",
+    "initiative": 0,
+    "hp": 0,
+    "level": 0
   },
   {
     "name": "Finrod Felagund",
@@ -51,7 +66,10 @@
     "body": 3,
     "mind": 3,
     "spirit": 0,
-    "class": "Adventurer"
+    "class": "Adventurer",
+    "initiative": 0,
+    "hp": 0,
+    "level": 0
   },
   {
     "name": "Galadriel",
@@ -60,7 +78,10 @@
     "body": -1,
     "mind": 2,
     "spirit": 2,
-    "class": "Adventurer"
+    "class": "Adventurer",
+    "initiative": 0,
+    "hp": 0,
+    "level": 0
   },
   {
     "name": "Hellboy",
@@ -69,7 +90,10 @@
     "body": 0,
     "mind": -1,
     "spirit": 2,
-    "class": "Adventurer"
+    "class": "Adventurer",
+    "initiative": 0,
+    "hp": 0,
+    "level": 0
   },
   {
     "name": "Jinx",
@@ -78,7 +102,10 @@
     "body": -1,
     "mind": 2,
     "spirit": 2,
-    "class": "Adventurer"
+    "class": "Adventurer",
+    "initiative": 0,
+    "hp": 0,
+    "level": 0
   },
   {
     "name": "Luke Skywalker",
@@ -87,7 +114,10 @@
     "body": -1,
     "mind": 0,
     "spirit": -1,
-    "class": "Adventurer"
+    "class": "Adventurer",
+    "initiative": 0,
+    "hp": 0,
+    "level": 0
   },
   {
     "name": "Maedhros",
@@ -96,7 +126,10 @@
     "body": 0,
     "mind": -1,
     "spirit": 2,
-    "class": "Adventurer"
+    "class": "Adventurer",
+    "initiative": 0,
+    "hp": 0,
+    "level": 0
   },
   {
     "name": "Niënor Níniel",
@@ -105,7 +138,10 @@
     "body": 3,
     "mind": 0,
     "spirit": 1,
-    "class": "Adventurer"
+    "class": "Adventurer",
+    "initiative": 0,
+    "hp": 0,
+    "level": 0
   },
   {
     "name": "Percival Fredrickstein von Musel Klossowski de Rolo III",
@@ -114,7 +150,10 @@
     "body": 1,
     "mind": -1,
     "spirit": 1,
-    "class": "Adventurer"
+    "class": "Adventurer",
+    "initiative": 0,
+    "hp": 0,
+    "level": 0
   },
   {
     "name": "Túrin Turambar",
@@ -123,7 +162,10 @@
     "body": 1,
     "mind": 2,
     "spirit": 2,
-    "class": "Adventurer"
+    "class": "Adventurer",
+    "initiative": 0,
+    "hp": 0,
+    "level": 0
   },
   {
     "name": "Vi",
@@ -132,7 +174,10 @@
     "body": 0,
     "mind": 2,
     "spirit": -1,
-    "class": "Adventurer"
+    "class": "Adventurer",
+    "initiative": 0,
+    "hp": 0,
+    "level": 0
   },
   {
     "name": "Staxx",
@@ -141,7 +186,10 @@
     "body": 0,
     "mind": 2,
     "spirit": 1,
-    "class": "Adventurer"
+    "class": "Adventurer",
+    "initiative": 0,
+    "hp": 0,
+    "level": 0
   },
   {
     "name": "Lol",
@@ -150,7 +198,10 @@
     "body": 1,
     "mind": 2,
     "spirit": 1,
-    "class": "Adventurer"
+    "class": "Adventurer",
+    "initiative": 0,
+    "hp": 0,
+    "level": 0
   },
   {
     "name": "W",
@@ -159,6 +210,21 @@
     "body": 1,
     "mind": 1,
     "spirit": 1,
-    "class": "Adventurer"
+    "class": "Adventurer",
+    "initiative": 0,
+    "hp": 0,
+    "level": 0
+  },
+  {
+    "name": "Alex",
+    "player": "alex1",
+    "xp": 0,
+    "body": 1,
+    "mind": 0,
+    "spirit": 1,
+    "class": "Adventurer",
+    "initiative": 0,
+    "hp": 0,
+    "level": 0
   }
 ]
