@@ -1,6 +1,9 @@
 package Business.Characters;
 
+import Business.Monster;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
 
 public class Character {
     private String name;
@@ -138,11 +141,11 @@ public class Character {
     /**
      * Action to be performed during the warm-up stage of a battle
      */
-    public void warmUpAction(){
+    /*public void warmUpAction(){
         //como ahora solo tenemos adventurers, solo incrementa el spirit
         this.spirit++;
-    }
-    public void warmUpAction(int d6){
+    }*/
+    public void warmUpAction(int d6, int d3, ArrayList<Character> party){
 
     }
 
@@ -233,5 +236,12 @@ public class Character {
     */
     public void setHp(int hp){
         this.hp = hp;
+    }
+    public void setSpirit(int spirit){
+        this.spirit = spirit;
+    }
+
+    protected void setMind(int mind) {
+        this.mind = mind;
     }
 }

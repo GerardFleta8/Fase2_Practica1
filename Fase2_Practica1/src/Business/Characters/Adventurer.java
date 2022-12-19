@@ -1,5 +1,9 @@
 package Business.Characters;
 
+import Business.Monster;
+
+import java.util.ArrayList;
+
 public class Adventurer extends Character {
     public Adventurer(Character character){
         super(character.getName(),
@@ -11,4 +15,9 @@ public class Adventurer extends Character {
                 character.getClassType());
     }
 
+    @Override
+    public void warmUpAction(int d6, int d3, ArrayList<Character> party) {
+        int currentSpirit = this.getSpirit();
+        this.setSpirit(currentSpirit+1);
+    }
 }

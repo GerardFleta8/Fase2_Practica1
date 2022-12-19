@@ -9,7 +9,7 @@ import java.util.*;
 /**
  * Contoller of the program
  */
-public class Controller {
+public class Controller() {
 
     private Menu menu = new Menu();
     private MonsterManager monsterManager;
@@ -355,7 +355,7 @@ public class Controller {
                                 for (l = 0; l < party.size(); l++) {
                                     if (party.get(l).getClassType().equals("Adventurer")) {
                                         menu.printMessage(party.get(l).getName() + " uses Self-Motivated. Their Spirit increases in +1");
-                                        party.get(l).warmUpAction();
+                                        //party.get(l).warmUpAction();
                                         party.get(l).calcAndSetInitiative(menu.rollDice(12));
                                         party.get(l).calcAndSetLevel(0);
                                         party.get(l).calcAndSetMaxHP();

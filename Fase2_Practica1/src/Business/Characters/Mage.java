@@ -1,5 +1,9 @@
 package Business.Characters;
 
+import Business.Monster;
+
+import java.util.ArrayList;
+
 public class Mage extends Character{
     int shield;
     public Mage(Character character){
@@ -13,7 +17,7 @@ public class Mage extends Character{
     }
 
     @Override
-    public void warmUpAction(int d6) {
+    public void warmUpAction(int d6, int d3, ArrayList<Character> party) {
         this.shield = (d6 + this.getMind()) * this.getLevel();
     }
 

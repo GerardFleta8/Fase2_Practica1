@@ -3,6 +3,8 @@ package Business.Characters;
 import Business.Characters.Adventurer;
 import Business.Characters.Character;
 
+import java.util.ArrayList;
+
 public class Warrior extends Character {
     public Warrior(Character character){
         super(character.getName(),
@@ -24,6 +26,12 @@ public class Warrior extends Character {
     /*public Warrior(Adventurer adventurer){
 
     }*/
+
+    @Override
+    public void warmUpAction(int d6, int d3, ArrayList<Character> party) {
+        int currentSpirit = this.getSpirit();
+        this.setSpirit(currentSpirit+1);
+    }
 
     @Override
     public int attackAction(int d10, int d10_2) {
