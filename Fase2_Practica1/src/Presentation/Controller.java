@@ -164,6 +164,50 @@ public class Controller {
                         break;
                     case 2:
                         if (characterManager.isEmpty() == false) {
+
+                            menu.printMessage("Tavern keeper: “Lads! They want to see you!”\n“Who piques your interest?”\n");
+                            boolean userFoundFlag = false;
+                            boolean userFound = false;
+                            String playerToFind;
+                            while(!userFoundFlag) {
+                                playerToFind = menu.askForInput("-> Enter the name of the Player to filter: ");
+                                userFound = characterManager.playerFound(playerToFind);
+
+                                if (!userFound && playerToFind.equals("")) {
+                                    positions = new ArrayList<>();
+
+                                    menu.printMessage("You watch as all adventurers get up from their chairs and approach you.\n");
+                                    ArrayList<String> charStrings = new ArrayList<>();
+                                    charStrings = characterManager.listCharacters();
+                                    int i = 1;
+                                    for(String s: charStrings){
+                                        menu.printMessage(s);
+                                        positions.add(i);
+                                        i++;
+                                    }
+                                    menu.printMessage("\n\t0. Back\n");
+                                    userFoundFlag = true;
+                                }
+                                if (!userFound && !playerToFind.equals("")) {
+                                    System.out.println("Player not found! try again.\n");
+                                    userFoundFlag = false;
+                                }
+                                if(userFound){
+                                    userFoundFlag = true;
+                                    menu.printMessage("You watch as some adventurers get up from their chairs and approach you.\n");
+                                    ArrayList<String> strings = new ArrayList<>();
+                                    strings = characterManager.playerCharacters(playerToFind);
+                                    int i = 1;
+                                    for(String s : strings){
+                                        menu.printMessage("\t" + i + ". "+s);
+                                        i++;
+                                    }
+                                }
+                            }
+
+
+
+
                             positions = menu.listCharacters(characterManager.getCharacters());
                             optionListCharacter = menu.optionListCharacters(positions);
                             if (optionListCharacter == 0) {

@@ -186,4 +186,53 @@ public class CharacterManager {
             return false;
         }
     }
+
+    public ArrayList<String> listCharacters(){
+        ArrayList<String> chars = new ArrayList<>();
+        ArrayList<Character> characters = new ArrayList<>();
+        try {
+            characters = charactersJsonDAO.readCharactersFile();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        int i = 1;
+        for(Character c : characters){
+            chars.add("\t" + i + ". "+c.getName());
+        }
+        return chars;
+    }
+
+    public boolean playerFound(String name){
+        boolean playerFound = false;
+        ArrayList<Character> characters = new ArrayList<>();
+        try {
+            characters = charactersJsonDAO.readCharactersFile();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        if (!characters.isEmpty()) {
+            for (Character character : characters) {
+                if (character.getPlayer().equalsIgnoreCase(name)) {
+                    playerFound = true;
+                }
+            }
+        }
+        return playerFound;
+    }
+
+    public ArrayList<String> playerCharacters(String name){
+        ArrayList<Character> characters = new ArrayList<>();
+        ArrayList<String> charStrings = new ArrayList<>();
+        try {
+            characters = charactersJsonDAO.readCharactersFile();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        for (Character character : characters) {
+            if (character.getPlayer().equalsIgnoreCase(name)) {
+                charStrings.add(character.getName());
+            }
+        }
+        return charStrings;
+    }
 }
