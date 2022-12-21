@@ -652,18 +652,22 @@ public class Controller {
                                                             if((i == monsterAttackTarget) && (c.getHp() > 0)){
                                                                 auxChar = c;
 
-                                                            } else if((i == monsterAttackTarget) && (c.getHp() <= 0)) { //correct target but target is dead: need to find the next live target
+                                                            } else if((i == monsterAttackTarget) && (c.getHp() <= 0)) { //correct target but target is dead: need to find the next living target
                                                                 int z = i;
                                                                 while(!targetFound){
-                                                                    if(z == 5){
-                                                                        z++;
-                                                                    }
-                                                                    if(party.get(z).getHp() > 0){
-                                                                        auxChar = party.get(z);
+                                                                    z = i;
+                                                                    /*if(z == 5){
+                                                                        z=0; ////////// changed from z++;
+                                                                    }*/
+                                                                    if(party.get(z-1).getHp() > 0){
+                                                                        auxChar = party.get(z-1);
                                                                         targetFound = true;
                                                                         break;
                                                                     }
                                                                     i++;
+                                                                    if(i > party.size()){
+                                                                        i = 1;
+                                                                    }
                                                                 }
                                                                 if(targetFound = true){
                                                                     break;
@@ -677,7 +681,9 @@ public class Controller {
                                                         diceMonster = totalMonstersEncounter.get(counterMonsters).getDamageDice();
                                                         int diceMonsterInt = Integer.parseInt(String.valueOf(diceMonster.charAt(1))); //devuelve el int del damageDice del monstruo
                                                         int d10M = menu.rollDice(10);
-                                                        int damageM = menu.rollDice(diceMonsterInt);
+                                                        //Revert change after to testing to diceMonsterInt
+                                                        //int damageM = menu.rollDice(diceMonsterInt);
+                                                        int damageM = 100;
                                                         if(d10M == 1){
                                                             menu.printMessage("Fails and deals 0 damage");
                                                         }else if(d10M == 10){
@@ -708,15 +714,19 @@ public class Controller {
                                                     } else if((i == monsterAttackTarget) && (c.getHp() <= 0)) { //correct target but target is dead: need to find the next live target
                                                         int z = i;
                                                         while(!targetFound){
-                                                            if(z == 5){
+                                                            z = i;
+                                                            /*if(z == 5){
                                                                 z++;
-                                                            }
-                                                            if(party.get(z).getHp() > 0){
-                                                                auxChar = party.get(z);
+                                                            }*/
+                                                            if(party.get(z-1).getHp() > 0){
+                                                                auxChar = party.get(z-1);
                                                                 targetFound = true;
                                                                 break;
                                                             }
                                                             i++;
+                                                            if(i > party.size()){
+                                                               i = 1;
+                                                            }
                                                         }
                                                         if(targetFound = true){
                                                             break;
@@ -761,7 +771,7 @@ public class Controller {
                                             break;
                                         }
                                         for(Character c: party){
-                                            if(c.getHp() >= 0){
+                                            if(c.getHp() > 0){
                                                 partyDead = false;
                                             }
                                         }
@@ -785,7 +795,7 @@ public class Controller {
                                 }
                                 boolean gameOver = true;
                                 for(Character c: party){
-                                    if(c.getHp() >= 0){
+                                    if(c.getHp() > 0){
                                         gameOver = false;
                                     }
                                 }

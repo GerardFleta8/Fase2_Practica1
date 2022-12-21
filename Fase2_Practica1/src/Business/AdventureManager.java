@@ -111,6 +111,7 @@ public class AdventureManager {
             if(i == position){
                 return a.getEncounters();
             }
+            i++;
         }
         return null;
     }

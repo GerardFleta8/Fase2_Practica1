@@ -228,6 +228,9 @@ public class Character {
      */
     public void takeDamage(int dmg){
         hp = hp - dmg;
+        if(hp < 0){
+            hp = 0;
+        }
     }
 
     /*
