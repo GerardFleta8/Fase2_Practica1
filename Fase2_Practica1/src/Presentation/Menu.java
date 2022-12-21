@@ -376,11 +376,11 @@ public class Menu {
      * @return option of the character chosen
      * @param size int with the number of characters shown
      */
-    /*public int optionListCharacters(int size) {
+    public int optionListCharacters(int size) {
         int option = 0;
         option = this.askForInt("Who would you like to meet [0.."+ size + "]: ", 0, size);
         return option;
-    }*/
+    }
     /**
      * Method that chooses the option to create, delete (monsters) or continue the encounter
      * @return option chosen
