@@ -32,6 +32,7 @@ public class CharactersJsonDAO {
         }
         for(Character c: character){
             characters.add(c);
+            c.calcAndSetLevel(0); //Calculates and sets the character's level after reading them based on their xp
         }
 
 

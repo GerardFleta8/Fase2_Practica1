@@ -269,12 +269,13 @@ public class Menu {
 
     }
     */
+
     /**
      * Method that lists all the characters created
      * @return list of positions to show
      * @param characters list of all characters
      */
-    public ArrayList<Integer> listCharacters(ArrayList<Character> characters) {
+    /*public ArrayList<Integer> listCharacters(ArrayList<Character> characters) {
         int option, i = 0;
         ArrayList<String> charactersNames = new ArrayList<>();
         boolean userFoundFlag = false;
@@ -329,9 +330,7 @@ public class Menu {
 
         }
         return positions;
-
-
-    }
+    }*/
 
     /**
      * Method that shows the details of the character chosen
@@ -340,7 +339,7 @@ public class Menu {
      * @param characters list of characters
      * @param option option of the character shown
      */
-    public String showCharacterDetails(ArrayList<Integer> positions, ArrayList<Character> characters, int option) {
+    /*public String showCharacterDetails(ArrayList<Integer> positions, ArrayList<Character> characters, int option) {
         System.out.println("Tavern keeper: “Hey " + characters.get(positions.get(option-1)).getName()+ " get here; the" +
                     " boss wants to see you!”");
         System.out.println("* Name:   "+ characters.get(positions.get(option-1)).getName());
@@ -370,18 +369,18 @@ public class Menu {
         System.out.println("[Enter name to delete, or press enter to cancel]");
 
         return this.askForInput("Do you want to delete "+characters.get(positions.get(option-1)).getName()+"?");
-    }
+    }*/
 
     /**
      * Method that chooses the character to meet
      * @return option of the character chosen
-     * @param positions positions of characters for each player
+     * @param size int with the number of characters shown
      */
-    public int optionListCharacters(ArrayList<Integer> positions) {
+    /*public int optionListCharacters(int size) {
         int option = 0;
-        option = Integer.parseInt(this.askForInput("Who would you like to meet [0.."+positions.size() + "]: "));
+        option = this.askForInt("Who would you like to meet [0.."+ size + "]: ", 0, size);
         return option;
-    }
+    }*/
     /**
      * Method that chooses the option to create, delete (monsters) or continue the encounter
      * @return option chosen

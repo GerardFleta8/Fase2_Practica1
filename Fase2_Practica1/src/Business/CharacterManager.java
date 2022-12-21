@@ -56,14 +56,24 @@ public class CharacterManager {
      * @param charToDelete String with the name of the character we want to delete
      * @return Boolean which indicates whether the character was deleted correctly
      */
-    public boolean deleteCharacter(ArrayList<Integer> positions, int characterIndex, String charToDelete) {
+    public void deleteCharacter(String charToDelete) {
 
-        if (charToDelete.equals(characters.get(positions.get(characterIndex)).getName())) {
-            characters.remove(characters.get(positions.get(characterIndex)));
-            return true;
-        } else {
-            return false;
+        ArrayList<Character> characters = new ArrayList<>();
+        try {
+            characters = charactersJsonDAO.readCharactersFile();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
+        int i = 0;
+        int found = 0;
+        for (Character character : characters) {
+            if (character.getName().equalsIgnoreCase(charToDelete)) {
+                found = i;
+            }
+            i++;
+        }
+        characters.remove(found);
+        this.charactersJsonDAO.updateCharactersFile(characters);
     }
 
     /**
@@ -197,7 +207,7 @@ public class CharacterManager {
         }
         int i = 1;
         for(Character c : characters){
-            chars.add("\t" + i + ". "+c.getName());
+            chars.add(c.getName());
         }
         return chars;
     }
@@ -234,5 +244,20 @@ public class CharacterManager {
             }
         }
         return charStrings;
+    }
+
+    public String showDetailsOfCharacter(String name){
+        ArrayList<Character> characters = new ArrayList<>();
+        try {
+            characters = charactersJsonDAO.readCharactersFile();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        for (Character character : characters) {
+            if (character.getName().equalsIgnoreCase(name)) {
+                return character.characterDetails();
+            }
+        }
+        return null;
     }
 }

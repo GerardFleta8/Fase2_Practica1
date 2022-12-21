@@ -169,6 +169,7 @@ public class Controller {
                             boolean userFoundFlag = false;
                             boolean userFound = false;
                             String playerToFind;
+                            ArrayList<String> charStrings = new ArrayList<>();
                             while(!userFoundFlag) {
                                 playerToFind = menu.askForInput("-> Enter the name of the Player to filter: ");
                                 userFound = characterManager.playerFound(playerToFind);
@@ -177,11 +178,11 @@ public class Controller {
                                     positions = new ArrayList<>();
 
                                     menu.printMessage("You watch as all adventurers get up from their chairs and approach you.\n");
-                                    ArrayList<String> charStrings = new ArrayList<>();
+
                                     charStrings = characterManager.listCharacters();
                                     int i = 1;
                                     for(String s: charStrings){
-                                        menu.printMessage(s);
+                                        menu.printMessage("\t" + i + ". "+s);
                                         positions.add(i);
                                         i++;
                                     }
@@ -195,36 +196,37 @@ public class Controller {
                                 if(userFound){
                                     userFoundFlag = true;
                                     menu.printMessage("You watch as some adventurers get up from their chairs and approach you.\n");
-                                    ArrayList<String> strings = new ArrayList<>();
-                                    strings = characterManager.playerCharacters(playerToFind);
+                                    charStrings = characterManager.playerCharacters(playerToFind);
                                     int i = 1;
-                                    for(String s : strings){
+                                    for(String s : charStrings){
                                         menu.printMessage("\t" + i + ". "+s);
                                         i++;
                                     }
+                                    menu.printMessage("\n\t0. Back\n");
                                 }
                             }
+                            optionListCharacter = menu.optionListCharacters(charStrings.size());
 
 
 
-
-                            positions = menu.listCharacters(characterManager.getCharacters());
-                            optionListCharacter = menu.optionListCharacters(positions);
                             if (optionListCharacter == 0) {
                                 menu.printMessage("");
                                 break;
                             } else {
                                 String charToDelete = null;
-                                menu.printMessage(characterManager.getCharacters().get(positions.get(optionListCharacter-1)).characterDetails());
+                                String charNameShowDetails = charStrings.get(optionListCharacter-1);
+                                menu.printMessage(characterManager.showDetailsOfCharacter(charNameShowDetails));
+                                charToDelete = menu.askForInput("\n[Enter name to delete, or press enter to cancel]\nDo you want to delete "+ charNameShowDetails +"?");
+
+                                //menu.printMessage(characterManager.getCharacters().get(positions.get(optionListCharacter-1)).characterDetails());
                                 //charToDelete = menu.showCharacterDetails(positions, characterManager.getCharacters(), optionListCharacter);
                                 if (charToDelete == "") {
                                     break;
                                 } else {
-                                    boolean deleted = characterManager.deleteCharacter(positions, optionListCharacter - 1, charToDelete);
-                                    if (!deleted) {
+                                    if (!charToDelete.equalsIgnoreCase(charNameShowDetails)) {
                                         menu.printMessage("Incorrect character name, the character won't be deleted.\n");
                                     } else {
-                                        characterManager.getCharactersDAO().updateCharactersFile(characterManager.getCharacters());
+                                        characterManager.deleteCharacter(charToDelete);
                                         menu.printMessage("Tavern keeper: \"I'm sorry Kiddo, but you have to leave.\"");
                                         menu.printMessage("");
                                         menu.printMessage("Character " + charToDelete + " left the Guild.");

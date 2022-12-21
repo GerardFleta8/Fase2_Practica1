@@ -37,6 +37,7 @@ public class Character {
         this.spirit = spirit;
         this.classType = classType;
         initiative = 0;
+        level = this.calcAndSetLevel(0);
     }
 
     /**
@@ -165,7 +166,7 @@ public class Character {
      */
     public int calcAndSetLevel(int experience){
         this.xp = this.xp + experience;
-        if(xp > 0 && xp <= 99){
+        if(xp >= 0 && xp <= 99){
             level = 1;
         }
         if(xp > 99 && xp <= 199){
