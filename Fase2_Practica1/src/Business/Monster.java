@@ -107,4 +107,9 @@ public class Monster {
     public void takeDamage(int damage){
         hitPoints = hitPoints - damage;
     }
+
+    public String monsterNameAndClass(){
+        String string = this.name+"("+this.challenge+")";
+        return string;
+    }
 }

@@ -184,5 +184,35 @@
         ]
       }
     ]
+  },
+  {
+    "name": "d",
+    "numEncounters": 1,
+    "encounters": [
+      {
+        "monstersInEncounter": [
+          {
+            "name": "Olog-hai",
+            "challenge": "Lieutenant",
+            "experience": 40,
+            "hitPoints": 52,
+            "initiative": 0,
+            "damageDice": "d12",
+            "damageType": "Physical",
+            "numMonsters": 8
+          },
+          {
+            "name": "Nazgul",
+            "challenge": "Lieutenant",
+            "experience": 34,
+            "hitPoints": 44,
+            "initiative": 1,
+            "damageDice": "d10",
+            "damageType": "Psychical",
+            "numMonsters": 8
+          }
+        ]
+      }
+    ]
   }
 ]

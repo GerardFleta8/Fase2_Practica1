@@ -207,13 +207,11 @@ public class Controller {
                             }
                             optionListCharacter = menu.optionListCharacters(charStrings.size());
 
-
-
                             if (optionListCharacter == 0) {
                                 menu.printMessage("");
                                 break;
                             } else {
-                                String charToDelete = null;
+                                String charToDelete;
                                 String charNameShowDetails = charStrings.get(optionListCharacter-1);
                                 menu.printMessage(characterManager.showDetailsOfCharacter(charNameShowDetails));
                                 charToDelete = menu.askForInput("\n[Enter name to delete, or press enter to cancel]\nDo you want to delete "+ charNameShowDetails +"?");
@@ -246,12 +244,8 @@ public class Controller {
                         menu.printMessage("Tavern keeper: “Planning an adventure? Good luck with that!”\n");
                         nameAdv = menu.askForInput("-> Name your adventure: ");
                         boolean adNameAlreadyTaken = false;
-                        if(!(adventureManager.getAdventures().isEmpty())) {
-                            for (Adventure adventure : adventureManager.getAdventures()) {
-                                if (adventure.getName().equalsIgnoreCase(nameAdv)) {
-                                    adNameAlreadyTaken = true;
-                                }
-                            }
+                        if(!(adventureManager.isEmpty())) {
+                            adNameAlreadyTaken = adventureManager.checkAdventureNameTaken(nameAdv);
                         }
 
                         if (adNameAlreadyTaken) {
@@ -266,12 +260,11 @@ public class Controller {
                             }
                         }
 
-                        menu.printMessage("Tavern keeper: “You plan to undertake " + nameAdv + ", really?”");
-                        menu.printMessage("“How long will that take?”\n");
+                        menu.printMessage("Tavern keeper: “You plan to undertake " + nameAdv + ", really?”\n“How long will that take?”\n");
                         boolean isCorrect = false;
                         int countIncorrect = 0;
                         while (!isCorrect && countIncorrect < 3) {
-                            numCombats = menu.askForInt("-> How many encounters do you want [1..4]: ", 1, 4);
+                            numCombats = Integer.parseInt(menu.askForInput("-> How many encounters do you want [1..4]: "));
                             if (numCombats < 1 || numCombats > 4) {
                                 menu.printMessage("Incorrect number of encounters!\n");
                                 countIncorrect++;
@@ -312,7 +305,7 @@ public class Controller {
                                     //si monster remove != significa que queremos borrar
                                     // y hemos actualizado seentwice y no la queremos sobre escribir
                                     if (monsterRemove == 0) {
-                                        if (monsterManager.getMonsters().get(monsterAdd - 1).getChallenge().equals("Boss")) {
+                                        if (monsterManager.checkMonsterIsBoss(monsterAdd - 1)) {
                                             bossCounter++;
                                         }
                                         if (bossCounter > 1) {
@@ -320,10 +313,8 @@ public class Controller {
                                             bossCounter = 1;
 
                                         } else {
-                                            monstersList.add(monsterManager.getMonsters().get(monsterAdd - 1));
+                                            monstersList.add(monsterManager.getMonsterAtPosition(monsterAdd-1));
                                         }
-
-
                                         for (Monster s : monstersList) {
                                             seentwice.add(s.getName());
                                         }
@@ -354,10 +345,14 @@ public class Controller {
                                 int monsterOption = menu.MonsterOptions();
                                 monsterRemove = 0;
                                 if (monsterOption == 1) {
-                                    ArrayList<Monster> availableMonsters = new ArrayList<>();
-                                    availableMonsters = this.monsterManager.getMonsters();
-                                    monsterAdd = menu.askForMonsterToAdd(availableMonsters);
-
+                                    ArrayList<String> monsterStrings = this.monsterManager.showMonsters();
+                                    int index = 1;
+                                    for(String s : monsterStrings){
+                                        menu.printMessage(index+". "+s);
+                                        index++;
+                                    }
+                                    menu.printMessage("");
+                                    monsterAdd = menu.askForInt("-> Choose a monster to add [1.." +monsterStrings.size() +"]: ", 1, monsterStrings.size());
                                     monstersIn = new ArrayList<>();
                                 } else if (monsterOption == 2) {
                                     monsterRemove = menu.askForInt("-> Which monster do you want to delete:", 1, seentwice.size());
@@ -373,7 +368,6 @@ public class Controller {
                                     seentwice.remove(aux); //hay que pasarle el nombre aux (para borrar en un set)
                                     monsterRemove++; //para que no entre al if si han borrado el 1 y monsterRemove es 0 otra vez
                                     monstersIn = new ArrayList<>();
-
 
                                     //los hemos borrado del set seentwice, falta borrarlos del monstersList
                                     boolean monsterFound = true;
@@ -405,29 +399,26 @@ public class Controller {
                             }
                         }
                         adventureManager.createAdventure(new Adventure(nameAdv, numCombats, encounters));
-                        adventureManager.getAdventuresDAO().updateAdventuresFile(adventureManager.getAdventures());
-                        //falta guardar la adventure en JSON con json manager
                         break;
 
                     //play adventure
                     case 4:
-                        menu.printMessage("Tavern keeper: \"So, you are looking to go on an adventure?\"\n\"Where do you fancy going?\"");
-                        menu.printMessage("");
-                        menu.printMessage("Available adventures:");
+                        menu.printMessage("Tavern keeper: \"So, you are looking to go on an adventure?\"\n\"Where do you fancy going?\"\n\nAvailable adventures: ");
                         int i = 0;
                         //igual aqui hay que cogerlas del json y no directamente las que tenga el manager
                         //las que hay en el manager son las que ha creado nuevas, asi que tendriamos que leer todas del json
-                        if (adventureManager.getAdventures().isEmpty()) {
+                        if (adventureManager.isEmpty()) {
                             menu.printMessage("No adventures created yet!\n");
                             break;
                         } else {
-                            for (Adventure a : adventureManager.getAdventures()) {
-                                menu.printMessage("\t"+(i+1) + ". " + a.getName());
+                            ArrayList<String> adventureNames = adventureManager.showAdventureNames();
+                            for (String s : adventureNames) {
+                                menu.printMessage("\t"+(i+1) + ". " + s);
                                 i++;
                             }
                             menu.printMessage("");
-                            int option = menu.askForInt("-> Choose an adventure: ", 1, adventureManager.getAdventures().size());
-                            menu.printMessage("Tavern keeper: “"+ adventureManager.getAdventures().get(option-1).getName()+
+                            int option = menu.askForInt("-> Choose an adventure: ", 1, adventureNames.size());
+                            menu.printMessage("Tavern keeper: “"+ adventureNames.get(option-1)+
                                     " it is!”\n“And how many people shall join you?”\n");
                             int numChar = menu.askForInt("-> Choose a number of characters [3..5]: ", 3, 5);
                             menu.printMessage("Tavern keeper: “Great, "+numChar+" it is.”");
@@ -435,17 +426,11 @@ public class Controller {
                             menu.printMessage("------------------------------");
                             int numChamps = 0;
                             ArrayList<Character> party = new ArrayList<>();
-                            /*for (int j = 0; j < numChar; j++) {
-                                Character aux = new Character("", "", 0,0,0,0,"");
-                                party.add(aux);
-                            }*/
                             int k = 0;
                             while (numChamps < numChar) {
                                 menu.printMessage("Your party ("+(numChamps +" / "+ numChar+"):"));
                                 for (int j = 1; j <= numChar ; j++) {
-                                    //!party.get(j-1).getName().isEmpty()
                                     if (!party.isEmpty()) {
-                                        menu.printMessage(String.valueOf(party.size()));
                                         if(party.size() > (j-1)) {
                                             menu.printMessage("\t" + j + ". " + party.get(j - 1).getName());
                                         }
@@ -458,8 +443,9 @@ public class Controller {
                                 }
                                 menu.printMessage("------------------------------");
                                 menu.printMessage("Available characters:");
-                                for (int j = 1; j <= characterManager.getCharacters().size(); j++) {
-                                    menu.printMessage("\t"+j+". " + characterManager.getCharacters().get(j-1).getName());
+                                ArrayList<String> charStrings = characterManager.listCharacters();
+                                for (int j = 1; j <= charStrings.size(); j++) {
+                                    menu.printMessage("\t"+j+". " + charStrings.get(j-1));
                                 }
                                 int characterChosen = menu.askForInt("-> Choose character "+(numChamps+1)+" in your party: ", 1, characterManager.getCharacters().size());
                                 boolean alreadyInParty = false;
@@ -469,7 +455,7 @@ public class Controller {
                                         break;
                                     }
                                     else if(party.size() >= j+1 ) {
-                                        if (characterManager.getCharacters().get(characterChosen - 1).getName().equals(party.get(j).getName())) {
+                                        if (charStrings.get(characterChosen - 1).equals(party.get(j).getName())) {
                                             alreadyInParty = true;
                                         }
                                     }
@@ -482,7 +468,7 @@ public class Controller {
                                     menu.printMessage("\n------------------------------");
                                 } else {
                                     menu.printMessage("\n------------------------------");
-                                    party.add(k,characterManager.getCharacters().get(characterChosen-1));
+                                    party.add(k,characterManager.getCharacterAtPosition(characterChosen-1));
                                     k++;
                                     numChamps++;
                                 }
@@ -493,15 +479,17 @@ public class Controller {
                             }
                             menu.printMessage("------------------------------\n");
                             menu.printMessage("Tavern keeper: “Great, good luck on your adventure lads!”\n\n");
-                            menu.printMessage("The “"+adventureManager.getAdventures().get(option-1).getName()+"” will start soon...\n");
+                            menu.printMessage("The “"+adventureNames.get(option-1)+"” will start soon...\n");
 
-                            for (int j = 0; j < adventureManager.getAdventures().get(option-1).getNumCombats(); j++) {
+                            ArrayList<Encounter> advEncounters = adventureManager.getAdventureEncounters(option-1);
+
+                            for (int j = 0; j < advEncounters.size(); j++) {
                                 menu.printMessage("---------------------");
                                 menu.printMessage("Starting encounter " + (j + 1) + ":");
 
-                                for (int m = 0; m < adventureManager.getAdventures().get(option - 1).getEncounters().get(j).getEncounterMonsters().size(); m++) {
-                                    menu.printMessage("- " + adventureManager.getAdventures().get(option - 1).getEncounters().get(j).getEncounterMonsters().get(m).getNumMonsters() + "x " +
-                                            adventureManager.getAdventures().get(option - 1).getEncounters().get(j).getEncounterMonsters().get(m).getName());
+                                for (int m = 0; m < advEncounters.get(j).getEncounterMonsters().size(); m++) {
+                                    menu.printMessage("- " + advEncounters.get(j).getEncounterMonsters().get(m).getNumMonsters() + "x " +
+                                            advEncounters.get(j).getEncounterMonsters().get(m).getName());
                                 }
                                 menu.printMessage("---------------------\n\n");
                                 menu.printMessage("---------------------");
@@ -520,8 +508,7 @@ public class Controller {
                                 menu.printMessage("");
                                 menu.printMessage("Rolling initiative...");
                                 ArrayList<Monster> monstersInEncounter = new ArrayList<>();
-                                monstersInEncounter = adventureManager.getAdventures().get(option - 1).getEncounters().get(j).getEncounterMonsters();
-
+                                monstersInEncounter = advEncounters.get(j).getEncounterMonsters();
                                 ArrayList<Monster> totalMonstersEncounter = new ArrayList<>();
                                 for(Monster c: monstersInEncounter){
                                     for(int y = 0; y < c.getNumMonsters(); y++){

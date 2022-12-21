@@ -395,7 +395,7 @@ public class Menu {
         boolean isCorrect = false;
         while (!isCorrect) {
             option = Integer.parseInt(this.askForInput("-> Enter an option [1..3]: "));
-            if(option < 1 || option > 3) {
+            if (option < 1 || option > 3) {
                 System.out.println("Incorrect option!\n");
                 isCorrect = false;
             } else {
@@ -410,7 +410,7 @@ public class Menu {
      * @return option chosen
      * @param monsters list of all monsters to be chosen
      */
-    public int askForMonsterToAdd(ArrayList<Monster> monsters) {
+   /* public int askForMonsterToAdd(ArrayList<Monster> monsters) {
         int i = 1;
         for(Monster c : monsters){
             System.out.println(i+". "+c.getName()+"("+c.getChallenge()+")");
@@ -429,5 +429,5 @@ public class Menu {
             }
         }
         return option;
-    }
+    }*/
     }

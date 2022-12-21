@@ -3,6 +3,7 @@ package Business;
 import Persistance.AdventuresJsonDAO;
 import Persistance.CharactersJsonDAO;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class AdventureManager {
@@ -22,7 +23,14 @@ public class AdventureManager {
      * @param adventure to add to the list of adventures currently stores
      */
     public void createAdventure(Adventure adventure) {
-        adventures.add(adventure);
+        ArrayList<Adventure> currentAdventures = new ArrayList<>();
+        try {
+            currentAdventures = this.adventuresJsonDAO.readAdventuresFile();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        currentAdventures.add(adventure);
+        this.adventuresJsonDAO.updateAdventuresFile(currentAdventures);
     }
 
     /**
@@ -47,5 +55,63 @@ public class AdventureManager {
      */
     public AdventuresJsonDAO getAdventuresDAO() {
         return adventuresJsonDAO;
+    }
+
+    public boolean isEmpty(){
+        ArrayList<Adventure> currentAdventures = new ArrayList<>();
+        try {
+            currentAdventures = this.adventuresJsonDAO.readAdventuresFile();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        if(currentAdventures.isEmpty()){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkAdventureNameTaken(String name){
+        ArrayList<Adventure> currentAdventures = new ArrayList<>();
+        try {
+            currentAdventures = this.adventuresJsonDAO.readAdventuresFile();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        for(Adventure adventure : currentAdventures){
+            if(adventure.getName().equalsIgnoreCase(name)){
+                return true;
+            }
+        }
+       return false;
+    }
+
+    public ArrayList<String> showAdventureNames(){
+        ArrayList<Adventure> currentAdventures = new ArrayList<>();
+        ArrayList<String> strings = new ArrayList<>();
+        try {
+            currentAdventures = this.adventuresJsonDAO.readAdventuresFile();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        for(Adventure a : currentAdventures){
+            strings.add(a.getName());
+        }
+        return strings;
+    }
+
+    public ArrayList<Encounter> getAdventureEncounters(int position){
+        ArrayList<Adventure> currentAdventures = new ArrayList<>();
+        try {
+            currentAdventures = this.adventuresJsonDAO.readAdventuresFile();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        int i = 0;
+        for(Adventure a : currentAdventures){
+            if(i == position){
+                return a.getEncounters();
+            }
+        }
+        return null;
     }
 }

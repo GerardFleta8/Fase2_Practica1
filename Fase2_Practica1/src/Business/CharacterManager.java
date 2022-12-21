@@ -260,4 +260,22 @@ public class CharacterManager {
         }
         return null;
     }
+
+    //Used when playing an adventure and forming a party
+    public Character getCharacterAtPosition(int position){
+        ArrayList<Character> characters = new ArrayList<>();
+        try {
+            characters = this.charactersJsonDAO.readCharactersFile();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        int i = 0;
+        for(Character c : characters){
+            if(i == position){
+                return c;
+            }
+            i++;
+        }
+        return null;
+    }
 }

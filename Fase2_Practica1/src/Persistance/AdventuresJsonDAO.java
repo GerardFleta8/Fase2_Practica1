@@ -48,8 +48,6 @@ public class AdventuresJsonDAO {
         for(Adventure a: adventure){
             adventures.add(a);
         }
-
-
         return adventures;
     }
 }
