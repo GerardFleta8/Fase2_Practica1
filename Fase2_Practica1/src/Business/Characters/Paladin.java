@@ -14,7 +14,11 @@ public class Paladin extends Character{
     }
 
     @Override
-    public void warmUpAction(int d6, int d3, ArrayList<Character> party) {
+    public void warmUpAction(ArrayList<Character> party) {
+        //Roll dice: d3
+        int d3;
+        d3 = (int) (Math.random()* 3 + 1);
+
         for(Character c: party){
             int currentMind = c.getMind();
             c.setMind(currentMind + d3);

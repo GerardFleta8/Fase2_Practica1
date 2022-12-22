@@ -682,8 +682,8 @@ public class Controller {
                                                         int diceMonsterInt = Integer.parseInt(String.valueOf(diceMonster.charAt(1))); //devuelve el int del damageDice del monstruo
                                                         int d10M = menu.rollDice(10);
                                                         //Revert change after to testing to diceMonsterInt
-                                                        //int damageM = menu.rollDice(diceMonsterInt);
-                                                        int damageM = 100;
+                                                        int damageM = menu.rollDice(diceMonsterInt);
+                                                        //int damageM = 100; //Test unconscious members
                                                         if(d10M == 1){
                                                             menu.printMessage("Fails and deals 0 damage");
                                                         }else if(d10M == 10){

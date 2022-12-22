@@ -17,7 +17,11 @@ public class Mage extends Character{
     }
 
     @Override
-    public void warmUpAction(int d6, int d3, ArrayList<Character> party) {
+    public void warmUpAction(ArrayList<Character> party) {
+        //Roll dice: d6
+        int d6;
+        d6 = (int) (Math.random()* 6 + 1);
+
         this.shield = (d6 + this.getMind()) * this.getLevel();
     }
 

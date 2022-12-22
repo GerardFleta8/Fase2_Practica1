@@ -147,7 +147,7 @@ public class Character {
         //como ahora solo tenemos adventurers, solo incrementa el spirit
         this.spirit++;
     }*/
-    public void warmUpAction(int d6, int d3, ArrayList<Character> party){
+    public void warmUpAction(ArrayList<Character> party){
 
     }
 

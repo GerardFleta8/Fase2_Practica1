@@ -14,10 +14,16 @@ public class Champion extends Character{
     }
 
     @Override
-    public void warmUpAction(int d6, int d3, ArrayList<Character> party) {
+    public void warmUpAction(ArrayList<Character> party) {
         for(Character c: party){
             int currentSpirit = c.getSpirit();
             c.setSpirit(currentSpirit + 1);
         }
+    }
+
+    @Override
+    public void calcAndSetMaxHP() {
+        int hp = (10 + this.getBody())*this.getLevel() + this.getBody()*this.getLevel();
+        this.setHp(hp);
     }
 }

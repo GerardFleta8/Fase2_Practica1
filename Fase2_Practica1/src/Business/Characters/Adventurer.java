@@ -16,7 +16,7 @@ public class Adventurer extends Character {
     }
 
     @Override
-    public void warmUpAction(int d6, int d3, ArrayList<Character> party) {
+    public void warmUpAction(ArrayList<Character> party) {
         int currentSpirit = this.getSpirit();
         this.setSpirit(currentSpirit+1);
     }
