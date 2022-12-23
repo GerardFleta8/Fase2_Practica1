@@ -17,6 +17,15 @@ public class Mage extends Character{
     }
 
     @Override
+    public void calcAndSetInitiative(int initiative) {
+        //Roll dice: d20
+        int d20;
+        d20 = (int) (Math.random()*20 + 1);
+
+        super.calcAndSetInitiative(d20+this.getMind());
+    }
+
+    @Override
     public void warmUpAction(ArrayList<Character> party) {
         //Roll dice: d6
         int d6;

@@ -14,6 +14,15 @@ public class Paladin extends Character{
     }
 
     @Override
+    public void calcAndSetInitiative(int initiative) {
+        //Roll dice: d10
+        int d10;
+        d10 = (int) (Math.random()*10 + 1);
+
+        super.calcAndSetInitiative(d10 + this.getSpirit());
+    }
+
+    @Override
     public void warmUpAction(ArrayList<Character> party) {
         //Roll dice: d3
         int d3;

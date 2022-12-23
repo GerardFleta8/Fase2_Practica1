@@ -98,11 +98,11 @@ public class Character {
 
     /**
      * Calculates and sets a character's initiative
-     * @param d12 Integer which is the result of 12 faced die being rolled. It is used to calculate the initiative
+     * @param initiative
      */
-    public void calcAndSetInitiative(int d12){
+    public void calcAndSetInitiative(int initiative){
         //para un adventurer: d12 + spirit;
-        this.initiative = d12 + spirit;
+        this.initiative = initiative;
     }
 
     /**
