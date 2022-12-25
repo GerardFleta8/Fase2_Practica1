@@ -104,7 +104,7 @@ public class Monster {
      * Method that affects the hit points of a monster
      * @param damage damage taken
      */
-    public void takeDamage(int damage){
+    public void takeDamage(int damage, String dmgType){
         hitPoints = hitPoints - damage;
     }
 

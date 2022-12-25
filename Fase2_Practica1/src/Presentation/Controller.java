@@ -586,8 +586,8 @@ public class Controller {
                                         monstersDead = true;
                                         if(counterParty < party.size()){
                                             if(counterMonsters >= totalMonstersEncounter.size()){
-                                                if(party.get(counterParty).getHp() > 0){
-                                                    Monster aux = totalMonstersEncounter.get(0);
+                                                if(party.get(counterParty).isAlive()){
+                                                    /*Monster aux = totalMonstersEncounter.get(0);
                                                     for(Monster c : totalMonstersEncounter){
                                                         if(aux.getHitPoints() > c.getHitPoints() && c.getHitPoints() >= 0) {
                                                             aux = c;
@@ -605,10 +605,11 @@ public class Controller {
                                                         menu.printMessage("Critical hit and deals "+damage+" physical damage.");
                                                     }else{
                                                         menu.printMessage("Hits and deals "+damage+" physical damage.");
-                                                    }
-                                                    aux.takeDamage(damage);
-                                                    if(aux.getHitPoints() <= 0){
-                                                        menu.printMessage(aux.getName()+" dies.");
+                                                    }*/
+                                                    int d10 = menu.rollDice(10);
+                                                    String attackAction = party.get(counterParty).attackAction(d10, party, totalMonstersEncounter);
+                                                    if(attackAction != null){ //if null significa que no hay targets vivos
+                                                        menu.printMessage(attackAction);
                                                     }
                                                 }
                                                 counterParty++;
@@ -616,7 +617,7 @@ public class Controller {
                                             else {
                                                 if (party.get(counterParty).getInitiative() > totalMonstersEncounter.get(counterMonsters).getInitiative()){
                                                     if(party.get(counterParty).getHp() > 0){
-                                                        Monster aux = totalMonstersEncounter.get(0);
+                                                        /*Monster aux = totalMonstersEncounter.get(0);
                                                         for(Monster c : totalMonstersEncounter){
                                                             if(aux.getHitPoints() > c.getHitPoints() && c.getHitPoints() >= 0) {
                                                                 aux = c;
@@ -638,6 +639,12 @@ public class Controller {
                                                         aux.takeDamage(damage);
                                                         if(aux.getHitPoints() <= 0){
                                                             menu.printMessage(aux.getName()+" dies.");
+                                                        }
+                                                        */
+                                                        int d10 = menu.rollDice(10);
+                                                        String attackAction = party.get(counterParty).attackAction(d10, party, totalMonstersEncounter);
+                                                        if(attackAction != null){
+                                                            menu.printMessage(attackAction);
                                                         }
                                                     }
                                                     counterParty++;
@@ -757,14 +764,14 @@ public class Controller {
                                         }
 
                                         for(Monster c: totalMonstersEncounter){
-                                            if(c.getHitPoints() >= 0){
+                                            if(c.getHitPoints() > 0){
                                                 monstersDead = false;
                                             }
                                             //System.out.println(c.getHitPoints()); //to test monster hp is correct
                                         }
                                         if(monstersDead){
                                             for(Character c: party){
-                                                if(c.getHp() >= 0){
+                                                if(c.getHp() > 0){
                                                     partyDead = false;
                                                 }
                                             }

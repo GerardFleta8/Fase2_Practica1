@@ -123,12 +123,11 @@ public class Character {
     /**
      * Action to be performed during the attack stage of a battle
      * @param d10 Integer with the result of a 10 face die being rolled
-     * @param d6 Integer with the result of a 6 face die being rolled
      * @return Integer with the amount of damage done by the attack
      */
-    public int attackAction(int d10, int d6){
+    public String attackAction(int d10, ArrayList<Character> party, ArrayList<Monster> monsters){
 
-        int damage = 0;
+        /*int damage = 0;
         if(d10 == 1){
             damage = 0;
         }else{
@@ -137,7 +136,8 @@ public class Character {
                 damage = damage*2;
             }
         }
-        return damage;
+        return damage;*/
+        return null;
     }
 
     /**
@@ -271,5 +271,12 @@ public class Character {
             stringSpirit = stringMind + "* Spirit: -"+spirit+"\n";
         }
         return stringSpirit;
+    }
+
+    public boolean isAlive(){
+        if(this.hp > 0){
+            return true;
+        }
+        return false;
     }
 }

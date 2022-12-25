@@ -2,6 +2,7 @@ package Business.Characters;
 
 import Business.Characters.Adventurer;
 import Business.Characters.Character;
+import Business.Monster;
 
 import java.util.ArrayList;
 
@@ -44,7 +45,10 @@ public class Warrior extends Character {
     }
 
     @Override
-    public int attackAction(int d10, int d10_2) {
+    public String attackAction(int d10, ArrayList<Character> party, ArrayList<Monster> monsters) {
+        int d10_2;
+        d10_2 = (int) (Math.random()*12 + 1);
+
         int damage = 0;
         if(d10 == 1){
             damage = 0;
@@ -54,7 +58,7 @@ public class Warrior extends Character {
                 damage = damage*2;
             }
         }
-        return damage;
+        return null;
     }
 
     @Override

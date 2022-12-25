@@ -1,5 +1,6 @@
 package Persistance;
 
+import Business.Characters.Adventurer;
 import Business.Characters.Character;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -31,8 +32,10 @@ public class CharactersJsonDAO {
             return new ArrayList<>();
         }
         for(Character c: character){
-            characters.add(c);
-            c.calcAndSetLevel(0); //Calculates and sets the character's level after reading them based on their xp
+            Character d = new Adventurer(c);
+            characters.add(d);
+            //might have to change how we calc and set lvl
+            d.calcAndSetLevel(0); //Calculates and sets the character's level after reading them based on their xp
         }
 
 
