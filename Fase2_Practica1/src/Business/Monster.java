@@ -104,12 +104,20 @@ public class Monster {
      * Method that affects the hit points of a monster
      * @param damage damage taken
      */
-    public void takeDamage(int damage, String dmgType){
+    public int takeDamage(int damage, String dmgType){
         hitPoints = hitPoints - damage;
+        return damage; //devuelve damage para saber cuanto daño a hecho el ataque realmente por las diferentes pasivas
     }
 
     public String monsterNameAndClass(){
         String string = this.name+"("+this.challenge+")";
         return string;
+    }
+
+    public boolean isAlive(){
+        if(this.hitPoints > 0){
+            return true;
+        }
+        return false;
     }
 }

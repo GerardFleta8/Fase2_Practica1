@@ -616,7 +616,7 @@ public class Controller {
                                             }
                                             else {
                                                 if (party.get(counterParty).getInitiative() > totalMonstersEncounter.get(counterMonsters).getInitiative()){
-                                                    if(party.get(counterParty).getHp() > 0){
+                                                    if(party.get(counterParty).isAlive()){
                                                         /*Monster aux = totalMonstersEncounter.get(0);
                                                         for(Monster c : totalMonstersEncounter){
                                                             if(aux.getHitPoints() > c.getHitPoints() && c.getHitPoints() >= 0) {
@@ -649,24 +649,24 @@ public class Controller {
                                                     }
                                                     counterParty++;
                                                 } else {
-                                                    if(totalMonstersEncounter.get(counterMonsters).getHitPoints() > 0){
+                                                    if(totalMonstersEncounter.get(counterMonsters).isAlive()){
                                                         Character auxChar = party.get(0);
                                                         boolean targetFound = false;
                                                         int monsterAttackTarget = menu.rollDice(party.size());
                                                         i = 1;
                                                         for(Character c: party){
                                                             //correct target and target is alive:
-                                                            if((i == monsterAttackTarget) && (c.getHp() > 0)){
+                                                            if((i == monsterAttackTarget) && (c.isAlive())){
                                                                 auxChar = c;
 
-                                                            } else if((i == monsterAttackTarget) && (c.getHp() <= 0)) { //correct target but target is dead: need to find the next living target
+                                                            } else if((i == monsterAttackTarget) && (!c.isAlive())) { //correct target but target is dead: need to find the next living target
                                                                 int z = i;
                                                                 while(!targetFound){
                                                                     z = i;
                                                                     /*if(z == 5){
                                                                         z=0; ////////// changed from z++;
                                                                     }*/
-                                                                    if(party.get(z-1).getHp() > 0){
+                                                                    if(party.get(z-1).isAlive()){
                                                                         auxChar = party.get(z-1);
                                                                         targetFound = true;
                                                                         break;
@@ -725,7 +725,7 @@ public class Controller {
                                                             /*if(z == 5){
                                                                 z++;
                                                             }*/
-                                                            if(party.get(z-1).getHp() > 0){
+                                                            if(party.get(z-1).isAlive()){
                                                                 auxChar = party.get(z-1);
                                                                 targetFound = true;
                                                                 break;
@@ -787,7 +787,7 @@ public class Controller {
                                         }
                                     }
 
-                                    menu.printMessage("End of round "+round+".");
+                                    menu.printMessage("\nEnd of round "+round+".");
                                     round++;
                                     if(monstersDead){
                                         menu.printMessage("All enemies are defeated");

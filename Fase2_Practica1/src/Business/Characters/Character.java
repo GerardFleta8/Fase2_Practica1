@@ -125,7 +125,7 @@ public class Character {
      * @param d10 Integer with the result of a 10 face die being rolled
      * @return Integer with the amount of damage done by the attack
      */
-    public String attackAction(int d10, ArrayList<Character> party, ArrayList<Monster> monsters){
+    public String attackAction(int d10, ArrayList<Character> party, ArrayList<Monster> totalMonstersEncounter){
 
         /*int damage = 0;
         if(d10 == 1){
@@ -275,6 +275,13 @@ public class Character {
 
     public boolean isAlive(){
         if(this.hp > 0){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean hpLessThanHalf(){
+        if(this.hp < this.getMaxHP()/2){
             return true;
         }
         return false;

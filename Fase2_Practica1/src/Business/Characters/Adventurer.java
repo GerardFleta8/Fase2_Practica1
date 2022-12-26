@@ -65,7 +65,7 @@ public class Adventurer extends Character {
             }else if(d10 == 10){
                 s2 = s + "\nCritical hit and deals "+damage+" physical damage.";
             }else{
-                s2 = s + "Hits and deals "+damage+" physical damage.";
+                s2 = s + "\nHits and deals "+damage+" physical damage.";
             }
 
 
