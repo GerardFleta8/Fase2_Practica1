@@ -35,8 +35,7 @@ public class Controller {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-
-        if (monsterManager.getMonsters().size() < 0) {
+        if(monsterManager.monsterFileEmpty()){
             menu.printMessage("Error: The monsters.json file can’t be accessed.");
         } else {
             while(selection != 5) {

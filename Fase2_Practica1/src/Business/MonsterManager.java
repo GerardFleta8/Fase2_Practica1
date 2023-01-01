@@ -86,4 +86,8 @@ public class MonsterManager {
         }
         return null;
     }
+
+    public boolean monsterFileEmpty(){
+        return this.monstersJsonDAO.isEmpty();
+    }
 }

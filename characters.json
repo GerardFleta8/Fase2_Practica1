@@ -1,5 +1,6 @@
 [
   {
+    "shield": 0,
     "name": "Amrod",
     "player": "SonsOfFeanor",
     "xp": 229,
@@ -12,6 +13,7 @@
     "level": 3
   },
   {
+    "shield": 0,
     "name": "Caranthir",
     "player": "SonsOfFeanor",
     "xp": 306,
@@ -24,6 +26,7 @@
     "level": 4
   },
   {
+    "shield": 0,
     "name": "Curufin",
     "player": "SonsOfFeanor",
     "xp": 286,
@@ -36,6 +39,7 @@
     "level": 3
   },
   {
+    "shield": 0,
     "name": "Elendil",
     "player": "Eru Ilúvatar",
     "xp": 307,
@@ -48,6 +52,7 @@
     "level": 4
   },
   {
+    "shield": 0,
     "name": "Fëanor",
     "player": "SonsOfFeanor",
     "xp": 407,
@@ -60,6 +65,7 @@
     "level": 5
   },
   {
+    "shield": 0,
     "name": "Finrod Felagund",
     "player": "Eru Il£vatar",
     "xp": 144,
@@ -72,6 +78,7 @@
     "level": 2
   },
   {
+    "shield": 0,
     "name": "Galadriel",
     "player": "Eru Ilúvatar",
     "xp": 118,
@@ -84,6 +91,7 @@
     "level": 2
   },
   {
+    "shield": 0,
     "name": "Hellboy",
     "player": "ComicSans",
     "xp": 167,
@@ -96,6 +104,7 @@
     "level": 2
   },
   {
+    "shield": 0,
     "name": "Jinx",
     "player": "IPlayLOLInClass",
     "xp": 50,
@@ -108,6 +117,7 @@
     "level": 1
   },
   {
+    "shield": 0,
     "name": "Luke Skywalker",
     "player": "Lucas Films",
     "xp": 329,
@@ -120,6 +130,7 @@
     "level": 4
   },
   {
+    "shield": 0,
     "name": "Maedhros",
     "player": "SonsOfFeanor",
     "xp": 348,
@@ -132,6 +143,7 @@
     "level": 4
   },
   {
+    "shield": 0,
     "name": "Niënor Níniel",
     "player": "Eru Ilúvatar",
     "xp": 148,
@@ -144,6 +156,7 @@
     "level": 2
   },
   {
+    "shield": 0,
     "name": "Percival Fredrickstein von Musel Klossowski de Rolo III",
     "player": "Critter9",
     "xp": 499,
@@ -156,6 +169,7 @@
     "level": 5
   },
   {
+    "shield": 0,
     "name": "Túrin Turambar",
     "player": "Eru Ilúvatar",
     "xp": 292,
@@ -168,6 +182,7 @@
     "level": 3
   },
   {
+    "shield": 0,
     "name": "Vi",
     "player": "IPlayLOLInClass",
     "xp": 844,
@@ -180,6 +195,7 @@
     "level": 9
   },
   {
+    "shield": 0,
     "name": "Staxx",
     "player": "Gerard",
     "xp": 2,
@@ -192,6 +208,7 @@
     "level": 1
   },
   {
+    "shield": 0,
     "name": "Lol",
     "player": "Gerard",
     "xp": 2,
@@ -204,6 +221,7 @@
     "level": 1
   },
   {
+    "shield": 0,
     "name": "W",
     "player": "w",
     "xp": 2,

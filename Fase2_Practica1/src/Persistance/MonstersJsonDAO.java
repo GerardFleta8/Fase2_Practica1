@@ -31,4 +31,17 @@ public class MonstersJsonDAO {
 
         return monsters;
     }
+
+    public boolean isEmpty(){
+        ArrayList<Monster> monsters;
+        try {
+            monsters = this.readMonstersFile();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        if(monsters.isEmpty()){
+            return true;
+        }
+        return false;
+    }
 }
