@@ -43,6 +43,64 @@ public class Mage extends Character{
     }
 
     @Override
+    public String attackAction(int d10, ArrayList<Character> party, ArrayList<Monster> totalMonstersEncounter) {
+        int mCounter = 0;
+        int damage = 0;
+        String string = null;
+        for(Monster m : totalMonstersEncounter){
+            if(m.isAlive()){
+                mCounter++;
+            }
+        }
+        if(mCounter >= 3){
+            string = this.getName()+" attacks ";
+            int d4;
+            d4 = (int) (Math.random()*4 + 1);
+            damage = fireball(d4);
+            if(d10 == 10){
+                damage = damage * 2;
+            }else if(d10 == 1){
+                damage = 0;
+            }
+            ArrayList<Monster> liveMonsters = new ArrayList<>();
+            for(Monster m : totalMonstersEncounter){
+                if(m.isAlive()){
+                    m.takeDamage(damage, "Magic");
+                    liveMonsters.add(m);
+                }
+            }
+            int i = 1;
+            for (Monster m : liveMonsters){
+                if(i == liveMonsters.size()){
+                    string = string + "and " + m.getName()+ " with Fireball.";
+                } else if(i == liveMonsters.size()-1){
+                    string = string + m.getName();
+                }
+                else{
+                    string = string + m.getName() + ",";
+                }
+            }
+            if(d10 == 1){
+                string =  string + "\nFails and deals 0 damage";
+            }else if(d10 == 10){
+                string = string + "\nCritical hit and deals "+damage+" physical damage.";
+            }else{
+                string = string + "\nHits and deals "+damage+" physical damage.";
+            }
+        }else{
+            int d6;
+            d6 = (int) (Math.random()*6 + 1);
+            damage = arcaneMissile(d6);
+            if(d10 == 10){
+                damage = damage * 2;
+            }else if(d10 == 1){
+                damage = 0;
+            }
+        }
+        return string;
+    }
+
+    @Override
     public int restStageAction(int d8) {
         return 0;
     }

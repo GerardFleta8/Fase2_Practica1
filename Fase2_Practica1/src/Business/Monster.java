@@ -106,6 +106,9 @@ public class Monster {
      */
     public int takeDamage(int damage, String dmgType){
         hitPoints = hitPoints - damage;
+        if(this.hitPoints < 0){
+            this.hitPoints = 0;
+        }
         return damage; //devuelve damage para saber cuanto daño a hecho el ataque realmente por las diferentes pasivas
     }
 

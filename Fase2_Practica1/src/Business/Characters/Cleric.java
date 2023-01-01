@@ -44,7 +44,7 @@ public class Cleric extends Character{
         String actionTaken = null;
         for(Character c : party){
             //busca si hay alguno de la party con menos de la mitad de hp y lo cura(a el primero y tambien a el mismo si es el)
-            if(c.hpLessThanHalf()){
+            if(c.hpLessThanHalf() && c.isAlive()){
                 //Prayer of Healing:
                 healAction = true;
                 c.takeDamage(-heal); //takedmg: hp = hp - dmg ---> to heal:  hp = hp - (-heal)
@@ -100,7 +100,7 @@ public class Cleric extends Character{
             }
 
             int endDmg = aux.takeDamage(dmg, "Psychical");
-            String s = this.getName() + " attacks " + aux.getName() +" with Not on my watch.\n";
+            String s = this.getName() + " attacks " + aux.getName() +" with Not on my watch.";
             if(d10_2 == 1){
                 actionTaken =  s + "\nFails and deals 0 damage";
             }else if(d10_2 == 10){
