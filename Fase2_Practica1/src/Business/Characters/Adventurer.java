@@ -26,9 +26,11 @@ public class Adventurer extends Character {
     }
 
     @Override
-    public void warmUpAction(ArrayList<Character> party) {
+    public String warmUpAction(ArrayList<Character> party) {
         int currentSpirit = this.getSpirit();
         this.setSpirit(currentSpirit+1);
+        String string = this.getName()+" uses Self-motivated. Their Spirit increases in +1.";
+        return string;
     }
 
     @Override
@@ -50,9 +52,9 @@ public class Adventurer extends Character {
 
         Monster aux = totalMonstersEncounter.get(0);
         for(Monster c : totalMonstersEncounter){
-            if(aux.getHitPoints() > c.getHitPoints() && c.getHitPoints() >= 0) {
+            if(aux.getHitPoints() > c.getHitPoints() && c.isAlive()) {
                 aux = c;
-            }else if(aux.getHitPoints() <= 0 && c.getHitPoints() >= 0){
+            }else if(aux.getHitPoints() <= 0 && c.isAlive()){
                 aux = c;
             }
         }
@@ -63,19 +65,25 @@ public class Adventurer extends Character {
             if(d10 == 1){
                 s2 = s + "\nFails and deals 0 damage";
             }else if(d10 == 10){
-                s2 = s + "\nCritical hit and deals "+damage+" physical damage.";
+                s2 = s + "\nCritical hit and deals "+damage+" physical damage.\n";
             }else{
-                s2 = s + "\nHits and deals "+damage+" physical damage.";
+                s2 = s + "\nHits and deals "+damage+" physical damage.\n";
             }
 
 
             aux.takeDamage(damage, this.getClassType());
             if(aux.getHitPoints() <= 0){
-                s3 = s2 + "\n"+ aux.getName()+" dies.";
+                s3 = s2 + aux.getName()+" dies.\n";
             }
             else{
                 s3 = s2;
             }
         return s3;
+    }
+
+    @Override
+    public String displayCurrentHp() {
+        String string = "\t- "+this.getName()+"\t"+this.getHp()+" / "+this.getMaxHP()+" hit points";
+        return string;
     }
 }

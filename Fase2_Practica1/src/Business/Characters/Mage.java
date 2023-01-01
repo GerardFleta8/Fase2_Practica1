@@ -26,12 +26,14 @@ public class Mage extends Character{
     }
 
     @Override
-    public void warmUpAction(ArrayList<Character> party) {
+    public String warmUpAction(ArrayList<Character> party) {
         //Roll dice: d6
         int d6;
         d6 = (int) (Math.random()* 6 + 1);
 
         this.shield = (d6 + this.getMind()) * this.getLevel();
+        String string = this.getName()+" uses Mage shield. Shield recharges to "+ this.shield +".";
+        return string;
     }
 
     public int fireball(int d4){
@@ -52,8 +54,8 @@ public class Mage extends Character{
                 mCounter++;
             }
         }
+        string = this.getName()+" attacks ";
         if(mCounter >= 3){
-            string = this.getName()+" attacks ";
             int d4;
             d4 = (int) (Math.random()*4 + 1);
             damage = fireball(d4);
@@ -72,21 +74,28 @@ public class Mage extends Character{
             int i = 1;
             for (Monster m : liveMonsters){
                 if(i == liveMonsters.size()){
-                    string = string + "and " + m.getName()+ " with Fireball.";
+                    string = string + " and " + m.getName()+ " with Fireball.";
                 } else if(i == liveMonsters.size()-1){
                     string = string + m.getName();
                 }
                 else{
-                    string = string + m.getName() + ",";
+                    string = string + m.getName() + ", ";
                 }
+                i++;
             }
             if(d10 == 1){
-                string =  string + "\nFails and deals 0 damage";
+                string =  string + "\nFails and deals 0 damage.\n";
             }else if(d10 == 10){
-                string = string + "\nCritical hit and deals "+damage+" physical damage.";
+                string = string + "\nCritical hit and deals "+damage+" physical damage.\n";
             }else{
-                string = string + "\nHits and deals "+damage+" physical damage.";
+                string = string + "\nHits and deals "+damage+" physical damage.\n";
             }
+            for (Monster m : liveMonsters){
+                if(!m.isAlive()){
+                    string = string + m.getName()+" dies.\n";
+                }
+            }
+
         }else{
             int d6;
             d6 = (int) (Math.random()*6 + 1);
@@ -95,6 +104,25 @@ public class Mage extends Character{
                 damage = damage * 2;
             }else if(d10 == 1){
                 damage = 0;
+            }
+            Monster aux = totalMonstersEncounter.get(0);
+            //atacar al que mas vida tiene
+            for(Monster m : totalMonstersEncounter){
+                if(m.getHitPoints() > aux.getHitPoints()){
+                    aux = m;
+                }
+            }
+            aux.takeDamage(damage,"Magic");
+            string = string + aux.getName()+ " with Arcane missile.";
+            if(d10 == 1){
+                string =  string + "\nFails and deals 0 damage\n";
+            }else if(d10 == 10){
+                string = string + "\nCritical hit and deals "+damage+" physical damage.\n";
+            }else{
+                string = string + "\nHits and deals "+damage+" physical damage.\n";
+            }
+            if(!aux.isAlive()){
+                string = string + aux.getName()+" dies.";
             }
         }
         return string;
@@ -137,5 +165,11 @@ public class Mage extends Character{
                 super.takeDamage(dmg);
             }
         }
+    }
+
+    @Override
+    public String displayCurrentHp() {
+        String string = "\t- "+this.getName()+"\t"+this.getHp()+" / "+this.getMaxHP()+" hit points (Shield): "+this.shield;
+        return string;
     }
 }

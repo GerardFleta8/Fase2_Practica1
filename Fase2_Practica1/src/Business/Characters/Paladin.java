@@ -25,7 +25,7 @@ public class Paladin extends Character{
     }
 
     @Override
-    public void warmUpAction(ArrayList<Character> party) {
+    public String warmUpAction(ArrayList<Character> party) {
         //Roll dice: d3
         int d3;
         d3 = (int) (Math.random()* 3 + 1);
@@ -34,6 +34,8 @@ public class Paladin extends Character{
             int currentMind = c.getMind();
             c.setMind(currentMind + d3);
         }
+        String string = this.getName()+" uses Blessing of good luck. Everyone's Mind increases in +"+d3+".";
+        return string;
     }
 
     @Override
@@ -117,14 +119,22 @@ public class Paladin extends Character{
             int endDmg = aux.takeDamage(dmg, "Psychical");
             String s = this.getName() + " attacks " + aux.getName() +" with Never on my watch.\n";
             if(d10_2 == 1){
-                actionTaken =  s + "\nFails and deals 0 damage";
+                actionTaken =  s + "Fails and deals 0 damage\n";
             }else if(d10_2 == 10){
-                actionTaken = s + "\nCritical hit and deals "+endDmg+" physical damage.";
+                actionTaken = s + "Critical hit and deals "+endDmg+" physical damage.\n";
             }else{
-                actionTaken = s + "\nHits and deals "+endDmg+" physical damage.";
+                actionTaken = s + "Hits and deals "+endDmg+" physical damage.\n";
+            }
+            if(!aux.isAlive()){
+                actionTaken = actionTaken + aux.getName() + " dies.\n";
             }
         }
-
         return actionTaken;
+    }
+
+    @Override
+    public String displayCurrentHp() {
+        String string = "\t- "+this.getName()+"\t"+this.getHp()+" / "+this.getMaxHP()+" hit points";
+        return string;
     }
 }

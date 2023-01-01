@@ -497,13 +497,15 @@ public class Controller {
                                 menu.printMessage("---------------------");
                                 int l;
                                 for (l = 0; l < party.size(); l++) {
-                                    if (party.get(l).getClassType().equals("Adventurer")) {
-                                        menu.printMessage(party.get(l).getName() + " uses Self-Motivated. Their Spirit increases in +1");
-                                        //party.get(l).warmUpAction();
                                         party.get(l).calcAndSetInitiative(menu.rollDice(12));
                                         party.get(l).calcAndSetLevel(0);
                                         party.get(l).calcAndSetMaxHP();
-                                    }
+                                        if(party.get(l).isAlive()){
+                                            menu.printMessage(party.get(l).warmUpAction(party));
+                                        }else {
+                                            menu.printMessage(party.get(l).getName() + " is unconscious");
+                                        }
+
                                 }
                                 menu.printMessage("");
                                 menu.printMessage("Rolling initiative...");
@@ -526,11 +528,6 @@ public class Controller {
                                         return Integer.valueOf(o2.getInitiative()).compareTo(o1.getInitiative());
                                     }
                                 });
-                                /*
-                                for(Character c : party){
-                                    menu.printMessage("\t- "+c.getInitiative()+"\t"+c.getName());
-                                }*/
-
 
                                 Collections.sort(totalMonstersEncounter, new Comparator<Monster>() {
                                     @Override
@@ -538,10 +535,7 @@ public class Controller {
                                         return Integer.valueOf(o2.getInitiative()).compareTo(o1.getInitiative());
                                     }
                                 });
-                                /*
-                                for(Monster m: totalMonstersEncounter){
-                                    menu.printMessage("\t- "+m.getInitiative()+"\t"+m.getName());
-                                }*/
+
                                 int totalTurns = totalMonstersEncounter.size() + party.size();
                                 int counterParty = 0;
                                 int counterMonsters = 0;
@@ -575,7 +569,7 @@ public class Controller {
 
                                     menu.printMessage("Round "+round+":");
                                     for(Character c: party){
-                                        menu.printMessage("\t- "+c.getName()+"\t"+c.getHp()+" / "+c.getMaxHP()+" hit points");
+                                        menu.printMessage(c.displayCurrentHp());
                                     }
                                     counterParty = 0;
                                     counterMonsters = 0;
@@ -698,7 +692,8 @@ public class Controller {
                                                         }else{
                                                             menu.printMessage("Hits and deals "+damageM+" physical damage.");
                                                         }
-                                                        auxChar.takeDamage(damageM);
+                                                        //still needs to be changed
+                                                        auxChar.takeDamage(damageM, "Physical");
                                                         if(auxChar.getHp() <= 0){
                                                             menu.printMessage(auxChar.getName()+" falls unconscious.");
                                                         }
@@ -832,7 +827,7 @@ public class Controller {
                                 for(Character c: party){
                                     int heal = c.restStageAction(menu.rollDice(8));
                                     if(heal == 0){
-                                        menu.printMessage(c.getName()+" is unconscious.");
+                                        menu.printMessage(c.getName()+" is unconscious."); //wont work for other classes other than adventurer this way
                                     }
                                     else{
                                         menu.printMessage(c.getName()+" uses Bandage time. Heals "+heal+" hit points.");

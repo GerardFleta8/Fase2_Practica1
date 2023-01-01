@@ -142,13 +142,16 @@ public class Character {
 
     /**
      * Action to be performed during the warm-up stage of a battle
+     *
+     * @return
      */
     /*public void warmUpAction(){
         //como ahora solo tenemos adventurers, solo incrementa el spirit
         this.spirit++;
     }*/
-    public void warmUpAction(ArrayList<Character> party){
+    public String warmUpAction(ArrayList<Character> party){
 
+        return null;
     }
 
     /**
@@ -285,5 +288,8 @@ public class Character {
             return true;
         }
         return false;
+    }
+    public String displayCurrentHp(){
+        return null;
     }
 }

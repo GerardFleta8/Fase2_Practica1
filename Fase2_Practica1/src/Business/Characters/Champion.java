@@ -73,16 +73,24 @@ public class Champion extends Character{
     }
 
     @Override
-    public void warmUpAction(ArrayList<Character> party) {
+    public String warmUpAction(ArrayList<Character> party) {
         for(Character c: party){
             int currentSpirit = c.getSpirit();
             c.setSpirit(currentSpirit + 1);
         }
+        String string = this.getName()+" uses Motivational speech. Everyone's Spirit increases in +1.";
+        return string;
     }
 
     @Override
     public void calcAndSetMaxHP() {
         int hp = (10 + this.getBody())*this.getLevel() + this.getBody()*this.getLevel();
         this.setHp(hp);
+    }
+
+    @Override
+    public String displayCurrentHp() {
+        String string = "\t- "+this.getName()+"\t"+this.getHp()+" / "+this.getMaxHP()+" hit points";
+        return string;
     }
 }

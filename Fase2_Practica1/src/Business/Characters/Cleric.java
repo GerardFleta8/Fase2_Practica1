@@ -25,11 +25,13 @@ public class Cleric extends Character{
     }
 
     @Override
-    public void warmUpAction(ArrayList<Character> party) {
+    public String warmUpAction(ArrayList<Character> party) {
         for(Character c: party){
             int currentMind = c.getMind();
             c.setMind(currentMind + 1);
         }
+        String string = this.getName()+" uses Prayer of good luck. Everyone's Mind increases in +1.";
+        return string;
     }
 
     @Override
@@ -110,5 +112,11 @@ public class Cleric extends Character{
             }
         }
         return actionTaken;
+    }
+
+    @Override
+    public String displayCurrentHp() {
+        String string = "\t- "+this.getName()+"\t"+this.getHp()+" / "+this.getMaxHP()+" hit points";
+        return string;
     }
 }
