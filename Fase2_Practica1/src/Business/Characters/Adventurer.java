@@ -2,6 +2,7 @@ package Business.Characters;
 
 import Business.Monsters.Monster;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Adventurer extends Character {
@@ -48,13 +49,15 @@ public class Adventurer extends Character {
                 damage = damage*2;
             }
         }
-
-
-        Monster aux = totalMonstersEncounter.get(0);
-        for(Monster c : totalMonstersEncounter){
-            if(aux.getHitPoints() > c.getHitPoints() && c.isAlive()) {
-                aux = c;
-            }else if(aux.getHitPoints() <= 0 && c.isAlive()){
+        ArrayList<Monster> liveMonsters = new ArrayList<>();
+        for(Monster m : totalMonstersEncounter){
+            if(m.isAlive()){
+                liveMonsters.add(m);
+            }
+        }
+        Monster aux = liveMonsters.get(0);
+        for(Monster c : liveMonsters){
+            if(aux.getHitPoints() > c.getHitPoints()) {
                 aux = c;
             }
         }

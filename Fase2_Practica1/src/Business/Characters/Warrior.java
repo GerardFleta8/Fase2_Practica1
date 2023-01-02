@@ -60,11 +60,15 @@ public class Warrior extends Character {
         }
 
 
-        Monster aux = totalMonstersEncounter.get(0);
-        for(Monster c : totalMonstersEncounter){
-            if(aux.getHitPoints() > c.getHitPoints() && c.getHitPoints() >= 0) {
-                aux = c;
-            }else if(aux.getHitPoints() <= 0 && c.getHitPoints() >= 0){
+        ArrayList<Monster> liveMonsters = new ArrayList<>();
+        for(Monster m : totalMonstersEncounter){
+            if(m.isAlive()){
+                liveMonsters.add(m);
+            }
+        }
+        Monster aux = liveMonsters.get(0);
+        for(Monster c : liveMonsters){
+            if(aux.getHitPoints() > c.getHitPoints()) {
                 aux = c;
             }
         }

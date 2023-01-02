@@ -1,4 +1,9 @@
 package Business.Monsters;
+
+import Business.Characters.Character;
+
+import java.util.ArrayList;
+
 /**
  * Monster class
  */
@@ -122,5 +127,58 @@ public class Monster {
             return true;
         }
         return false;
+    }
+
+    public String attackMove(ArrayList<Character> party){
+        String string;
+        Character auxChar = party.get(0);
+        boolean targetFound = false;
+        int monsterAttackTarget = (int) (Math.random()*party.size() + 1);
+        int i = 1;
+        for(Character c: party){
+            //correct target and target is alive:
+            if((i == monsterAttackTarget) && (c.isAlive())){
+                auxChar = c;
+
+            } else if((i == monsterAttackTarget) && (!c.isAlive())) { //correct target but target is dead: need to find the next living target
+                int z = i;
+                while(!targetFound){
+                    z = i;
+                    if(party.get(z-1).isAlive()){
+                        auxChar = party.get(z-1);
+                        targetFound = true;
+                        break;
+                    }
+                    i++;
+                    if(i > party.size()){
+                        i = 1;
+                    }
+                }
+                if(targetFound = true){
+                    break;
+                }
+            }
+            i++;
+        }
+        string = "\n";
+        string = string + this.getName()+ " attacks "+auxChar.getName()+".\n";
+        int diceMonsterInt = Integer.parseInt(String.valueOf(this.getDamageDice().charAt(1))); //devuelve el int del damageDice del monstruo
+        int d10M = (int) (Math.random()*10 + 1);
+        //Revert change after testing to diceMonsterInt
+        int damageM = (int) (Math.random()*diceMonsterInt + 1);
+        //int damageM = 15; //Test unconscious members
+        if(d10M == 1){
+            string = string + "Fails and deals 0 damage";
+        }else if(d10M == 10){
+            string = string + "Critical hit and deals "+damageM+" physical damage.";
+        }else{
+            string = string + "Hits and deals "+damageM+" physical damage.";
+        }
+        //still needs to be changed
+        auxChar.takeDamage(damageM, this.getDamageType());
+        if(!auxChar.isAlive()){
+            string = string +"\n"+auxChar.getName()+" falls unconscious.";
+        }
+        return string;
     }
 }

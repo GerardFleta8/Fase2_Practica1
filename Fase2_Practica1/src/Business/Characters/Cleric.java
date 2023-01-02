@@ -72,8 +72,6 @@ public class Cleric extends Character{
                     break;
                 } else if (i == target && !m.isAlive()) {
                     int z = i;
-
-
                     while(!targetFound){
                         z = i;
                         if(totalMonstersEncounter.get(z-1).isAlive()){

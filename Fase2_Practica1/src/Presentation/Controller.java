@@ -644,7 +644,7 @@ public class Controller {
                                                     counterParty++;
                                                 } else {
                                                     if(totalMonstersEncounter.get(counterMonsters).isAlive()){
-                                                        Character auxChar = party.get(0);
+                                                        /*Character auxChar = party.get(0);
                                                         boolean targetFound = false;
                                                         int monsterAttackTarget = menu.rollDice(party.size());
                                                         i = 1;
@@ -657,9 +657,8 @@ public class Controller {
                                                                 int z = i;
                                                                 while(!targetFound){
                                                                     z = i;
-                                                                    /*if(z == 5){
-                                                                        z=0; ////////// changed from z++;
-                                                                    }*/
+
+                                                                    }
                                                                     if(party.get(z-1).isAlive()){
                                                                         auxChar = party.get(z-1);
                                                                         targetFound = true;
@@ -697,14 +696,16 @@ public class Controller {
                                                         if(auxChar.getHp() <= 0){
                                                             menu.printMessage(auxChar.getName()+" falls unconscious.");
                                                         }
+                                                        */
+                                                        menu.printMessage(totalMonstersEncounter.get(counterMonsters).attackMove(party));
                                                     }
                                                     counterMonsters++;
                                                 }
                                             }
                                         }
                                         else{
-                                            if(totalMonstersEncounter.get(counterMonsters).getHitPoints() > 0){
-                                                Character auxChar = party.get(0);
+                                            if(totalMonstersEncounter.get(counterMonsters).isAlive()){
+                                                /*Character auxChar = party.get(0);
                                                 boolean targetFound = false;
                                                 int monsterAttackTarget = menu.rollDice(party.size());
                                                 i = 1;
@@ -717,9 +718,7 @@ public class Controller {
                                                         int z = i;
                                                         while(!targetFound){
                                                             z = i;
-                                                            /*if(z == 5){
-                                                                z++;
-                                                            }*/
+
                                                             if(party.get(z-1).isAlive()){
                                                                 auxChar = party.get(z-1);
                                                                 targetFound = true;
@@ -754,6 +753,8 @@ public class Controller {
                                                 if(auxChar.getHp() <= 0){
                                                     menu.printMessage(auxChar.getName()+" falls unconscious.");
                                                 }
+                                                */
+                                                menu.printMessage(totalMonstersEncounter.get(counterMonsters).attackMove(party));
                                             }
                                             counterMonsters++;
                                         }

@@ -1,5 +1,6 @@
 package Persistance;
 
+import Business.Monsters.Boss;
 import Business.Monsters.Monster;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
@@ -26,9 +27,14 @@ public class MonstersJsonDAO {
         Monster monster[] = g.fromJson(reader, Monster[].class);
         ArrayList<Monster> monsters = new ArrayList<>();
         for(Monster m: monster){
-            monsters.add(m);
+            if(m.getChallenge().equalsIgnoreCase("Boss")){
+                Monster d = new Boss(m);
+                monsters.add(d);
+            }
+            else {
+                monsters.add(m);
+            }
         }
-
         return monsters;
     }
 
