@@ -89,8 +89,27 @@ public class Champion extends Character{
     }
 
     @Override
+    public int getMaxHP() {
+        int hp = (10 + this.getBody())*this.getLevel() + this.getBody()*this.getLevel();
+        return hp;
+    }
+
+    @Override
     public String displayCurrentHp() {
         String string = "\t- "+this.getName()+"\t"+this.getHp()+" / "+this.getMaxHP()+" hit points";
+        return string;
+    }
+
+    @Override
+    public String restStageAction(int d8) {
+        String string;
+        if(!this.isAlive()){
+            string = this.getName() + " is unconscious.";
+        }else{
+            int heal = this.getMaxHP()-this.getHp();
+            this.calcAndSetMaxHP();
+            string = this.getName() + " uses Improved bandage time. Heals "+heal+" hit points.";
+        }
         return string;
     }
 }

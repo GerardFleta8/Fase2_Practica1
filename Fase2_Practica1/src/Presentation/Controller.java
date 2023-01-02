@@ -824,13 +824,8 @@ public class Controller {
                                 }
                                 menu.printMessage("");
                                 for(Character c: party){
-                                    int heal = c.restStageAction(menu.rollDice(8));
-                                    if(heal == 0){
-                                        menu.printMessage(c.getName()+" is unconscious."); //wont work for other classes other than adventurer this way
-                                    }
-                                    else{
-                                        menu.printMessage(c.getName()+" uses Bandage time. Heals "+heal+" hit points.");
-                                    }
+                                    int d8 = menu.rollDice(8);
+                                    menu.printMessage(c.restStageAction(d8));
                                 }
                                 menu.printMessage("");
                                 menu.printMessage("");

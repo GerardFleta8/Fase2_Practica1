@@ -129,8 +129,8 @@ public class Mage extends Character{
     }
 
     @Override
-    public int restStageAction(int d8) {
-        return 0;
+    public String restStageAction(int d8) {
+        return super.restStageAction(d8);
     }
 
     @Override

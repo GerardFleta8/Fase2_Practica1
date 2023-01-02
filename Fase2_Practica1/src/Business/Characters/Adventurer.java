@@ -86,4 +86,25 @@ public class Adventurer extends Character {
         String string = "\t- "+this.getName()+"\t"+this.getHp()+" / "+this.getMaxHP()+" hit points";
         return string;
     }
+
+    @Override
+    public String restStageAction(int d8) {
+        String string;
+        if(!this.isAlive()){
+            string = this.getName() + " is unconscious.";
+        }else{
+            int heal = d8 + this.getMind();
+            int hp = this.getHp();
+
+            if(hp + heal > this.getMaxHP()){
+                this.calcAndSetMaxHP();
+                heal = this.getMaxHP() - hp;
+            }else {
+                this.setHp(hp + heal);
+            }
+
+            string = this.getName() + " uses Bandage time. Heals "+heal+" hit points.";
+        }
+        return string;
+    }
 }

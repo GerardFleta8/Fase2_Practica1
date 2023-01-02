@@ -110,14 +110,8 @@ public class Character {
      * @param d8 Integer which is the result of an 8 faced die being rolled. Used to calculate heal value
      * @return Int with the heal value, to be able to print it.
      */
-    public int restStageAction(int d8){
-        if(hp <= 0){
-            return 0;
-        }else{
-            int heal = d8 + mind;
-            hp = hp + heal;
-            return heal;
-        }
+    public String restStageAction(int d8){
+        return null;
     }
 
     /**
