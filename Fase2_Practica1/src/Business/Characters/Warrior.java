@@ -77,11 +77,11 @@ public class Warrior extends Character {
         String s2;
 
         if(d10 == 1){
-            s2 = s + "\nFails and deals 0 damage\n";
+            s2 = s + "\nFails and deals 0 damage";
         }else if(d10 == 10){
-            s2 = s + "\nCritical hit and deals "+damage+" physical damage.\n";
+            s2 = s + "\nCritical hit and deals "+damage+" physical damage.";
         }else{
-            s2 = s + "\nHits and deals "+damage+" physical damage.\n";
+            s2 = s + "\nHits and deals "+damage+" physical damage.";
         }
 
 
@@ -120,7 +120,13 @@ public class Warrior extends Character {
         }else{
             int heal = d8 + this.getMind();
             int hp = this.getHp();
-            this.setHp(hp + heal);
+
+            if(hp + heal > this.getMaxHP()){
+                this.setHp(this.getMaxHP());
+                heal = this.getMaxHP() - hp;
+            }else {
+                this.setHp(hp + heal);
+            }
 
             string = this.getName() + " uses Bandage time. Heals "+heal+" hit points.";
         }

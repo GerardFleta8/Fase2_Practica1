@@ -68,15 +68,15 @@ public class Adventurer extends Character {
             if(d10 == 1){
                 s2 = s + "\nFails and deals 0 damage";
             }else if(d10 == 10){
-                s2 = s + "\nCritical hit and deals "+damage+" physical damage.\n";
+                s2 = s + "\nCritical hit and deals "+damage+" physical damage.";
             }else{
-                s2 = s + "\nHits and deals "+damage+" physical damage.\n";
+                s2 = s + "\nHits and deals "+damage+" physical damage.";
             }
 
 
             aux.takeDamage(damage, this.getClassType());
             if(aux.getHitPoints() <= 0){
-                s3 = s2 + aux.getName()+" dies.\n";
+                s3 = s2 +"\n"+ aux.getName()+" dies.";
             }
             else{
                 s3 = s2;
@@ -100,7 +100,7 @@ public class Adventurer extends Character {
             int hp = this.getHp();
 
             if(hp + heal > this.getMaxHP()){
-                this.calcAndSetMaxHP();
+                this.setHp(this.getMaxHP());
                 heal = this.getMaxHP() - hp;
             }else {
                 this.setHp(hp + heal);

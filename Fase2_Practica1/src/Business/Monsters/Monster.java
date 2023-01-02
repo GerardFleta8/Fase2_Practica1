@@ -164,17 +164,18 @@ public class Monster {
         string = string + this.getName()+ " attacks "+auxChar.getName()+".\n";
         int diceMonsterInt = Integer.parseInt(String.valueOf(this.getDamageDice().charAt(1))); //devuelve el int del damageDice del monstruo
         int d10M = (int) (Math.random()*10 + 1);
-        //Revert change after testing to diceMonsterInt
         int damageM = (int) (Math.random()*diceMonsterInt + 1);
-        //int damageM = 15; //Test unconscious members
+        //int damageM = 50; //Test unconscious members
         if(d10M == 1){
             string = string + "Fails and deals 0 damage";
+            damageM = 0;
         }else if(d10M == 10){
+            damageM = damageM * 2;
             string = string + "Critical hit and deals "+damageM+" physical damage.";
         }else{
             string = string + "Hits and deals "+damageM+" physical damage.";
         }
-        //still needs to be changed
+
         auxChar.takeDamage(damageM, this.getDamageType());
         if(!auxChar.isAlive()){
             string = string +"\n"+auxChar.getName()+" falls unconscious.";
