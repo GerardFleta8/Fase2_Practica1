@@ -2,6 +2,7 @@ package Presentation;
 
 import Business.*;
 import Business.Characters.Character;
+import Business.Monsters.Monster;
 
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -825,7 +826,10 @@ public class Controller {
                                 menu.printMessage("");
                                 for(Character c: party){
                                     int d8 = menu.rollDice(8);
-                                    menu.printMessage(c.restStageAction(d8));
+                                    String string = c.restStageAction(d8, party);
+                                    if(string != null) {
+                                        menu.printMessage(string);
+                                    }
                                 }
                                 menu.printMessage("");
                                 menu.printMessage("");

@@ -1,6 +1,6 @@
 package Persistance;
 
-import Business.Monster;
+import Business.Monsters.Monster;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 

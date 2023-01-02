@@ -1,4 +1,4 @@
-package Business;
+package Business.Monsters;
 /**
  * Monster class
  */
@@ -109,7 +109,7 @@ public class Monster {
         if(this.hitPoints < 0){
             this.hitPoints = 0;
         }
-        return damage; //devuelve damage para saber cuanto daño a hecho el ataque realmente por las diferentes pasivas
+        return damage; //devuelve damage para saber cuanto daño a hecho el ataque realmente por las diferentes pasivas para boss
     }
 
     public String monsterNameAndClass(){

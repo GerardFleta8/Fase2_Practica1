@@ -1,5 +1,7 @@
 package Business;
 
+import Business.Monsters.Monster;
+
 import java.util.ArrayList;
 /**
  * Encounter class

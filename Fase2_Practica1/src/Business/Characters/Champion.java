@@ -1,6 +1,6 @@
 package Business.Characters;
 
-import Business.Monster;
+import Business.Monsters.Monster;
 
 import java.util.ArrayList;
 
@@ -101,7 +101,7 @@ public class Champion extends Character{
     }
 
     @Override
-    public String restStageAction(int d8) {
+    public String restStageAction(int d8, ArrayList<Character> party) {
         String string;
         if(!this.isAlive()){
             string = this.getName() + " is unconscious.";

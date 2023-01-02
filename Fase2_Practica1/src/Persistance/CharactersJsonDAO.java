@@ -1,9 +1,7 @@
 package Persistance;
 
-import Business.Characters.Adventurer;
+import Business.Characters.*;
 import Business.Characters.Character;
-import Business.Characters.Cleric;
-import Business.Characters.Mage;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
@@ -34,7 +32,32 @@ public class CharactersJsonDAO {
             return new ArrayList<>();
         }
         for(Character c: character){
-            Character d = new Mage(c);
+            c.calcAndSetLevel(0);
+            Character d = null;
+            if(c.getClassType().equalsIgnoreCase("Adventurer")){
+                if(c.getLevel() < 4) {
+                    d = new Adventurer(c);
+                } else if (c.getLevel() >= 4 && c.getLevel() < 8) {
+                    d = new Warrior(c);
+                } else if (c.getLevel() >= 8){
+                    d = new Champion(c);
+                }
+            } else if (c.getClassType().equalsIgnoreCase("Warrior")) {
+                d = new Warrior(c);
+            } else if (c.getClassType().equalsIgnoreCase("Champion")) {
+                d = new Champion(c);
+            } else if (c.getClassType().equalsIgnoreCase("Cleric")) {
+                if(c.getLevel() < 5) {
+                    d = new Cleric(c);
+                } else if(c.getLevel() >= 5){
+                    d = new Paladin(c);
+                }
+            } else if (c.getClassType().equalsIgnoreCase("Paladin")) {
+                d = new Paladin(c);
+            } else if (c.getClassType().equalsIgnoreCase("Mage")) {
+                d = new Mage(c);
+            }
+            //Character d = new Mage(c);
             characters.add(d);
             //might have to change how we calc and set lvl
             d.calcAndSetLevel(0); //Calculates and sets the character's level after reading them based on their xp

@@ -1,6 +1,6 @@
 package Business.Characters;
 
-import Business.Monster;
+import Business.Monsters.Monster;
 
 import java.util.ArrayList;
 
@@ -147,7 +147,7 @@ public class Paladin extends Character{
     }
 
     @Override
-    public String restStageAction(int d8) {
+    public String restStageAction(int d8, ArrayList<Character> party) {
         String string;
         if(!this.isAlive()){
             string = this.getName() + " is unconscious.";
@@ -155,15 +155,20 @@ public class Paladin extends Character{
             int d10;
             d10 = (int) (Math.random()*10 + 1);
             int heal = d10 + this.getMind();
-            int hp = this.getHp();
-            if(hp + heal > this.getMaxHP()){
-                this.calcAndSetMaxHP();
-                heal = this.getMaxHP() - hp;
-            }else {
-                this.setHp(hp + heal);
-            }
 
-            string = this.getName() + " uses Prayer of self-healing. Heals "+heal+" hit points.";
+            ArrayList<Character> liveParty = new ArrayList<>();
+            for(Character c: party){
+                if(c.isAlive()){
+                    liveParty.add(c);
+                }
+            }
+            for(Character c: liveParty){
+                c.takeDamage(-heal);
+                if(c.getHp() > c.getMaxHP()){
+                    c.setHp(c.getMaxHP());
+                }
+            }
+            string = this.getName() + " uses Prayer of healing. Everyone heals " + heal + " hit points.";
         }
         return string;
     }

@@ -1,6 +1,6 @@
 package Business.Characters;
 
-import Business.Monster;
+import Business.Monsters.Monster;
 
 import java.util.ArrayList;
 
@@ -129,8 +129,8 @@ public class Mage extends Character{
     }
 
     @Override
-    public String restStageAction(int d8) {
-        return super.restStageAction(d8);
+    public String restStageAction(int d8, ArrayList<Character> party) {
+        return null;
     }
 
     @Override

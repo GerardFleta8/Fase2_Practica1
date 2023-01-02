@@ -1,6 +1,6 @@
 package Business.Characters;
 
-import Business.Monster;
+import Business.Monsters.Monster;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -110,7 +110,7 @@ public class Character {
      * @param d8 Integer which is the result of an 8 faced die being rolled. Used to calculate heal value
      * @return Int with the heal value, to be able to print it.
      */
-    public String restStageAction(int d8){
+    public String restStageAction(int d8, ArrayList<Character> party){
         return null;
     }
 
