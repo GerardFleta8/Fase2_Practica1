@@ -483,6 +483,7 @@ public class Controller {
 
                             ArrayList<Encounter> advEncounters = adventureManager.getAdventureEncounters(option-1);
 
+
                             for (int j = 0; j < advEncounters.size(); j++) {
                                 menu.printMessage("---------------------");
                                 menu.printMessage("Starting encounter " + (j + 1) + ":");
@@ -498,8 +499,8 @@ public class Controller {
                                 int l;
                                 for (l = 0; l < party.size(); l++) {
                                         party.get(l).calcAndSetInitiative(menu.rollDice(12));
-                                        party.get(l).calcAndSetLevel(0);
-                                        party.get(l).calcAndSetMaxHP();
+                                        //party.get(l).calcAndSetLevel(0);
+                                        //party.get(l).calcAndSetMaxHP();
                                         if(party.get(l).isAlive()){
                                             menu.printMessage(party.get(l).warmUpAction(party));
                                         }else {
@@ -615,21 +616,21 @@ public class Controller {
                                         }
 
                                         for(Monster c: totalMonstersEncounter){
-                                            if(c.getHitPoints() > 0){
+                                            if(c.isAlive()){
                                                 monstersDead = false;
                                             }
                                             //System.out.println(c.getHitPoints()); //to test monster hp is correct
                                         }
                                         if(monstersDead){
                                             for(Character c: party){
-                                                if(c.getHp() > 0){
+                                                if(c.isAlive()){
                                                     partyDead = false;
                                                 }
                                             }
                                             break;
                                         }
                                         for(Character c: party){
-                                            if(c.getHp() > 0){
+                                            if(c.isAlive()){
                                                 partyDead = false;
                                             }
                                         }
@@ -653,7 +654,7 @@ public class Controller {
                                 }
                                 boolean gameOver = true;
                                 for(Character c: party){
-                                    if(c.getHp() > 0){
+                                    if(c.isAlive()){
                                         gameOver = false;
                                     }
                                 }
@@ -691,8 +692,8 @@ public class Controller {
                                 menu.printMessage("");
                             }
                             boolean partyAlive = true;
-                            for(Character c: party){
-                                if(c.getHp() <= 0){
+                            for(Character c : party){
+                                if(!c.isAlive()){
                                     partyAlive = false;
                                 }
                             }
