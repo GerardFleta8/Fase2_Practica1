@@ -58,6 +58,7 @@ public class CharactersJsonDAO {
                 d = new Mage(c);
             }
             //Character d = new Mage(c);
+            d.calcAndSetLevel(0);
             d.calcAndSetMaxHP();
             characters.add(d);
             //might have to change how we calc and set lvl
