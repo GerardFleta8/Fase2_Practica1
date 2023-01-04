@@ -12,7 +12,7 @@ public class Champion extends Character{
                 character.getBody(),
                 character.getMind(),
                 character.getSpirit(),
-                character.getClassType());
+                "Champion");
     }
 
     @Override

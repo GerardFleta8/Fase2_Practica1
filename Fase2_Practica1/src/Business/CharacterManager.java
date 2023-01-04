@@ -22,7 +22,14 @@ public class CharacterManager {
      * @param character Character object with character to add
      */
     public void createCharacter(Character character) {
+        ArrayList<Character> characters = new ArrayList<>();
+        try {
+            characters = charactersJsonDAO.readCharactersFile();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         characters.add(character);
+        this.charactersJsonDAO.updateCharactersFile(characters);
     }
 
     /**
@@ -275,6 +282,21 @@ public class CharacterManager {
                 return c;
             }
             i++;
+        }
+        return null;
+    }
+
+    public String showCharacterClassType(String name){
+        ArrayList<Character> characters = new ArrayList<>();
+        try {
+            characters = charactersJsonDAO.readCharactersFile();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        for (Character character : characters) {
+            if (character.getName().equalsIgnoreCase(name)) {
+                return character.getClassType();
+            }
         }
         return null;
     }

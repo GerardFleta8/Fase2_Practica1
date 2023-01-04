@@ -13,7 +13,7 @@ public class Mage extends Character{
                 character.getBody(),
                 character.getMind(),
                 character.getSpirit(),
-                character.getClassType());
+                "Mage");
     }
 
     @Override

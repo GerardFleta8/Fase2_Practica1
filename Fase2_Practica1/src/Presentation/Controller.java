@@ -50,7 +50,7 @@ public class Controller {
                         String player;
                         int xp;
                         int level;
-                        String classType;
+                        String classType = "";
                         boolean xpCorrect = false;
                         boolean correctName = false;
                         boolean nameAlreadyTaken;
@@ -147,7 +147,14 @@ public class Controller {
                             body = totalresult.get(0);
                             mind = totalresult.get(1);
                             spirit = totalresult.get(2);
-                            classType = "Adventurer";
+
+                            menu.printMessage("\nTavern Keeper: \"Looking good!\"\n\"And, lastly, ?\"");
+                            while(true) {
+                                classType = menu.askForInput("-> Enter the character's initial class [Adventurer, Cleric, Mage]: ");
+                                if (classType.equalsIgnoreCase("Adventurer") || classType.equalsIgnoreCase("Cleric") || classType.equalsIgnoreCase("Mage")){
+                                    break;
+                                }
+                            }
                             newCharacter = new Character(name, player, xp, body, mind, spirit, classType);
                         } else {
                             newCharacter = null;
@@ -157,8 +164,9 @@ public class Controller {
                             break;
                         } else {
                             characterManager.createCharacter(newCharacter);
-                            menu.printMessage("\nThe character " + newCharacter.getName() + " has been created.\n");
-                            characterManager.getCharactersDAO().updateCharactersFile(characterManager.getCharacters());
+                            String updatedClassType = characterManager.showCharacterClassType(name);
+                            menu.printMessage("Tavern keeper: \"Any decent party needs one of those.\"\n\"I guess that means you're a "+updatedClassType+" by now, nice!\"\n");
+                            menu.printMessage("The character " + newCharacter.getName() + " has been created.\n");
 
                         }
                         break;

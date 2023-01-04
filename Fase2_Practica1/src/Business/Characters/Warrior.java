@@ -12,7 +12,7 @@ public class Warrior extends Character {
                 character.getBody(),
                 character.getMind(),
                 character.getSpirit(),
-                character.getClassType());
+                "Warrior");
     }
 
     //crear un warrior desde una clase character si hace extends de Adventurer y no character

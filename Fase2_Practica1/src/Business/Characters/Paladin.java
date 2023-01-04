@@ -12,7 +12,7 @@ public class Paladin extends Character{
                 character.getBody(),
                 character.getMind(),
                 character.getSpirit(),
-                character.getClassType());
+                "Paladin");
     }
 
     @Override

@@ -13,7 +13,7 @@ public class Adventurer extends Character {
                 character.getBody(),
                 character.getMind(),
                 character.getSpirit(),
-                character.getClassType());
+                "Adventurer");
     }
 
     @Override
