@@ -2,7 +2,6 @@ package Business.Characters;
 
 import Business.Monsters.Monster;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Adventurer extends Character {
