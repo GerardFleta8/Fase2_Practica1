@@ -29,13 +29,13 @@ public class Controller {
 
         menu.welcomeMenu();
 
-        try {
-            monsterManager.setMonsters(monsterManager.getMonsterDAO().readMonstersFile());
+        /*try {
+            //monsterManager.setMonsters(monsterManager.getMonsterDAO().readMonstersFile());
             //characterManager.setCharacters(characterManager.getCharactersDAO().readCharactersFile());
-            adventureManager.setAdventures(adventureManager.getAdventuresDAO().readAdventuresFile());
+            //adventureManager.setAdventures(adventureManager.getAdventuresDAO().readAdventuresFile());
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
-        }
+        }*/
         if(monsterManager.monsterFileEmpty()){
             menu.printMessage("Error: The monsters.json file can’t be accessed.");
         } else {
@@ -712,7 +712,7 @@ public class Controller {
                                 }
                             }
                             if(partyAlive){
-                                menu.printMessage("Congratulations, your party completed \""+adventureManager.getAdventures().get(option-1).getName()+ "\"");
+                                menu.printMessage("Congratulations, your party completed \""+adventureNames.get(option-1)+ "\"");
                                 menu.printMessage("");
                             }
                         }

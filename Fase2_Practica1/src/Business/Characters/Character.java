@@ -108,6 +108,7 @@ public class Character {
     /**
      * Is the action to be performed during the rest stage (only if a character is alive)
      * @param d8 Integer which is the result of an 8 faced die being rolled. Used to calculate heal value
+     * @param party ArrayList of characters with all the party members
      * @return Int with the heal value, to be able to print it.
      */
     public String restStageAction(int d8, ArrayList<Character> party){
@@ -117,6 +118,8 @@ public class Character {
     /**
      * Action to be performed during the attack stage of a battle
      * @param d10 Integer with the result of a 10 face die being rolled
+     * @param party ArrayList of characters with the party members
+     * @param totalMonstersEncounter ArrayList of monsters with all the current monsters in the encounter
      * @return Integer with the amount of damage done by the attack
      */
     public String attackAction(int d10, ArrayList<Character> party, ArrayList<Monster> totalMonstersEncounter){
@@ -136,13 +139,9 @@ public class Character {
 
     /**
      * Action to be performed during the warm-up stage of a battle
-     *
-     * @return
+     * @param party arrayList containing all party members.
+     * @return String Result of the action in the wanted format
      */
-    /*public void warmUpAction(){
-        //como ahora solo tenemos adventurers, solo incrementa el spirit
-        this.spirit++;
-    }*/
     public String warmUpAction(ArrayList<Character> party){
 
         return null;
@@ -215,7 +214,11 @@ public class Character {
     }
 
 
-    //will be used in subClasses to reduce dmg taken
+    /**
+     * Method which will be implemented by subclasses in order to take into account the incoming damage type to reduce the damage taken
+     * @param dmg int for dmg to be taken
+     * @param dmgType String which indicated the damage type to be able to account for reduced damage due to passived.
+     */
     public void takeDamage(int dmg, String dmgType){
         hp = hp - dmg;
     }
@@ -230,23 +233,35 @@ public class Character {
         }
     }
 
-    /*
-    //For subclasses to be able to set name
-    public void setName(String name) {
-        this.name = name;
-    }
-    */
+
+    /**
+     * Setter for character Hp
+     * @param hp int for new hp value
+     */
     public void setHp(int hp){
         this.hp = hp;
     }
+
+    /**
+     * Sets the character's Spirit parameter (is used for example by champion warm up stage action)
+     * @param spirit int which is the new spirit parameter
+     */
     public void setSpirit(int spirit){
         this.spirit = spirit;
     }
 
+    /**
+     * Sets the character's Mind parameter (is used for example by paladin warm up stage action)
+     * @param mind int which is the new Mind parameter
+     */
     protected void setMind(int mind) {
         this.mind = mind;
     }
 
+    /**
+     * Method which places the wanted information regarding the character's details into the needed format
+     * @return String which has the message with info needed.
+     */
     public String characterDetails(){
         String string = "Tavern keeper: \"Hey " + name + " get here; the boss wants to see you!\"\n\n"+"* Name:   "+name+"\n* Player: "+player+"\n* Class:  "+classType+"\n* Level:  "+level+"\n* XP:     "+xp+"\n";
         String stringBody;
@@ -270,6 +285,10 @@ public class Character {
         return stringSpirit;
     }
 
+    /**
+     * Method that checks if a character is alive
+     * @return Boolean whih indicated true when character is alive, and false, when charater is dead.
+     */
     public boolean isAlive(){
         if(this.hp > 0){
             return true;
@@ -277,16 +296,30 @@ public class Character {
         return false;
     }
 
+    /**
+     * Method that checks if a character's hp is less than half (this is used for example by the paladin healing action)
+     * @return Boolean indicated whether the character has less than/equal half of its hp(true) or not(false)
+     */
     public boolean hpLessThanHalf(){
         if(this.hp < this.getMaxHP()/2){
             return true;
         }
         return false;
     }
+
+    /**
+     * Displays the information needed before each round regarding character HP.
+     * @return String with the corresponding output
+     */
     public String displayCurrentHp(){
         return null;
     }
 
+    /**
+     * Method that adds the necessary xp to the character and checks if the character has leveled up
+     * @param xp int with the xp to add
+     * @return Returns a string which shows the message with its corresponding format including the necessary info.
+     */
     public String addXp(int xp){
         int currentLevel = this.level;
         int newLevel = this.calcAndSetLevel(xp);

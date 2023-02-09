@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class AdventureManager {
     private AdventuresJsonDAO adventuresJsonDAO;
-    private ArrayList<Adventure> adventures = new ArrayList<>();
+    //private ArrayList<Adventure> adventures = new ArrayList<>();
 
     /**
      * Constructor for AdventureManager, creates a new adventuresJsonDAO to be able
@@ -37,17 +37,17 @@ public class AdventureManager {
      * Returns the list of Adventures stored in the adventureManager
      * @return ArrayList of adventures
      */
-    public ArrayList<Adventure> getAdventures(){
+    /*public ArrayList<Adventure> getAdventures(){
         return adventures;
-    }
+    }*/
 
     /**
      * Sets the adventures to AdventureManager
      * @param adventures ArrayList containing adventures
      */
-    public void setAdventures(ArrayList<Adventure> adventures) {
+    /*public void setAdventures(ArrayList<Adventure> adventures) {
         this.adventures = adventures;
-    }
+    }*/
 
     /**
      * Gets the adventuresJsonDAO from adventure manager
