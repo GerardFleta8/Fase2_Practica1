@@ -4,7 +4,15 @@ import Business.Monsters.Monster;
 
 import java.util.ArrayList;
 
+/**
+ * Cleric class, subclass of Character
+ */
 public class Cleric extends Character{
+
+    /**
+     * Constructor for Cleric class, is used to instantiate a character as a Cleric
+     * @param character Character which we want to initialize as Cleric
+     */
     public Cleric(Character character){
         super(character.getName(),
                 character.getPlayer(),

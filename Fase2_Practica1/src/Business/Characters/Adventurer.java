@@ -4,7 +4,15 @@ import Business.Monsters.Monster;
 
 import java.util.ArrayList;
 
+/**
+ * Adventurer class, subclass of Character
+ */
 public class Adventurer extends Character {
+
+    /**
+     * Constructor for an Adventurer given a character (is used to instantiate a character as an adventurer)
+     * @param character Character which we want to initialize as an adventurer.
+     */
     public Adventurer(Character character){
         super(character.getName(),
                 character.getPlayer(),

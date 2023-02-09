@@ -5,6 +5,9 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
+/**
+ * Character class
+ */
 public class Character {
     private String name;
     private String player;

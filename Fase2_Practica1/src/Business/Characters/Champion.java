@@ -4,7 +4,15 @@ import Business.Monsters.Monster;
 
 import java.util.ArrayList;
 
+/**
+ * Champion class, subclass of Character
+ */
 public class Champion extends Character{
+
+    /**
+     * Constructor for Champion class, is used both to instantiate a character as a Champion and for when a character evolves
+     * @param character Character we wish to initialize as a champion, or character that is evolving.
+     */
     public Champion(Character character){
         super(character.getName(),
                 character.getPlayer(),
