@@ -172,4 +172,5 @@ public class Mage extends Character{
         String string = "\t- "+this.getName()+"\t"+this.getHp()+" / "+this.getMaxHP()+" hit points (Shield): "+this.shield;
         return string;
     }
+
 }

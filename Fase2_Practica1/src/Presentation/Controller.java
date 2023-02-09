@@ -31,7 +31,7 @@ public class Controller {
 
         try {
             monsterManager.setMonsters(monsterManager.getMonsterDAO().readMonstersFile());
-            characterManager.setCharacters(characterManager.getCharactersDAO().readCharactersFile());
+            //characterManager.setCharacters(characterManager.getCharactersDAO().readCharactersFile());
             adventureManager.setAdventures(adventureManager.getAdventuresDAO().readAdventuresFile());
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -455,7 +455,7 @@ public class Controller {
                                 for (int j = 1; j <= charStrings.size(); j++) {
                                     menu.printMessage("\t"+j+". " + charStrings.get(j-1));
                                 }
-                                int characterChosen = menu.askForInt("-> Choose character "+(numChamps+1)+" in your party: ", 1, characterManager.getCharacters().size());
+                                int characterChosen = menu.askForInt("-> Choose character "+(numChamps+1)+" in your party: ", 1, charStrings.size());
                                 boolean alreadyInParty = false;
                                 for (int j = 0; j < numChar; j++) {
                                     if(party.isEmpty()){
@@ -676,6 +676,7 @@ public class Controller {
                                 for(Monster c: totalMonstersEncounter){
                                     xpToAdd = xpToAdd + c.getExperience();
                                 }
+                                /*
                                 for(Character c: party){
                                     int currentLevel = c.getLevel();
                                     c.calcAndSetLevel(xpToAdd);
@@ -688,7 +689,17 @@ public class Controller {
                                         menu.printMessage(c.getName()+" gains "+xpToAdd+" xp.");
                                     }
                                 }
+                                */
+                                for (Character c: party){
+                                    System.out.println(c.getName() + c.getHp());
+                                }
+                                String xpString = characterManager.manageXp(party, xpToAdd);
+                                menu.printMessage(xpString);
                                 menu.printMessage("");
+                                for (Character c: party){
+                                    System.out.println(c.getName() + c.getHp());
+                                }
+
                                 for(Character c: party){
                                     int d8 = menu.rollDice(8);
                                     String string = c.restStageAction(d8, party);
@@ -699,10 +710,10 @@ public class Controller {
                                 menu.printMessage("");
                                 menu.printMessage("");
                             }
-                            boolean partyAlive = true;
+                            boolean partyAlive = false;
                             for(Character c : party){
-                                if(!c.isAlive()){
-                                    partyAlive = false;
+                                if(c.isAlive()){
+                                    partyAlive = true;
                                 }
                             }
                             if(partyAlive){
@@ -714,6 +725,6 @@ public class Controller {
                 }
             }
         }
-        characterManager.getCharactersDAO().updateCharactersFile(characterManager.getCharacters());
+        //characterManager.getCharactersDAO().updateCharactersFile(characterManager.getCharacters());
     }
 }

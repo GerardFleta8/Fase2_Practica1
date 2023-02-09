@@ -286,4 +286,19 @@ public class Character {
     public String displayCurrentHp(){
         return null;
     }
+
+    public String addXp(int xp){
+        int currentLevel = this.level;
+        int newLevel = this.calcAndSetLevel(xp);
+        String string = null;
+        if(newLevel > currentLevel){
+            //level up;
+            string = this.name+" gains "+xp+" xp. "+this.name+" levels up. They are now lvl "+newLevel+"!\n";
+            this.calcAndSetMaxHP(); //100% hp when lvl up
+        }
+        else{
+            string = this.getName()+" gains "+xp+" xp.\n";
+        }
+        return string;
+    }
 }

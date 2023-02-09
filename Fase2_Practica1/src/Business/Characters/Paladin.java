@@ -172,4 +172,5 @@ public class Paladin extends Character{
         }
         return string;
     }
+
 }

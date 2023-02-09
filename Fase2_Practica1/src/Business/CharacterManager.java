@@ -1,6 +1,9 @@
 package Business;
 
+import Business.Characters.Champion;
 import Business.Characters.Character;
+import Business.Characters.Paladin;
+import Business.Characters.Warrior;
 import Persistance.CharactersJsonDAO;
 
 import java.io.FileNotFoundException;
@@ -8,7 +11,7 @@ import java.util.ArrayList;
 
 public class CharacterManager {
     private CharactersJsonDAO charactersJsonDAO;
-    private ArrayList<Character> characters = new ArrayList<>();
+    //private ArrayList<Character> characters = new ArrayList<>();
 
     /**
      * Constructor for Character manager, creates a new charactersJsonDAO in character manager
@@ -36,9 +39,9 @@ public class CharacterManager {
      * Gets the arrayList containing the characters in characterManager
      * @return ArrayList of characters
      */
-    public ArrayList<Character> getCharacters(){
+    /*public ArrayList<Character> getCharacters(){
         return characters;
-    }
+    }*/
 
     /**
      * Gets the charactersJsonDAO from characterManager
@@ -52,9 +55,9 @@ public class CharacterManager {
      * Sets the Characters arrayList in CharacterManager to those inputted to this setter
      * @param characters ArrayList with characters to set
      */
-    public void setCharacters(ArrayList<Character> characters) {
+    /*public void setCharacters(ArrayList<Character> characters) {
         this.characters = characters;
-    }
+    }*/
 
     /**
      * Removes a character based on its name
@@ -88,7 +91,13 @@ public class CharacterManager {
      * @return Boolean with true for more than 3 characters, and false otherwise.
      */
     public boolean moreThan3Characters(){
-        if(this.characters.size() >= 3){
+        ArrayList<Character> characters = new ArrayList<>();
+        try {
+            characters = charactersJsonDAO.readCharactersFile();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        if(characters.size() >= 3){
             return true;
         }
         return false;
@@ -299,5 +308,35 @@ public class CharacterManager {
             }
         }
         return null;
+    }
+
+    public String manageXp(ArrayList<Character> party, int xp){
+        String string = null;
+        int i = 0;
+        for(Character c : party){
+            String aux = c.addXp(xp);
+            if(i == 0) {
+                string = aux;
+            }
+            else{
+                string = string + aux;
+            }
+            if (aux.contains("Warrior")){
+                c = new Warrior(c);
+                party.set(i, c);
+                party.get(i).calcAndSetMaxHP();
+            } else if (aux.contains("Champion")) {
+                c = new Champion(c);
+                party.set(i, c);
+                party.get(i).calcAndSetMaxHP();
+            } else if (aux.contains("Paladin")) {
+                c = new Paladin(c);
+                party.set(i, c);
+                party.get(i).calcAndSetMaxHP();
+            }
+            i++;
+        }
+
+        return string;
     }
 }

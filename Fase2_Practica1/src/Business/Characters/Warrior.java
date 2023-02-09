@@ -132,4 +132,25 @@ public class Warrior extends Character {
         }
         return string;
     }
+
+    @Override
+    public String addXp(int xp){
+        int currentLevel = this.getLevel();
+        int newLevel = this.calcAndSetLevel(xp);
+        String string = null;
+        if(newLevel > currentLevel){
+            //level up;
+            string = this.getName()+" gains "+xp+" xp. "+this.getName()+" levels up. They are now lvl "+newLevel+"!\n";
+            this.calcAndSetMaxHP(); //100% hp when lvl up
+            //check evolve.
+            if(newLevel >= 8 && currentLevel < 8){
+                string = string + this.getName() + " evolves to Champion!\n";
+            }
+
+        }
+        else{
+            string = this.getName()+" gains "+xp+" xp.\n";
+        }
+        return string;
+    }
 }
