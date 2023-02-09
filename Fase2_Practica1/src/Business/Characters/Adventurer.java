@@ -23,6 +23,10 @@ public class Adventurer extends Character {
                 "Adventurer");
     }
 
+    /**
+     * Sets an adventurer's initiative
+     * @param initiative int
+     */
     @Override
     public void calcAndSetInitiative(int initiative) {
         //Roll dice: d12
@@ -33,6 +37,11 @@ public class Adventurer extends Character {
         super.calcAndSetInitiative(d12 + this.getSpirit());
     }
 
+    /**
+     * Action to be performed during warm up stage by an Adventurer
+     * @param party arrayList containing all party members.
+     * @return String with the result of the action performed.
+     */
     @Override
     public String warmUpAction(ArrayList<Character> party) {
         int currentSpirit = this.getSpirit();
@@ -41,6 +50,13 @@ public class Adventurer extends Character {
         return string;
     }
 
+    /**
+     * Attack action to be performed by an adventurer
+     * @param d10 Integer with the result of a 10 face die being rolled
+     * @param party ArrayList of characters with the party members
+     * @param totalMonstersEncounter ArrayList of monsters with all the current monsters in the encounter
+     * @return String with the result of the action
+     */
     @Override
     public String attackAction(int d10, ArrayList<Character> party, ArrayList<Monster> totalMonstersEncounter) {
         //Roll dice: d6
@@ -91,12 +107,22 @@ public class Adventurer extends Character {
         return s3;
     }
 
+    /**
+     * Displays the characters current hp in the desired format.
+     * @return String with the desired information in the correct format to be displayed
+     */
     @Override
     public String displayCurrentHp() {
         String string = "\t- "+this.getName()+"\t"+this.getHp()+" / "+this.getMaxHP()+" hit points";
         return string;
     }
 
+    /**
+     * Action to be performed by an adventurer during the rest stage
+     * @param d8 Integer which is the result of an 8 faced die being rolled. Used to calculate heal value
+     * @param party ArrayList of characters with all the party members
+     * @return String with the result of the action.
+     */
     @Override
     public String restStageAction(int d8, ArrayList<Character> party) {
         String string;
@@ -118,6 +144,11 @@ public class Adventurer extends Character {
         return string;
     }
 
+    /**
+     * Method which adds xp to the character and checks if we have leveled up and if we need to evolve.
+     * @param xp int with the xp to add
+     * @return String with the result of adding xp.
+     */
     @Override
     public String addXp(int xp){
         int currentLevel = this.getLevel();

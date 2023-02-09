@@ -23,6 +23,7 @@ public class Cleric extends Character{
                 "Cleric");
     }
 
+
     @Override
     public void calcAndSetInitiative(int initiative) {
         //Roll dice: d10

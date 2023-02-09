@@ -101,7 +101,7 @@ public class Character {
 
     /**
      * Calculates and sets a character's initiative
-     * @param initiative
+     * @param initiative int with initiative value
      */
     public void calcAndSetInitiative(int initiative){
         //para un adventurer: d12 + spirit;
