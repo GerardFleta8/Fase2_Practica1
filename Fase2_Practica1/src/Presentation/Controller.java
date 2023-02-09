@@ -690,15 +690,10 @@ public class Controller {
                                     }
                                 }
                                 */
-                                for (Character c: party){
-                                    System.out.println(c.getName() + c.getHp());
-                                }
+
                                 String xpString = characterManager.manageXp(party, xpToAdd);
                                 menu.printMessage(xpString);
                                 menu.printMessage("");
-                                for (Character c: party){
-                                    System.out.println(c.getName() + c.getHp());
-                                }
 
                                 for(Character c: party){
                                     int d8 = menu.rollDice(8);
