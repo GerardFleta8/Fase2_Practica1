@@ -2,6 +2,7 @@ package Business;
 
 import Business.Monsters.Monster;
 import Persistance.JSON.MonstersJsonDAO;
+import Persistance.MonsterDataInterface;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -9,13 +10,15 @@ import java.util.ArrayList;
  * Manages monsters
  */
 public class MonsterManager {
+    private MonsterDataInterface monsterDataInterface;
     //private ArrayList<Monster> monsters = new ArrayList<>();
-    private MonstersJsonDAO monstersJsonDAO;
+    //private MonstersJsonDAO monstersJsonDAO;
     /**
      * Constructor for MonsterManager
      */
-    public MonsterManager () {
-        monstersJsonDAO = new MonstersJsonDAO();
+    public MonsterManager (MonsterDataInterface monsterDataInterface) {
+        this.monsterDataInterface = monsterDataInterface;
+        //monstersJsonDAO = new MonstersJsonDAO();
     }
     /**
      * Method that gets all monsters
@@ -35,14 +38,16 @@ public class MonsterManager {
      * Method that gets the DAO of monsters
      * @return MonstersJsonDAO
      */
+
+    /*
     public MonstersJsonDAO getMonsterDAO() {
         return monstersJsonDAO;
     }
-
+    */
     public boolean checkMonsterIsBoss(int position){
         ArrayList<Monster> monsters = new ArrayList<>();
         try {
-            monsters = monstersJsonDAO.readMonstersFile();
+            monsters = monsterDataInterface.readMonstersFile();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -60,7 +65,7 @@ public class MonsterManager {
         ArrayList<Monster> monsters = new ArrayList<>();
         ArrayList<String> strings = new ArrayList<>();
         try {
-            monsters = monstersJsonDAO.readMonstersFile();
+            monsters = monsterDataInterface.readMonstersFile();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -73,7 +78,7 @@ public class MonsterManager {
     public Monster getMonsterAtPosition(int position){
         ArrayList<Monster> monsters = new ArrayList<>();
         try {
-            monsters = monstersJsonDAO.readMonstersFile();
+            monsters = monsterDataInterface.readMonstersFile();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -88,6 +93,6 @@ public class MonsterManager {
     }
 
     public boolean monsterFileEmpty(){
-        return this.monstersJsonDAO.isEmpty();
+        return this.monsterDataInterface.isEmpty();
     }
 }

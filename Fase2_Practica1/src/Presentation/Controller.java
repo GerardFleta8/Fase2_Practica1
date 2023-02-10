@@ -4,8 +4,11 @@ import Business.*;
 import Business.Characters.Character;
 import Business.Monsters.Monster;
 import Persistance.API.CharactersApiDAO;
+import Persistance.API.MonstersApiDAO;
 import Persistance.CharacterDataInterface;
 import Persistance.JSON.CharactersJsonDAO;
+import Persistance.JSON.MonstersJsonDAO;
+import Persistance.MonsterDataInterface;
 
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -24,16 +27,19 @@ public class Controller {
      */
     public void run() {
         CharacterDataInterface CDI = null;
+        MonsterDataInterface MDI = null;
         menu.welcomeMenu();
-        int cloudLocal = menu.askForInt("Do you want to use your local or cloud data?\n\t1) Local data\n\t2) Cloud data\n\n-> Answer: ", 1, 2);
-        if(cloudLocal == 1){
+        int dataSource = menu.askForInt("Do you want to use your local or cloud data?\n\t1) Local data\n\t2) Cloud data\n\n-> Answer: ", 1, 2);
+        if(dataSource == 1){
             CDI = new CharactersJsonDAO();
+            MDI = new MonstersJsonDAO();
         }
-        if (cloudLocal == 2){
+        if (dataSource == 2){
             CDI = new CharactersApiDAO();
+            MDI = new MonstersApiDAO();
         }
 
-        monsterManager = new MonsterManager();
+        monsterManager = new MonsterManager(MDI);
         characterManager = new CharacterManager(CDI);
         adventureManager = new AdventureManager();
         int optionListCharacter = 0;

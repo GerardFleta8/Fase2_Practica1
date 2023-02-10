@@ -27,10 +27,9 @@ public class CharactersApiDAO implements CharacterDataInterface {
 
     @Override
     public ArrayList<Character> readCharactersFile() throws FileNotFoundException {
-
-            Gson g = new Gson();
-
+        Gson g = new Gson();
         String response = null;
+
         try {
             response = apiHelper.getFromUrl("https://balandrau.salle.url.edu/dpoo/S1-Project_15/characters");
         } catch (IOException e) {
