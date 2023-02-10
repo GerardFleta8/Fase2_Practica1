@@ -4,20 +4,25 @@ import Business.Characters.Champion;
 import Business.Characters.Character;
 import Business.Characters.Paladin;
 import Business.Characters.Warrior;
-import Persistance.CharactersJsonDAO;
+import Persistance.API.CharactersApiDAO;
+import Persistance.CharacterDataInterface;
+import Persistance.JSON.CharactersJsonDAO;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class CharacterManager {
-    private CharactersJsonDAO charactersJsonDAO;
+    private CharacterDataInterface characterDataInterface;
+    //private CharactersJsonDAO charactersJsonDAO;
     //private ArrayList<Character> characters = new ArrayList<>();
 
     /**
      * Constructor for Character manager, creates a new charactersJsonDAO in character manager
      */
-    public CharacterManager() {
-        charactersJsonDAO = new CharactersJsonDAO();
+    public CharacterManager(CharacterDataInterface characterDataInterface) {
+        this.characterDataInterface = characterDataInterface;
+        //charactersJsonDAO = new CharactersJsonDAO();
+
     }
 
     /**
@@ -27,12 +32,14 @@ public class CharacterManager {
     public void createCharacter(Character character) {
         ArrayList<Character> characters = new ArrayList<>();
         try {
-            characters = charactersJsonDAO.readCharactersFile();
+            characters = characterDataInterface.readCharactersFile();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
         characters.add(character);
-        this.charactersJsonDAO.updateCharactersFile(characters);
+        this.characterDataInterface.updateCharactersFile(characters);
+
+
     }
 
     /**
@@ -43,14 +50,17 @@ public class CharacterManager {
         return characters;
     }*/
 
+
     /**
      * Gets the charactersJsonDAO from characterManager
      * @return CharacterJsonDAO object
      */
+    /*
     public CharactersJsonDAO getCharactersDAO() {
         return charactersJsonDAO;
     }
 
+    */
     /**
      * Sets the Characters arrayList in CharacterManager to those inputted to this setter
      * @param characters ArrayList with characters to set
@@ -70,7 +80,7 @@ public class CharacterManager {
 
         ArrayList<Character> characters = new ArrayList<>();
         try {
-            characters = charactersJsonDAO.readCharactersFile();
+            characters = characterDataInterface.readCharactersFile();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -83,7 +93,7 @@ public class CharacterManager {
             i++;
         }
         characters.remove(found);
-        this.charactersJsonDAO.updateCharactersFile(characters);
+        this.characterDataInterface.updateCharactersFile(characters);
     }
 
     /**
@@ -93,7 +103,7 @@ public class CharacterManager {
     public boolean moreThan3Characters(){
         ArrayList<Character> characters = new ArrayList<>();
         try {
-            characters = charactersJsonDAO.readCharactersFile();
+            characters = characterDataInterface.readCharactersFile();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -185,7 +195,7 @@ public class CharacterManager {
         boolean nameTaken = false;
         ArrayList<Character> characters = new ArrayList<>();
         try {
-            characters = charactersJsonDAO.readCharactersFile();
+            characters = characterDataInterface.readCharactersFile();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -202,7 +212,7 @@ public class CharacterManager {
     public boolean isEmpty(){
         ArrayList<Character> characters = new ArrayList<>();
         try {
-            characters = charactersJsonDAO.readCharactersFile();
+            characters = characterDataInterface.readCharactersFile();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -217,7 +227,7 @@ public class CharacterManager {
         ArrayList<String> chars = new ArrayList<>();
         ArrayList<Character> characters = new ArrayList<>();
         try {
-            characters = charactersJsonDAO.readCharactersFile();
+            characters = characterDataInterface.readCharactersFile();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -225,6 +235,19 @@ public class CharacterManager {
         for(Character c : characters){
             chars.add(c.getName());
         }
+
+        /*
+        //Test API:
+        CharacterDataInterface cdi = new CharactersApiDAO();
+        cdi.updateCharactersFile(characters);
+        try {
+            cdi.readCharactersFile();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        //END tests API
+        */
         return chars;
     }
 
@@ -232,7 +255,7 @@ public class CharacterManager {
         boolean playerFound = false;
         ArrayList<Character> characters = new ArrayList<>();
         try {
-            characters = charactersJsonDAO.readCharactersFile();
+            characters = characterDataInterface.readCharactersFile();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -250,7 +273,7 @@ public class CharacterManager {
         ArrayList<Character> characters = new ArrayList<>();
         ArrayList<String> charStrings = new ArrayList<>();
         try {
-            characters = charactersJsonDAO.readCharactersFile();
+            characters = characterDataInterface.readCharactersFile();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -265,7 +288,7 @@ public class CharacterManager {
     public String showDetailsOfCharacter(String name){
         ArrayList<Character> characters = new ArrayList<>();
         try {
-            characters = charactersJsonDAO.readCharactersFile();
+            characters = characterDataInterface.readCharactersFile();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -281,7 +304,7 @@ public class CharacterManager {
     public Character getCharacterAtPosition(int position){
         ArrayList<Character> characters = new ArrayList<>();
         try {
-            characters = this.charactersJsonDAO.readCharactersFile();
+            characters = this.characterDataInterface.readCharactersFile();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -298,7 +321,7 @@ public class CharacterManager {
     public String showCharacterClassType(String name){
         ArrayList<Character> characters = new ArrayList<>();
         try {
-            characters = charactersJsonDAO.readCharactersFile();
+            characters = characterDataInterface.readCharactersFile();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

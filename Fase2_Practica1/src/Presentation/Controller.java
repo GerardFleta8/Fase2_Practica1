@@ -3,6 +3,9 @@ package Presentation;
 import Business.*;
 import Business.Characters.Character;
 import Business.Monsters.Monster;
+import Persistance.API.CharactersApiDAO;
+import Persistance.CharacterDataInterface;
+import Persistance.JSON.CharactersJsonDAO;
 
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -21,7 +24,9 @@ public class Controller {
      */
     public void run() {
         monsterManager = new MonsterManager();
-        characterManager = new CharacterManager();
+
+        CharacterDataInterface CDI = new CharactersApiDAO();
+        characterManager = new CharacterManager(CDI);
         adventureManager = new AdventureManager();
         int optionListCharacter = 0;
         ArrayList<Integer> positions = new ArrayList<>();

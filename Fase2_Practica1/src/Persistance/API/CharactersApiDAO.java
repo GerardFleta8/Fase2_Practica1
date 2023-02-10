@@ -1,32 +1,42 @@
-package Persistance;
+package Persistance.API;
 
 import Business.Characters.*;
 import Business.Characters.Character;
+import Persistance.CharacterDataInterface;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-/**
- * DAO of characters
- */
-public class CharactersJsonDAO {
+public class CharactersApiDAO implements CharacterDataInterface {
+    ApiHelper apiHelper;
 
-    private String path = "characters.json";
-    /**
-     * Method that reads the characters file
-     * @return list of characters in the json file
-     * @throws FileNotFoundException
-     */
+    {
+        try {
+            apiHelper = new ApiHelper();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    @Override
     public ArrayList<Character> readCharactersFile() throws FileNotFoundException {
-        Gson g = new Gson();
-        JsonReader reader = new JsonReader(new FileReader(path));
-        Character character[] = g.fromJson(reader, Character[].class);
 
+            Gson g = new Gson();
+
+        String response = null;
+        try {
+            response = apiHelper.getFromUrl("https://balandrau.salle.url.edu/dpoo/S1-Project_15/characters");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Character character[] = g.fromJson(response, Character[].class);
         ArrayList<Character> characters = new ArrayList<>();
         if (character == null) {
             return new ArrayList<>();
@@ -64,21 +74,25 @@ public class CharactersJsonDAO {
             //might have to change how we calc and set lvl
             d.calcAndSetLevel(0); //Calculates and sets the character's level after reading them based on their xp
         }
-
-
         return characters;
     }
-    /**
-     * Method that updates the characters file
-     * @param characters list of characters to write in the file
-     */
+
+    @Override
     public void updateCharactersFile(ArrayList<Character> characters) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
-        try(FileWriter fileWriter = new FileWriter(path)) {
-            gson.toJson(characters, fileWriter);
+        try {
+            apiHelper.deleteFromUrl("https://balandrau.salle.url.edu/dpoo/S1-Project_15/characters");
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+
+
+        try {
+            for (Character c: characters) {
+                apiHelper.postToUrl("https://balandrau.salle.url.edu/dpoo/S1-Project_15/characters", gson.toJson(c));
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
     }

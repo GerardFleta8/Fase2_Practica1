@@ -1,4 +1,4 @@
-package Persistance;
+package Persistance.JSON;
 
 import Business.Monsters.Boss;
 import Business.Monsters.Monster;

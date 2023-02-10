@@ -1,7 +1,6 @@
 package Business;
 
-import Persistance.AdventuresJsonDAO;
-import Persistance.CharactersJsonDAO;
+import Persistance.JSON.AdventuresJsonDAO;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;

@@ -4,8 +4,16 @@ import Business.Monsters.Monster;
 
 import java.util.ArrayList;
 
+/**
+ * Mage class
+ */
 public class Mage extends Character{
     int shield;
+
+    /**
+     * constructor method for mage class
+     * @param character Character which we want to initialize as a mage
+     */
     public Mage(Character character){
         super(character.getName(),
                 character.getPlayer(),
@@ -16,6 +24,10 @@ public class Mage extends Character{
                 "Mage");
     }
 
+    /**
+     * Method that calculates the initiative for a mage
+     * @param initiative int with initiative value
+     */
     @Override
     public void calcAndSetInitiative(int initiative) {
         //Roll dice: d20
@@ -25,6 +37,11 @@ public class Mage extends Character{
         super.calcAndSetInitiative(d20+this.getMind());
     }
 
+    /**
+     * Action to be performed during the warm-up stage.
+     * @param party arrayList containing all party members.
+     * @return String with the result of the action.
+     */
     @Override
     public String warmUpAction(ArrayList<Character> party) {
         //Roll dice: d6
@@ -36,14 +53,31 @@ public class Mage extends Character{
         return string;
     }
 
+    /**
+     * Method which calculates the damage that the spell 'fireball' should do
+     * @param d4 int corresponding to a 4 sided die
+     * @return int with the damage to be dealt
+     */
     public int fireball(int d4){
         return (d4 + this.getMind());
     }
 
+    /**
+     * Method which calculates the damage that the spell 'arcane missile' should do
+     * @param d6 int corresponding to a 6 faced die
+     * @return int with the damage to be dealt
+     */
     public int arcaneMissile(int d6){
         return (d6 + this.getMind());
     }
 
+    /**
+     * Action to be performed during the combat stage by a mage.
+     * @param d10 Integer with the result of a 10 face die being rolled
+     * @param party ArrayList of characters with the party members
+     * @param totalMonstersEncounter ArrayList of monsters with all the current monsters in the encounter
+     * @return String with the result of the action that was performed.
+     */
     @Override
     public String attackAction(int d10, ArrayList<Character> party, ArrayList<Monster> totalMonstersEncounter) {
         int mCounter = 0;
@@ -54,7 +88,7 @@ public class Mage extends Character{
                 mCounter++;
             }
         }
-        string = this.getName()+" attacks ";
+        string = "\n" + this.getName()+" attacks ";
         if(mCounter >= 3){
             int d4;
             d4 = (int) (Math.random()*4 + 1);
@@ -128,11 +162,22 @@ public class Mage extends Character{
         return string;
     }
 
+    /**
+     * Action to be performed during the rest stage, in this case, the mage does not perform any action.
+     * @param d8 Integer which is the result of an 8 faced die being rolled.
+     * @param party ArrayList of characters with all the party members
+     * @return String with the result of the action.
+     */
     @Override
     public String restStageAction(int d8, ArrayList<Character> party) {
         return null;
     }
 
+    /**
+     * Method which calculates the amount of damage that needs to be taken.
+     * @param dmg int for dmg to be taken
+     * @param dmgType String which indicated the damage type to be able to account for reduced damage due to passived.
+     */
     @Override
     public void takeDamage(int dmg, String dmgType) {
         if(dmgType.equalsIgnoreCase(this.getClassType())){
@@ -167,6 +212,10 @@ public class Mage extends Character{
         }
     }
 
+    /**
+     * Method which displays the characters current hp and in this case the mage's shield value.
+     * @return
+     */
     @Override
     public String displayCurrentHp() {
         String string = "\t- "+this.getName()+"\t"+this.getHp()+" / "+this.getMaxHP()+" hit points (Shield): "+this.shield;

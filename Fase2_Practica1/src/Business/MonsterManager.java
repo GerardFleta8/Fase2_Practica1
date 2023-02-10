@@ -1,7 +1,7 @@
 package Business;
 
 import Business.Monsters.Monster;
-import Persistance.MonstersJsonDAO;
+import Persistance.JSON.MonstersJsonDAO;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
