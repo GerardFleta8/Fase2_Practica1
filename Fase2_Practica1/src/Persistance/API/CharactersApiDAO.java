@@ -24,7 +24,6 @@ public class CharactersApiDAO implements CharacterDataInterface {
         }
     }
 
-
     @Override
     public ArrayList<Character> readCharactersFile() throws FileNotFoundException {
         Gson g = new Gson();

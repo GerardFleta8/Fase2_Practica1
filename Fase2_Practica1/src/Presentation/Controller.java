@@ -3,9 +3,12 @@ package Presentation;
 import Business.*;
 import Business.Characters.Character;
 import Business.Monsters.Monster;
+import Persistance.API.AdventuresApiDAO;
 import Persistance.API.CharactersApiDAO;
 import Persistance.API.MonstersApiDAO;
+import Persistance.AdventuresDataInterface;
 import Persistance.CharacterDataInterface;
+import Persistance.JSON.AdventuresJsonDAO;
 import Persistance.JSON.CharactersJsonDAO;
 import Persistance.JSON.MonstersJsonDAO;
 import Persistance.MonsterDataInterface;
@@ -28,20 +31,23 @@ public class Controller {
     public void run() {
         CharacterDataInterface CDI = null;
         MonsterDataInterface MDI = null;
+        AdventuresDataInterface ADI = null;
         menu.welcomeMenu();
         int dataSource = menu.askForInt("Do you want to use your local or cloud data?\n\t1) Local data\n\t2) Cloud data\n\n-> Answer: ", 1, 2);
         if(dataSource == 1){
             CDI = new CharactersJsonDAO();
             MDI = new MonstersJsonDAO();
+            ADI = new AdventuresJsonDAO();
         }
         if (dataSource == 2){
             CDI = new CharactersApiDAO();
             MDI = new MonstersApiDAO();
+            ADI = new AdventuresApiDAO();
         }
 
         monsterManager = new MonsterManager(MDI);
         characterManager = new CharacterManager(CDI);
-        adventureManager = new AdventureManager();
+        adventureManager = new AdventureManager(ADI);
         int optionListCharacter = 0;
         ArrayList<Integer> positions = new ArrayList<>();
         int selection = 0;
