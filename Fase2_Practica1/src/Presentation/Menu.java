@@ -18,8 +18,8 @@ public class Menu {
         System.out.println(" __\\ \\ / //  | \\ / _ \\ / // -_)  / /___ __\\ \\ / ,  _// ___// (_ /");
         System.out.println("/____//_//_/_/_// ___//_/ \\__/  /_____//____//_/\\ _\\/_/    \\___/");
         System.out.println("               /_/ ");
-        System.out.println("\nWelcome to Simple LSRPG.\n");
-        System.out.println("Loading data...\n");
+        System.out.println("\nWelcome to Simple LSRPG.\n\n");
+        //System.out.println("Loading data...\n");
     }
     /**
      * Mètode que demana a l'usuari quin rol vol tenir

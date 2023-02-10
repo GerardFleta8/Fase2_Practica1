@@ -23,16 +23,22 @@ public class Controller {
      * Runnable of the controller that manages the Menu and Managers
      */
     public void run() {
-        monsterManager = new MonsterManager();
+        CharacterDataInterface CDI = null;
+        menu.welcomeMenu();
+        int cloudLocal = menu.askForInt("Do you want to use your local or cloud data?\n\t1) Local data\n\t2) Cloud data\n\n-> Answer: ", 1, 2);
+        if(cloudLocal == 1){
+            CDI = new CharactersJsonDAO();
+        }
+        if (cloudLocal == 2){
+            CDI = new CharactersApiDAO();
+        }
 
-        CharacterDataInterface CDI = new CharactersApiDAO();
+        monsterManager = new MonsterManager();
         characterManager = new CharacterManager(CDI);
         adventureManager = new AdventureManager();
         int optionListCharacter = 0;
         ArrayList<Integer> positions = new ArrayList<>();
         int selection = 0;
-
-        menu.welcomeMenu();
 
         /*try {
             //monsterManager.setMonsters(monsterManager.getMonsterDAO().readMonstersFile());
