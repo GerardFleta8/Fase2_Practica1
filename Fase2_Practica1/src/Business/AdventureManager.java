@@ -6,6 +6,9 @@ import Persistance.JSON.AdventuresJsonDAO;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+/**
+ * Manager class for adventures
+ */
 public class AdventureManager {
     AdventuresDataInterface adventuresDataInterface;
     //private AdventuresJsonDAO adventuresJsonDAO;
@@ -35,31 +38,11 @@ public class AdventureManager {
         this.adventuresDataInterface.updateAdventuresFile(currentAdventures);
     }
 
-    /**
-     * Returns the list of Adventures stored in the adventureManager
-     * @return ArrayList of adventures
-     */
-    /*public ArrayList<Adventure> getAdventures(){
-        return adventures;
-    }*/
 
     /**
-     * Sets the adventures to AdventureManager
-     * @param adventures ArrayList containing adventures
+     * Method that checks whether an adventure has been created.
+     * @return Boolean which indicates if it is empty (true) or not (false)
      */
-    /*public void setAdventures(ArrayList<Adventure> adventures) {
-        this.adventures = adventures;
-    }*/
-
-    /**
-     * Gets the adventuresJsonDAO from adventure manager
-     * @return instance of class adventuresJsonDAO that adventureManager has stored in order to access its functionalities
-     */
-    /*
-    public AdventuresJsonDAO getAdventuresDAO() {
-        return adventuresJsonDAO;
-    }*/
-
     public boolean isEmpty(){
         ArrayList<Adventure> currentAdventures = new ArrayList<>();
         try {
@@ -73,6 +56,11 @@ public class AdventureManager {
         return false;
     }
 
+    /**
+     * Method which checks if an adventure has already been created with that name.
+     * @param name String which we want to verify it is taken or not.
+     * @return Boolean that lets us know whether the name is already taken (true) or not.
+     */
     public boolean checkAdventureNameTaken(String name){
         ArrayList<Adventure> currentAdventures = new ArrayList<>();
         try {
@@ -88,6 +76,10 @@ public class AdventureManager {
        return false;
     }
 
+    /**
+     * Method which shows the names of the current adventures.
+     * @return ArrayList<String> Returns an arrayList containing all of the adventure names as strings.
+     */
     public ArrayList<String> showAdventureNames(){
         ArrayList<Adventure> currentAdventures = new ArrayList<>();
         ArrayList<String> strings = new ArrayList<>();
@@ -102,6 +94,11 @@ public class AdventureManager {
         return strings;
     }
 
+    /**
+     * Method which returns the encounters found in a specific Adventure
+     * @param position int with the position of the adventure we want to get its encounters.
+     * @return ArrayList<Encounter> arraylist with the encounters in a specific adventure.
+     */
     public ArrayList<Encounter> getAdventureEncounters(int position){
         ArrayList<Adventure> currentAdventures = new ArrayList<>();
         try {

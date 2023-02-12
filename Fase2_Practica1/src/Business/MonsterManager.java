@@ -20,30 +20,13 @@ public class MonsterManager {
         this.monsterDataInterface = monsterDataInterface;
         //monstersJsonDAO = new MonstersJsonDAO();
     }
-    /**
-     * Method that gets all monsters
-     * @return list of monsters
-     */
-    /*public ArrayList<Monster> getMonsters() {
-        return monsters;
-    }*/
-    /**
-     * Method that sets monsters to the manager
-     * @param monsters list of monsters
-     */
-    /*public void setMonsters(ArrayList<Monster> monsters) {
-        this.monsters = monsters;
-    }*/
-    /**
-     * Method that gets the DAO of monsters
-     * @return MonstersJsonDAO
-     */
 
-    /*
-    public MonstersJsonDAO getMonsterDAO() {
-        return monstersJsonDAO;
-    }
-    */
+
+    /**
+     * Method which checks if a given monster has 'Boss' type.
+     * @param position int with the position of the monster we wish to check.
+     * @return Boolean indicated whether the monster in question is a boss or not.
+     */
     public boolean checkMonsterIsBoss(int position){
         ArrayList<Monster> monsters = new ArrayList<>();
         try {
@@ -92,6 +75,10 @@ public class MonsterManager {
         return null;
     }
 
+    /**
+     * Method which checks if the monster file is empty or not
+     * @return Boolean which indicates whether the file is empty (true) or not (false)
+     */
     public boolean monsterFileEmpty(){
         return this.monsterDataInterface.isEmpty();
     }

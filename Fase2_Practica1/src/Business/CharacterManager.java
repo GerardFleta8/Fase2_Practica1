@@ -11,10 +11,11 @@ import Persistance.JSON.CharactersJsonDAO;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+/**
+ * Class which Manages the characters and interaction with these.
+ */
 public class CharacterManager {
     private CharacterDataInterface characterDataInterface;
-    //private CharactersJsonDAO charactersJsonDAO;
-    //private ArrayList<Character> characters = new ArrayList<>();
 
     /**
      * Constructor for Character manager, creates a new charactersJsonDAO in character manager
@@ -42,37 +43,9 @@ public class CharacterManager {
 
     }
 
-    /**
-     * Gets the arrayList containing the characters in characterManager
-     * @return ArrayList of characters
-     */
-    /*public ArrayList<Character> getCharacters(){
-        return characters;
-    }*/
-
-
-    /**
-     * Gets the charactersJsonDAO from characterManager
-     * @return CharacterJsonDAO object
-     */
-    /*
-    public CharactersJsonDAO getCharactersDAO() {
-        return charactersJsonDAO;
-    }
-
-    */
-    /**
-     * Sets the Characters arrayList in CharacterManager to those inputted to this setter
-     * @param characters ArrayList with characters to set
-     */
-    /*public void setCharacters(ArrayList<Character> characters) {
-        this.characters = characters;
-    }*/
 
     /**
      * Removes a character based on its name
-     * @param positions Arraylist of integers with the different characters a player has
-     * @param characterIndex Integer with the position of the character we want to delete
      * @param charToDelete String with the name of the character we want to delete
      * @return Boolean which indicates whether the character was deleted correctly
      */
@@ -251,6 +224,11 @@ public class CharacterManager {
         return chars;
     }
 
+    /**
+     * Checks if a player has been found given a string
+     * @param name String with the player name
+     * @return Boolean which indicates whether the player was found or not in the list of characters.
+     */
     public boolean playerFound(String name){
         boolean playerFound = false;
         ArrayList<Character> characters = new ArrayList<>();
@@ -269,6 +247,12 @@ public class CharacterManager {
         return playerFound;
     }
 
+
+    /**
+     * Method to help show all the characters created by a player.
+     * @param name name of the player who's characters we want to show
+     * @return ArrayList</String> of strings with the player's characters.
+     */
     public ArrayList<String> playerCharacters(String name){
         ArrayList<Character> characters = new ArrayList<>();
         ArrayList<String> charStrings = new ArrayList<>();
@@ -285,6 +269,11 @@ public class CharacterManager {
         return charStrings;
     }
 
+    /**
+     * Method which shows a character's details upon request.
+     * @param name String with the given character's name
+     * @return String with the character details.
+     */
     public String showDetailsOfCharacter(String name){
         ArrayList<Character> characters = new ArrayList<>();
         try {
@@ -300,7 +289,11 @@ public class CharacterManager {
         return null;
     }
 
-    //Used when playing an adventure and forming a party
+    /**
+     * Method which returns a character at a given position. Is used when playing an adventure and forming a party.
+     * @param position int with the position of the character
+     * @return Character, returns the character which we want to add to the party.
+     */
     public Character getCharacterAtPosition(int position){
         ArrayList<Character> characters = new ArrayList<>();
         try {
@@ -318,6 +311,12 @@ public class CharacterManager {
         return null;
     }
 
+
+    /**
+     * Method which returns a character's class type. Is used when dealing damage to indicate the dmg type.
+     * @param name String with the character's name.
+     * @return String with the character's class type.
+     */
     public String showCharacterClassType(String name){
         ArrayList<Character> characters = new ArrayList<>();
         try {
@@ -333,6 +332,12 @@ public class CharacterManager {
         return null;
     }
 
+    /**
+     * Method which, at the end of an encounter, manages the xp for the entire party.
+     * @param party ArrayList of characters which form the current party which is playing an adventure.
+     * @param xp int with the xp we need to add to the members of the party.
+     * @return String with the result of adding xp to all members which will be shown on screen by the menu.
+     */
     public String manageXp(ArrayList<Character> party, int xp){
         String string = null;
         int i = 0;

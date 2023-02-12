@@ -34,15 +34,33 @@ public class Controller {
         AdventuresDataInterface ADI = null;
         menu.welcomeMenu();
         int dataSource = menu.askForInt("Do you want to use your local or cloud data?\n\t1) Local data\n\t2) Cloud data\n\n-> Answer: ", 1, 2);
+
+        if (dataSource == 2){
+            //try {
+                CDI = new CharactersApiDAO();
+           /* } catch (RuntimeException e){
+                menu.printMessage("Error load memory");
+                CDI = new CharactersJsonDAO();
+            }*/
+            //try {
+                MDI = new MonstersApiDAO();
+            /*} catch (RuntimeException e){
+                MDI = new MonstersJsonDAO();
+            }*/
+
+            //try {
+                ADI = new AdventuresApiDAO();
+            /*} catch (RuntimeException e){
+                ADI = new AdventuresJsonDAO();
+            }*/
+        }
+
         if(dataSource == 1){
             CDI = new CharactersJsonDAO();
             MDI = new MonstersJsonDAO();
             ADI = new AdventuresJsonDAO();
-        }
-        if (dataSource == 2){
-            CDI = new CharactersApiDAO();
-            MDI = new MonstersApiDAO();
-            ADI = new AdventuresApiDAO();
+
+
         }
 
         monsterManager = new MonsterManager(MDI);
