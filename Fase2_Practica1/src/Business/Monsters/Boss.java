@@ -6,11 +6,25 @@ import java.util.ArrayList;
 
 import static java.lang.Math.floor;
 
+/**
+ * Class for monsters that are of tpe boss.
+ */
 public class Boss extends Monster{
+
+    /**
+     * Constructor for Boss monsters
+     * @param monster
+     */
     public Boss(Monster monster){
         super(monster);
     }
 
+    /**
+     * Method which allows a boss to take damage taking into account the incoming damage type.
+     * @param damage int with the damage to take.
+     * @param dmgType string with the damage type.
+     * @return int with the damage finally taken.
+     */
     @Override
     public int takeDamage(int damage, String dmgType) {
         int dmgToTake = 0;
@@ -21,6 +35,11 @@ public class Boss extends Monster{
         return dmgTaken;
     }
 
+    /**
+     * Method which allows a boss to attack all party members.
+     * @param party Arraylist containing all memebrs of the party.
+     * @return String with the result of the action.
+     */
     @Override
     public String attackMove(ArrayList<Character> party) {
         String string;
@@ -46,10 +65,6 @@ public class Boss extends Monster{
             }
             i++;
         }
-
-
-
-
         int diceMonsterInt = Integer.parseInt(String.valueOf(this.getDamageDice().charAt(1))); //devuelve el int del damageDice del monstruo
         int d10M = (int) (Math.random()*10 + 1);
         int damageM = (int) (Math.random()*diceMonsterInt + 1);

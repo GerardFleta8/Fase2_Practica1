@@ -11,8 +11,6 @@ import java.util.ArrayList;
  */
 public class AdventureManager {
     AdventuresDataInterface adventuresDataInterface;
-    //private AdventuresJsonDAO adventuresJsonDAO;
-    //private ArrayList<Adventure> adventures = new ArrayList<>();
 
     /**
      * Constructor for AdventureManager, creates a new adventuresJsonDAO to be able

@@ -22,8 +22,6 @@ public class CharacterManager {
      */
     public CharacterManager(CharacterDataInterface characterDataInterface) {
         this.characterDataInterface = characterDataInterface;
-        //charactersJsonDAO = new CharactersJsonDAO();
-
     }
 
     /**
@@ -164,6 +162,11 @@ public class CharacterManager {
 
     }
 
+    /**
+     * Method which checks if a character name has already been taken.
+     * @param name String with the name we want to check
+     * @return boolean indicated whether the name is taken or not.
+     */
     public boolean checkNameAlreadyTaken(String name){
         boolean nameTaken = false;
         ArrayList<Character> characters = new ArrayList<>();
@@ -182,6 +185,10 @@ public class CharacterManager {
         return nameTaken;
     }
 
+    /**
+     * Method which checks if the character file is empty.
+     * @return boolean indicated whether it is empty or not.
+     */
     public boolean isEmpty(){
         ArrayList<Character> characters = new ArrayList<>();
         try {
@@ -196,6 +203,10 @@ public class CharacterManager {
         }
     }
 
+    /**
+     * Method which helps us list the characters by name
+     * @return list containing the names of all the characters.
+     */
     public ArrayList<String> listCharacters(){
         ArrayList<String> chars = new ArrayList<>();
         ArrayList<Character> characters = new ArrayList<>();
@@ -250,7 +261,7 @@ public class CharacterManager {
 
     /**
      * Method to help show all the characters created by a player.
-     * @param name name of the player who's characters we want to show
+     * @param name name of the player whose characters we want to show
      * @return ArrayList</String> of strings with the player's characters.
      */
     public ArrayList<String> playerCharacters(String name){

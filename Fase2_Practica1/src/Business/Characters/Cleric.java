@@ -24,6 +24,10 @@ public class Cleric extends Character{
     }
 
 
+    /**
+     * Method which calculated and sets a Cleric's initiative.
+     * @param initiative int with initiative value
+     */
     @Override
     public void calcAndSetInitiative(int initiative) {
         //Roll dice: d10
@@ -33,6 +37,11 @@ public class Cleric extends Character{
         super.calcAndSetInitiative(d10 + this.getSpirit());
     }
 
+    /**
+     * Method with the warm-up action that a cleric must perform.
+     * @param party arrayList containing all party members.
+     * @return String with the result of the action.
+     */
     @Override
     public String warmUpAction(ArrayList<Character> party) {
         for(Character c: party){
@@ -43,6 +52,13 @@ public class Cleric extends Character{
         return string;
     }
 
+    /**
+     * Method that performs an attack action for a cleric.
+     * @param d10 Integer with the result of a 10 face die being rolled
+     * @param party ArrayList of characters with the party members
+     * @param totalMonstersEncounter ArrayList of monsters with all the current monsters in the encounter
+     * @return String with the result of the action.
+     */
     @Override
     public String attackAction(int d10, ArrayList<Character> party, ArrayList<Monster> totalMonstersEncounter) {
         int heal = d10 + this.getMind();
@@ -121,12 +137,22 @@ public class Cleric extends Character{
         return actionTaken;
     }
 
+    /**
+     * Method which displays a Cleric's current hp.
+     * @return String with cleric's current hp.
+     */
     @Override
     public String displayCurrentHp() {
         String string = "\t- "+this.getName()+"\t"+this.getHp()+" / "+this.getMaxHP()+" hit points";
         return string;
     }
 
+    /**
+     * Method with the action that a cleric must perform during the rest stage.
+     * @param d8 Integer which is the result of an 8 faced die being rolled. Used to calculate heal value
+     * @param party ArrayList of characters with all the party members
+     * @return String with the result of the action.
+     */
     @Override
     public String restStageAction(int d8, ArrayList<Character> party) {
         String string;
@@ -149,6 +175,12 @@ public class Cleric extends Character{
         return string;
     }
 
+
+    /**
+     * Method which adds xp to a Cleric and checks if he has evolved/leveled up.
+     * @param xp int with the xp to add
+     * @return String with the result of adding xp
+     */
     @Override
     public String addXp(int xp){
         int currentLevel = this.getLevel();

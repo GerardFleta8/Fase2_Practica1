@@ -11,14 +11,12 @@ import java.util.ArrayList;
  */
 public class MonsterManager {
     private MonsterDataInterface monsterDataInterface;
-    //private ArrayList<Monster> monsters = new ArrayList<>();
-    //private MonstersJsonDAO monstersJsonDAO;
+
     /**
      * Constructor for MonsterManager
      */
     public MonsterManager (MonsterDataInterface monsterDataInterface) {
         this.monsterDataInterface = monsterDataInterface;
-        //monstersJsonDAO = new MonstersJsonDAO();
     }
 
 
@@ -44,6 +42,10 @@ public class MonsterManager {
         return false;
     }
 
+    /**
+     * Method which gets all the monsters' name and class
+     * @return List of strings with the name and class of each monster
+     */
     public ArrayList<String> showMonsters(){
         ArrayList<Monster> monsters = new ArrayList<>();
         ArrayList<String> strings = new ArrayList<>();
@@ -58,6 +60,11 @@ public class MonsterManager {
         return strings;
     }
 
+    /**
+     * Method which gets the monster at a given position
+     * @param position int indicated the position of the monster
+     * @return Monster at given position.
+     */
     public Monster getMonsterAtPosition(int position){
         ArrayList<Monster> monsters = new ArrayList<>();
         try {

@@ -4,7 +4,14 @@ import Business.Monsters.Monster;
 
 import java.util.ArrayList;
 
+/**
+ * Paladin Class
+ */
 public class Paladin extends Character{
+    /**
+     * Paladin constructor
+     * @param character Character which we want to instantiate/evolve as paladin.
+     */
     public Paladin(Character character){
         super(character.getName(),
                 character.getPlayer(),
@@ -15,6 +22,10 @@ public class Paladin extends Character{
                 "Paladin");
     }
 
+    /**
+     * Method which calculates and sets a paladin's initiative
+     * @param initiative int with initiative value
+     */
     @Override
     public void calcAndSetInitiative(int initiative) {
         //Roll dice: d10
@@ -24,6 +35,11 @@ public class Paladin extends Character{
         super.calcAndSetInitiative(d10 + this.getSpirit());
     }
 
+    /**
+     * Method whith the action a Paladin must perform during the warm-up stage.
+     * @param party arrayList containing all party members.
+     * @return String with the result of the action.
+     */
     @Override
     public String warmUpAction(ArrayList<Character> party) {
         //Roll dice: d3
@@ -38,6 +54,13 @@ public class Paladin extends Character{
         return string;
     }
 
+    /**
+     * Method with the action to be performed by a Paladin during the attack phase.
+     * @param d10 Integer with the result of a 10 face die being rolled
+     * @param party ArrayList of characters with the party members
+     * @param totalMonstersEncounter ArrayList of monsters with all the current monsters in the encounter
+     * @return String with the result of the action.
+     */
     @Override
     public String attackAction(int d10, ArrayList<Character> party, ArrayList<Monster> totalMonstersEncounter) {
         int heal = d10 + this.getMind();
@@ -140,12 +163,22 @@ public class Paladin extends Character{
         return actionTaken;
     }
 
+    /**
+     * Method which displays a Paladin's current hp.
+     * @return String with the current hp.
+     */
     @Override
     public String displayCurrentHp() {
         String string = "\t- "+this.getName()+"\t"+this.getHp()+" / "+this.getMaxHP()+" hit points";
         return string;
     }
 
+    /**
+     * Method with the action to be performed by a Paladin during the rest stage.
+     * @param d8 Integer which is the result of an 8 faced die being rolled. Used to calculate heal value
+     * @param party ArrayList of characters with all the party members
+     * @return String with the result of the action.
+     */
     @Override
     public String restStageAction(int d8, ArrayList<Character> party) {
         String string;

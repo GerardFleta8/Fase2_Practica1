@@ -117,11 +117,19 @@ public class Monster {
         return damage; //devuelve damage para saber cuanto daño a hecho el ataque realmente por las diferentes pasivas para boss
     }
 
+    /**
+     * Method which gets a monster's name and class
+     * @return String with the wanted format with name and class type.
+     */
     public String monsterNameAndClass(){
         String string = this.name+"("+this.challenge+")";
         return string;
     }
 
+    /**
+     * Method which checks if a monster is alive.
+     * @return Boolean which indicated whether its alive or not.
+     */
     public boolean isAlive(){
         if(this.hitPoints > 0){
             return true;
@@ -129,6 +137,11 @@ public class Monster {
         return false;
     }
 
+    /**
+     * Method used by monsters to realize an attack move.
+     * @param party Arraylist with all the party members.
+     * @return String with the result of the action.
+     */
     public String attackMove(ArrayList<Character> party){
         String string;
         Character auxChar = party.get(0);
