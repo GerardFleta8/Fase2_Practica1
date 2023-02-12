@@ -40,6 +40,10 @@ public class MonstersJsonDAO implements MonsterDataInterface {
         return monsters;
     }
 
+    /**
+     * Method which checks if the JSON monsters file is empty.
+     * @return boolean indicating whether its empty or not.
+     */
     @Override
     public boolean isEmpty(){
         ArrayList<Monster> monsters;

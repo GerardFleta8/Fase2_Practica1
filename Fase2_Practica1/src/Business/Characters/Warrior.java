@@ -4,7 +4,14 @@ import Business.Monsters.Monster;
 
 import java.util.ArrayList;
 
+/**
+ * Warrior class
+ */
 public class Warrior extends Character {
+    /**
+     * Constructor method for Warrior
+     * @param character Character which we want to initialize as a warrior.
+     */
     public Warrior(Character character){
         super(character.getName(),
                 character.getPlayer(),
@@ -15,17 +22,10 @@ public class Warrior extends Character {
                 "Warrior");
     }
 
-    //crear un warrior desde una clase character si hace extends de Adventurer y no character
-    /*public Warrior(Character character){
-        super(character);
-    }*/
-
-    //crear un warrior desde una clase Adventurer (cuando evolucionan)
-    //Nose si hace falta ya que los adventurers se instanciaran como Characters c = new Adventurer()
-    /*public Warrior(Adventurer adventurer){
-
-    }*/
-
+    /**
+     * Method which calculates and sets a warrior's initiative
+     * @param initiative int with initiative value
+     */
     @Override
     public void calcAndSetInitiative(int initiative) {
         //Roll dice: d12
@@ -36,6 +36,11 @@ public class Warrior extends Character {
         super.calcAndSetInitiative(d12 + this.getSpirit());
     }
 
+    /**
+     * Method with the action to be performed by a warrior during the warm-up stage
+     * @param party arrayList containing all party members.
+     * @return String with the result of the action
+     */
     @Override
     public String warmUpAction(ArrayList<Character> party) {
         int currentSpirit = this.getSpirit();
@@ -44,6 +49,13 @@ public class Warrior extends Character {
         return string;
     }
 
+    /**
+     * Action to be performed by a warrior during the attack phase of a combat
+     * @param d10 Integer with the result of a 10 face die being rolled
+     * @param party ArrayList of characters with the party members
+     * @param totalMonstersEncounter ArrayList of monsters with all the current monsters in the encounter
+     * @return
+     */
     @Override
     public String attackAction(int d10, ArrayList<Character> party, ArrayList<Monster> totalMonstersEncounter) {
         int d10_2;
@@ -95,6 +107,11 @@ public class Warrior extends Character {
         return s3;
     }
 
+    /**
+     * Method that calculates the damage that should be taken by a warrior depending on the damage type.
+     * @param dmg int for dmg to be taken
+     * @param dmgType String which indicated the damage type to be able to account for reduced damage due to passived.
+     */
     @Override
     public void takeDamage(int dmg, String dmgType) {
         int dmgToTake = 0;
@@ -106,12 +123,22 @@ public class Warrior extends Character {
         }
     }
 
+    /**
+     * Method which displays a warrior's current hp.
+     * @return
+     */
     @Override
     public String displayCurrentHp() {
         String string = "\t- "+this.getName()+"\t"+this.getHp()+" / "+this.getMaxHP()+" hit points";
         return string;
     }
 
+    /**
+     * Method with the action to be performed by a warrior during the rest stage.
+     * @param d8 Integer which is the result of an 8 faced die being rolled. Used to calculate heal value
+     * @param party ArrayList of characters with all the party members
+     * @return String with the result of the action.
+     */
     @Override
     public String restStageAction(int d8, ArrayList<Character> party) {
         String string;
@@ -133,6 +160,11 @@ public class Warrior extends Character {
         return string;
     }
 
+    /**
+     * Method which adds xp to a warrior and checks if he has leveled up or has to evolve.
+     * @param xp int with the xp to add
+     * @return String with the result of the xp added.
+     */
     @Override
     public String addXp(int xp){
         int currentLevel = this.getLevel();
