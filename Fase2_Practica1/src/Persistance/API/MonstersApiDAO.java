@@ -15,13 +15,16 @@ import java.util.ArrayList;
 public class MonstersApiDAO implements MonsterDataInterface {
     ApiHelper apiHelper;
 
-    {
+    public MonstersApiDAO(ApiHelper apiHelper){
+        this.apiHelper = apiHelper;
+    }
+    /*{
         try {
             apiHelper = new ApiHelper();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
     /**
      * Method in charge of reading the monsters from API

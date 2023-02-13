@@ -2,8 +2,10 @@ package Presentation;
 
 import Business.*;
 import Business.Characters.Character;
+import Business.Exceptions.ConexException;
 import Business.Monsters.Monster;
 import Persistance.API.AdventuresApiDAO;
+import Persistance.API.ApiHelper;
 import Persistance.API.CharactersApiDAO;
 import Persistance.API.MonstersApiDAO;
 import Persistance.AdventuresDataInterface;
@@ -14,6 +16,8 @@ import Persistance.JSON.MonstersJsonDAO;
 import Persistance.MonsterDataInterface;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.ConnectException;
 import java.util.*;
 
 /**
@@ -34,22 +38,50 @@ public class Controller {
         AdventuresDataInterface ADI = null;
         menu.welcomeMenu();
         int dataSource = menu.askForInt("Do you want to use your local or cloud data?\n\t1) Local data\n\t2) Cloud data\n\n-> Answer: ", 1, 2);
-
+        ApiHelper apiHelper = null;
+        int rip = 0;
         if (dataSource == 2){
-            //try {
+            try {
+                apiHelper = new ApiHelper();
+
+            } catch (ConnectException e) {
+                    rip = 1;
+                    CDI = new CharactersJsonDAO();
+                    MDI = new MonstersJsonDAO();
+                    ADI = new AdventuresJsonDAO();
+                    //throw new ConexException("Loading data...\nCouldn't connect to the remote server.\nReverting to local data.\n");
+            } catch (IOException e) {
+                rip = 1;
+                CDI = new CharactersJsonDAO();
+                MDI = new MonstersJsonDAO();
+                ADI = new AdventuresJsonDAO();
+            } catch(RuntimeException e){
+                rip = 1;
+                CDI = new CharactersJsonDAO();
+                MDI = new MonstersJsonDAO();
+                ADI = new AdventuresJsonDAO();
+            }
+            if(rip == 0) {
+                System.out.println("BBB");
+                CDI = new CharactersApiDAO(apiHelper);
+                MDI = new MonstersApiDAO(apiHelper);
+                ADI = new AdventuresApiDAO(apiHelper);
+            }
+            /*try {
                 CDI = new CharactersApiDAO();
-           /*} catch (Exception e){
-                menu.printMessage("Error load memory");
+
+            } catch (ConexException e){
+                //menu.printMessage("Error load memory");
                 CDI = new CharactersJsonDAO();
             }*/
             //try {
-                MDI = new MonstersApiDAO();
+                //MDI = new MonstersApiDAO();
             /*} catch (RuntimeException e){
                 MDI = new MonstersJsonDAO();
             }*/
 
             //try {
-                ADI = new AdventuresApiDAO();
+                //ADI = new AdventuresApiDAO();
             /*} catch (RuntimeException e){
                 ADI = new AdventuresJsonDAO();
             }*/

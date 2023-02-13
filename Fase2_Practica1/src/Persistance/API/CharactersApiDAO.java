@@ -2,6 +2,7 @@ package Persistance.API;
 
 import Business.Characters.*;
 import Business.Characters.Character;
+import Business.Exceptions.ConexException;
 import Persistance.CharacterDataInterface;
 
 import java.io.FileNotFoundException;
@@ -19,12 +20,15 @@ import com.google.gson.stream.JsonReader;
 public class CharactersApiDAO implements CharacterDataInterface {
     ApiHelper apiHelper;
 
-    {
+    /*{
         try {
             apiHelper = new ApiHelper();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            //throw new ConexException("Loading data...\nCouldn't connect to the remote server.\nReverting to local data.\n");
         }
+    }*/
+    public CharactersApiDAO(ApiHelper apiHelper){
+        this.apiHelper = apiHelper;
     }
 
     /**
