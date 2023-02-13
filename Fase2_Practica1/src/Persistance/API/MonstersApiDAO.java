@@ -9,6 +9,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Class incharge of interaction with Monsters in API
+ */
 public class MonstersApiDAO implements MonsterDataInterface {
     ApiHelper apiHelper;
 
@@ -19,6 +22,12 @@ public class MonstersApiDAO implements MonsterDataInterface {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * Method in charge of reading the monsters from API
+     * @return list containing the monsters in API
+     * @throws FileNotFoundException
+     */
     @Override
     public ArrayList<Monster> readMonstersFile() throws FileNotFoundException {
         String response;
@@ -43,6 +52,10 @@ public class MonstersApiDAO implements MonsterDataInterface {
         return monsters;
     }
 
+    /**
+     * Method which checks if there are monsters in API
+     * @return Boolean indicated whether there are monsters or not.
+     */
     @Override
     public boolean isEmpty() {
         ArrayList<Monster> monsters;

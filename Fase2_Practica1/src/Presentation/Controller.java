@@ -38,7 +38,7 @@ public class Controller {
         if (dataSource == 2){
             //try {
                 CDI = new CharactersApiDAO();
-           /* } catch (RuntimeException e){
+           /*} catch (Exception e){
                 menu.printMessage("Error load memory");
                 CDI = new CharactersJsonDAO();
             }*/
@@ -59,8 +59,6 @@ public class Controller {
             CDI = new CharactersJsonDAO();
             MDI = new MonstersJsonDAO();
             ADI = new AdventuresJsonDAO();
-
-
         }
 
         monsterManager = new MonsterManager(MDI);

@@ -13,6 +13,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 
+/**
+ * Class in charge with interacting with the list of Characters on the API
+ */
 public class CharactersApiDAO implements CharacterDataInterface {
     ApiHelper apiHelper;
 
@@ -24,6 +27,11 @@ public class CharactersApiDAO implements CharacterDataInterface {
         }
     }
 
+    /**
+     * Method which gets all the characters found on the API
+     * @return ArrayList of the characters that have been read.
+     * @throws FileNotFoundException
+     */
     @Override
     public ArrayList<Character> readCharactersFile() throws FileNotFoundException {
         Gson g = new Gson();
@@ -75,6 +83,10 @@ public class CharactersApiDAO implements CharacterDataInterface {
         return characters;
     }
 
+    /**
+     * Method which updates the characters in the API
+     * @param characters List of characters we want to update.
+     */
     @Override
     public void updateCharactersFile(ArrayList<Character> characters) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -83,8 +95,6 @@ public class CharactersApiDAO implements CharacterDataInterface {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-
         try {
             for (Character c: characters) {
                 apiHelper.postToUrl("https://balandrau.salle.url.edu/dpoo/S1-Project_15/characters", gson.toJson(c));

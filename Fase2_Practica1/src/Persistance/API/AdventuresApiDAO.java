@@ -10,6 +10,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Class in charge with interacting with t API
+ */
 public class AdventuresApiDAO implements AdventuresDataInterface {
     ApiHelper apiHelper;
 
@@ -21,6 +24,10 @@ public class AdventuresApiDAO implements AdventuresDataInterface {
         }
     }
 
+    /**
+     * Method which updates the adventures to the API
+     * @param adventures List containing the adventures we want to update.
+     */
     @Override
     public void updateAdventuresFile(ArrayList<Adventure> adventures) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -41,6 +48,11 @@ public class AdventuresApiDAO implements AdventuresDataInterface {
 
     }
 
+    /**
+     * Method which reads the adventures found on the API
+     * @return ArrayList</Adventure> list with the adventures that have been read.
+     * @throws FileNotFoundException
+     */
     @Override
     public ArrayList<Adventure> readAdventuresFile() throws FileNotFoundException {
         Gson g = new Gson();
