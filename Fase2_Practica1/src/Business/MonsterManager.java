@@ -5,6 +5,7 @@ import Persistance.JSON.MonstersJsonDAO;
 import Persistance.MonsterDataInterface;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 /**
  * Manages monsters
@@ -31,6 +32,8 @@ public class MonsterManager {
             monsters = monsterDataInterface.readMonstersFile();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         int i = 0;
         for(Monster m : monsters){
@@ -53,6 +56,8 @@ public class MonsterManager {
             monsters = monsterDataInterface.readMonstersFile();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         for(Monster m : monsters){
             strings.add(m.monsterNameAndClass());
@@ -71,6 +76,8 @@ public class MonsterManager {
             monsters = monsterDataInterface.readMonstersFile();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         int i = 0;
         for(Monster m : monsters){
@@ -86,7 +93,9 @@ public class MonsterManager {
      * Method which checks if the monster file is empty or not
      * @return Boolean which indicates whether the file is empty (true) or not (false)
      */
-    public boolean monsterFileEmpty(){
-        return this.monsterDataInterface.isEmpty();
+    public boolean monsterFileEmpty() throws IOException {
+        boolean empty;
+            empty = this.monsterDataInterface.isEmpty();
+        return empty;
     }
 }

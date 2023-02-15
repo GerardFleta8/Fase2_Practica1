@@ -32,47 +32,43 @@ public class Controller {
     /**
      * Runnable of the controller that manages the Menu and Managers
      */
-    public void run() {
+    public void run() throws IOException {
         CharacterDataInterface CDI = null;
         MonsterDataInterface MDI = null;
         AdventuresDataInterface ADI = null;
         menu.welcomeMenu();
         int dataSource = menu.askForInt("Do you want to use your local or cloud data?\n\t1) Local data\n\t2) Cloud data\n\n-> Answer: ", 1, 2);
-        //ApiHelper apiHelper = null;
-        //int rip = 0;
+        //boolean monstersEmpty = false;
+
         if (dataSource == 2){
-            try {
                 ADI = new AdventuresApiDAO();
                 CDI = new CharactersApiDAO();
                 MDI = new MonstersApiDAO();
-            } catch (IOException e) {
-                CDI = new CharactersJsonDAO();
-                MDI = new MonstersJsonDAO();
-                ADI = new AdventuresJsonDAO();
-            }
-
+                monsterManager = new MonsterManager(MDI);
+                try {
+                    monsterManager.monsterFileEmpty();
+                }
+                catch (IOException e){
+                    //No se ha podido conectar al server.
+                    menu.printMessage("Loading data...\nCouldn't connect to the remote server.\nReverting to local data.\n");
+                    CDI = new CharactersJsonDAO();
+                    MDI = new MonstersJsonDAO();
+                    ADI = new AdventuresJsonDAO();
+                }
         }
-
         if(dataSource == 1){
             CDI = new CharactersJsonDAO();
             MDI = new MonstersJsonDAO();
             ADI = new AdventuresJsonDAO();
         }
-
         monsterManager = new MonsterManager(MDI);
         characterManager = new CharacterManager(CDI);
         adventureManager = new AdventureManager(ADI);
+        menu.printMessage("Loading data...\nData was successfully loaded.\n");
         int optionListCharacter = 0;
         ArrayList<Integer> positions = new ArrayList<>();
         int selection = 0;
 
-        /*try {
-            //monsterManager.setMonsters(monsterManager.getMonsterDAO().readMonstersFile());
-            //characterManager.setCharacters(characterManager.getCharactersDAO().readCharactersFile());
-            //adventureManager.setAdventures(adventureManager.getAdventuresDAO().readAdventuresFile());
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }*/
         if(monsterManager.monsterFileEmpty()){
             menu.printMessage("Error: The monsters.json file can’t be accessed.");
         } else {

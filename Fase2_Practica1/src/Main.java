@@ -4,6 +4,7 @@ import Persistance.CharacterDataInterface;
 import Presentation.Controller;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -15,7 +16,10 @@ public class Main {
 
 
         Controller controller = new Controller();
-        controller.run();
+        try {
+            controller.run();
+        } catch (IOException ignored) {
+        }
 
 
     }

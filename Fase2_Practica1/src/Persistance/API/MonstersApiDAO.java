@@ -28,16 +28,13 @@ public class MonstersApiDAO implements MonsterDataInterface {
      * @throws FileNotFoundException
      */
     @Override
-    public ArrayList<Monster> readMonstersFile() throws FileNotFoundException {
+    public ArrayList<Monster> readMonstersFile() throws IOException, FileNotFoundException {
         String response;
         Gson g = new Gson();
 
-        try {
-            response = apiHelper.getFromUrl("https://balandrau.salle.url.edu/dpoo/shared/monsters");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-            //a
-        }
+
+        response = apiHelper.getFromUrl("https://balandrau.salle.url.edu/dpoo/shared/monsters");
+
         Monster monster[] = g.fromJson(response, Monster[].class);
         ArrayList<Monster> monsters = new ArrayList<>();
         for(Monster m: monster){
@@ -57,7 +54,7 @@ public class MonstersApiDAO implements MonsterDataInterface {
      * @return Boolean indicated whether there are monsters or not.
      */
     @Override
-    public boolean isEmpty() {
+    public boolean isEmpty() throws IOException {
         ArrayList<Monster> monsters;
         try {
             monsters = this.readMonstersFile();
