@@ -36,6 +36,7 @@ public class MonstersApiDAO implements MonsterDataInterface {
             response = apiHelper.getFromUrl("https://balandrau.salle.url.edu/dpoo/shared/monsters");
         } catch (IOException e) {
             throw new RuntimeException(e);
+            //a
         }
         Monster monster[] = g.fromJson(response, Monster[].class);
         ArrayList<Monster> monsters = new ArrayList<>();
