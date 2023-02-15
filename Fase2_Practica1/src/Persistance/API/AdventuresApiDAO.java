@@ -16,16 +16,13 @@ import java.util.ArrayList;
 public class AdventuresApiDAO implements AdventuresDataInterface {
     ApiHelper apiHelper;
 
-    public AdventuresApiDAO(ApiHelper apiHelper){
+    /*public AdventuresApiDAO(ApiHelper apiHelper){
         this.apiHelper = apiHelper;
-    }
-    /*{
-        try {
-            apiHelper = new ApiHelper();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }*/
+    public AdventuresApiDAO() throws IOException {
+        apiHelper = new ApiHelper();
+    }
+
 
     /**
      * Method which updates the adventures to the API

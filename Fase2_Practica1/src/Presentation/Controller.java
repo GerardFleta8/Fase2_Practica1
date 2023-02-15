@@ -38,53 +38,19 @@ public class Controller {
         AdventuresDataInterface ADI = null;
         menu.welcomeMenu();
         int dataSource = menu.askForInt("Do you want to use your local or cloud data?\n\t1) Local data\n\t2) Cloud data\n\n-> Answer: ", 1, 2);
-        ApiHelper apiHelper = null;
-        int rip = 0;
+        //ApiHelper apiHelper = null;
+        //int rip = 0;
         if (dataSource == 2){
             try {
-                apiHelper = new ApiHelper();
-
-            } catch (ConnectException e) {
-                    rip = 1;
-                    CDI = new CharactersJsonDAO();
-                    MDI = new MonstersJsonDAO();
-                    ADI = new AdventuresJsonDAO();
-                    //throw new ConexException("Loading data...\nCouldn't connect to the remote server.\nReverting to local data.\n");
-            } catch (IOException e) {
-                rip = 1;
-                CDI = new CharactersJsonDAO();
-                MDI = new MonstersJsonDAO();
-                ADI = new AdventuresJsonDAO();
-            } catch(RuntimeException e){
-                rip = 1;
-                CDI = new CharactersJsonDAO();
-                MDI = new MonstersJsonDAO();
-                ADI = new AdventuresJsonDAO();
-            }
-            if(rip == 0) {
-                System.out.println("BBB");
-                CDI = new CharactersApiDAO(apiHelper);
-                MDI = new MonstersApiDAO(apiHelper);
-                ADI = new AdventuresApiDAO(apiHelper);
-            }
-            /*try {
+                ADI = new AdventuresApiDAO();
                 CDI = new CharactersApiDAO();
-
-            } catch (ConexException e){
-                //menu.printMessage("Error load memory");
+                MDI = new MonstersApiDAO();
+            } catch (IOException e) {
                 CDI = new CharactersJsonDAO();
-            }*/
-            //try {
-                //MDI = new MonstersApiDAO();
-            /*} catch (RuntimeException e){
                 MDI = new MonstersJsonDAO();
-            }*/
-
-            //try {
-                //ADI = new AdventuresApiDAO();
-            /*} catch (RuntimeException e){
                 ADI = new AdventuresJsonDAO();
-            }*/
+            }
+
         }
 
         if(dataSource == 1){

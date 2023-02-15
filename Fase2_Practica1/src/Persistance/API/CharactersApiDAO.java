@@ -20,16 +20,14 @@ import com.google.gson.stream.JsonReader;
 public class CharactersApiDAO implements CharacterDataInterface {
     ApiHelper apiHelper;
 
-    /*{
-        try {
-            apiHelper = new ApiHelper();
-        } catch (IOException e) {
-            //throw new ConexException("Loading data...\nCouldn't connect to the remote server.\nReverting to local data.\n");
-        }
-    }*/
-    public CharactersApiDAO(ApiHelper apiHelper){
-        this.apiHelper = apiHelper;
+
+    public CharactersApiDAO() throws IOException{
+        apiHelper = new ApiHelper();
     }
+            //throw new ConexException("Loading data...\nCouldn't connect to the remote server.\nReverting to local data.\n");
+    /*public CharactersApiDAO(ApiHelper apiHelper){
+        ;
+    }*/
 
     /**
      * Method which gets all the characters found on the API
