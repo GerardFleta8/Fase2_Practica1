@@ -38,7 +38,7 @@ public class MonsterManager {
         int i = 0;
         for(Monster m : monsters){
             if(i == position ){
-                return m.getChallenge().equalsIgnoreCase("Boss");
+                return m.isBoss();
             }
             i++;
         }

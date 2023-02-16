@@ -195,4 +195,15 @@ public class Monster {
         }
         return string;
     }
+
+    /**
+     * Method which checks if a monster is boss in order to not add more than 1 boss in the encounter.
+     * @return true if boss, false if not boss
+     */
+    public boolean isBoss(){
+        if(getChallenge().equalsIgnoreCase("Boss")){
+            return true;
+        }
+        return false;
+    }
 }

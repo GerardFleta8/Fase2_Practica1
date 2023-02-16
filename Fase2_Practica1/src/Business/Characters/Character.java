@@ -224,6 +224,9 @@ public class Character {
      */
     public void takeDamage(int dmg, String dmgType){
         hp = hp - dmg;
+        if(hp < 0){
+            setHp(0);
+        }
     }
     /**
      * The damage received is subtracted from a character's current hp
@@ -232,7 +235,7 @@ public class Character {
     public void takeDamage(int dmg){
         hp = hp - dmg;
         if(hp < 0){
-            hp = 0;
+            setHp(0);
         }
     }
 

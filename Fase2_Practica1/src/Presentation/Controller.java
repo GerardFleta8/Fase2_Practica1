@@ -335,7 +335,6 @@ public class Controller {
                             bossCounter = 0;
                             int monsterRemove = 0;
                             while (continuar == 0) {
-
                                 int j = 0;
                                 menu.printMessage("* Encounter " + numCombatsAux + " / " + numCombats);
                                 menu.printMessage("* Monsters in the Encounter");
@@ -352,7 +351,6 @@ public class Controller {
                                         if (bossCounter > 1) {
                                             menu.printMessage("\nToo many bosses!");
                                             bossCounter = 1;
-
                                         } else {
                                             monstersList.add(monsterManager.getMonsterAtPosition(monsterAdd-1));
                                         }
@@ -554,13 +552,20 @@ public class Controller {
                                 ArrayList<Monster> monstersInEncounter = new ArrayList<>();
                                 monstersInEncounter = advEncounters.get(j).getEncounterMonsters();
                                 ArrayList<Monster> totalMonstersEncounter = new ArrayList<>();
+
                                 for(Monster c: monstersInEncounter){
-                                    for(int y = 0; y < c.getNumMonsters(); y++){
-                                        totalMonstersEncounter.add(new Monster(c));
+                                    if(c.getNumMonsters() == 0){
+                                        totalMonstersEncounter.add(c);
+                                    }
+                                    else {
+                                        for (int y = 0; y < c.getNumMonsters(); y++) {
+                                            totalMonstersEncounter.add(new Monster(c));
+                                        }
                                     }
                                 }
 
                                 for(int y = 0; y < totalMonstersEncounter.size(); y++){
+                                    //System.out.println(totalMonstersEncounter.get(y).getName()+totalMonstersEncounter.get(y).getChallenge());
                                     totalMonstersEncounter.get(y).calcAndSetInitiative(menu.rollDice(12));
                                 }
 

@@ -10,7 +10,6 @@ import static java.lang.Math.floor;
  * Class for monsters that are of tpe boss.
  */
 public class Boss extends Monster{
-
     /**
      * Constructor for Boss monsters
      * @param monster
@@ -54,14 +53,17 @@ public class Boss extends Monster{
         string = string + this.getName()+ " attacks ";
         int i = 1;
         for(Character c : liveParty){
-            if (i == liveParty.size()) {
-                string = string + " and "+ c.getName()+".";
-            }
-            else if(i == liveParty.size() - 1){
-                string = string + c.getName();
+            if(liveParty.size()==1){
+                string = string + c.getName()+".";
             }
             else {
-                string = string + c.getName() + ", ";
+                if (i == liveParty.size()) {
+                    string = string + " and " + c.getName() + ".";
+                } else if (i == (liveParty.size() - 1)) {
+                    string = string + c.getName();
+                } else {
+                    string = string + c.getName() + ", ";
+                }
             }
             i++;
         }

@@ -39,8 +39,7 @@ public class MonstersApiDAO implements MonsterDataInterface {
         ArrayList<Monster> monsters = new ArrayList<>();
         for(Monster m: monster){
             if(m.getChallenge().equalsIgnoreCase("Boss")){
-                Monster d = new Boss(m);
-                monsters.add(d);
+                monsters.add(new Boss(m));
             }
             else {
                 monsters.add(m);
